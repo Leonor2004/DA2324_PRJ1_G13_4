@@ -7,4 +7,11 @@ include_directories(.)
 
 add_executable(DA2324_PRJ1_G13_4
         main.cpp
+        City.cpp
+        City.h
+        Reservoir.cpp
+        Reservoir.h
+        Station.cpp
+        Station.h
+        Graph.h
         )
