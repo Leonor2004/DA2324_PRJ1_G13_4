@@ -21,11 +21,11 @@ class Edge;
 
 class Vertex {
 public:
-    Vertex(string in, int type);
+    Vertex(string in, int type, City* c, Reservoir* r, Station* s);
     bool operator<(Vertex & vertex) const;
 
     string getInfo() const;
-    int getType() const; //TODO
+    int getType() const;
     std::vector<Edge *> getAdj() const;
     bool isVisited() const;
     bool isProcessing() const;
@@ -33,6 +33,12 @@ public:
     double getDist() const;
     Edge *getPath() const;
     std::vector<Edge *> getIncoming() const;
+    void setCity(City* c);
+    void setReservoir(Reservoir* r);
+    void setStation(Station* s);
+    City* getCity();
+    Reservoir* getReservoir();
+    Station* getStation();
 
     void setInfo(string info);
     void setVisited(bool visited);
@@ -48,6 +54,10 @@ protected:
     string info;                // info node
     int type;                   // 0->City; 1->Reservoir; 2->Station
     std::vector<Edge *> adj;  // outgoing edges
+
+    City* city = nullptr;
+    Reservoir* reservoir = nullptr;
+    Station* station = nullptr;
 
     // auxiliary fields
     bool visited = false; // used by DFS, BFS, Prim ...
@@ -104,7 +114,7 @@ public:
      *  Adds a vertex with a given content or info (in) to a graph (this).
      *  Returns true if successful, and false if a vertex with that content already exists.
      */
-    bool addVertex(const string &in, int t);
+    bool addVertex(const string &in, int t, City* c, Reservoir* r, Station* s);
     bool removeVertex(const string &in);
 
     /*
@@ -145,7 +155,7 @@ void deleteMatrix(double **m, int n);
 
 /************************* Vertex  **************************/
 
-Vertex::Vertex(string in, int t): info(in), type(t) {}
+Vertex::Vertex(string in, int t, City* c, Reservoir* r, Station* s): info(in), type(t), city(c), reservoir(r), station(s) {}
 /*
  * Auxiliary function to add an outgoing edge to a vertex (this),
  * with a given destination vertex (d) and edge weight (w).
@@ -256,6 +266,30 @@ void Vertex::setPath(Edge *path) {
     this->path = path;
 }
 
+void Vertex::setCity(City* c) {
+    this->city = c;
+}
+
+void Vertex::setReservoir(Reservoir* r) {
+    this->reservoir = r;
+}
+
+void Vertex::setStation(Station* s) {
+    this->station = s;
+}
+
+City* Vertex::getCity() {
+    return this->city;
+}
+
+Reservoir* Vertex::getReservoir() {
+    return this->reservoir;
+}
+
+Station* Vertex::getStation() {
+    return this->station;
+}
+
 void Vertex::deleteEdge(Edge *edge) {
     Vertex *dest = edge->getDest();
     // Remove the corresponding edge from the incoming list
@@ -344,10 +378,10 @@ int Graph::findVertexIdx(const string &in) const {
  *  Adds a vertex with a given content or info (in) to a graph (this).
  *  Returns true if successful, and false if a vertex with that content already exists.
  */
-bool Graph::addVertex(const string &in, int t) {
+bool Graph::addVertex(const string &in, int t, City* c, Reservoir* r, Station* s) {
     if (findVertex(in) != nullptr)
         return false;
-    vertexSet.push_back(new Vertex(in, t));
+    vertexSet.push_back(new Vertex(in, t, c, r, s));
     return true;
 }
 
