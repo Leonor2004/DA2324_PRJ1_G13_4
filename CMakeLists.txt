@@ -14,4 +14,6 @@ add_executable(DA2324_PRJ1_G13_4
         Station.cpp
         Station.h
         Graph.h
-        )
+        csvInfo.h
+        csvInfo.cpp
+)

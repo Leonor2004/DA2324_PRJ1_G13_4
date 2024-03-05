@@ -3,6 +3,8 @@
 
 #include <fstream>
 #include <sstream>
+#include <string>
+#include <set>
 #include <Graph.h>
 
 /**
@@ -32,6 +34,18 @@ public:
      * Graph of all the pipes
      */
     static Graph pipesGraph;
+    /**
+     * Set with the code of all reservoirs
+     */
+    static std::set<std::string> ReservoirSet;
+    /**
+     * Set with the code of all stations
+     */
+    static std::set<std::string> StationSet;
+    /**
+     * Set with the code of all cities
+     */
+    static std::set<std::string> CitySet;
 };
 
 #endif //DA2324_PRJ1_G13_4_CSVINFO_H
