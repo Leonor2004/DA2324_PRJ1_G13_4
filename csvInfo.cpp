@@ -69,8 +69,8 @@ void csvInfo::createStations() {
         stationSet.insert(code);
         stationsVector.push_back(sta);
         int aux = stationsVector.size();
-        Station* r = &stationsVector[aux - 1];
-        pipesGraph.addVertex(code, 2, nullptr, nullptr, s);
+        Station* st = &stationsVector[aux - 1];
+        pipesGraph.addVertex(code, 2, nullptr, nullptr, st);
     }
     file.close();
 }
