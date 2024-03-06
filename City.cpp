@@ -1,9 +1,11 @@
 #include "City.h"
 
+#include <utility>
+
 City::City(string ct, int i, string c, int d, int p) {
-    city = ct;
+    city = std::move(ct);
     Id = i;
-    code = c;
+    code = std::move(c);
     demand = d;
     population = p;
 }

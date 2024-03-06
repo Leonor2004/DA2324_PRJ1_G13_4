@@ -33,7 +33,7 @@ void csvInfo::createReservoir() {
         getline(s, municipality, ',');
         getline(s, id, ',');
         getline(s, code, ',');
-        getline(s, delivery, ',');
+        getline(s, delivery);
 
         Reservoir res = Reservoir(reservoir, municipality, stoi(id), code, stoi(delivery));
         reservoirSet.insert(code);
@@ -62,8 +62,7 @@ void csvInfo::createStations() {
     while(getline(file, line)) {
         stringstream s(line);
         getline(s, id, ',');
-        getline(s, code, ',');
-        if (id == ",") break;
+        getline(s, code);
 
         Station sta = Station(stoi(id), code);
         stationSet.insert(code);
@@ -99,8 +98,7 @@ void csvInfo::createCities() {
         getline(s, id, ',');
         getline(s, code, ',');
         getline(s, demand, ',');
-        getline(s, none, '"');
-        getline(s, population, '"');
+        getline(s, population);
 
         City res = City(city, stoi(id), code, stod(demand), stoi(population));
         citySet.insert(code);
@@ -133,9 +131,10 @@ void csvInfo::createPipes() {
         getline(s, A, ',');
         getline(s, B, ',');
         getline(s, capacity, ',');
-        getline(s, direction, ',');
+        getline(s, direction);
 
-        // TODO
+        if (direction == "1") pipesGraph.addBidirectionalEdge(A, B, stoi(capacity));
+        else pipesGraph.addEdge(A, B, stoi(capacity));
     }
     file.close();
 }

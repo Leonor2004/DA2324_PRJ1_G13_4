@@ -5,7 +5,7 @@
 #include <sstream>
 #include <string>
 #include <set>
-#include <Graph.h>
+#include "Graph.h"
 
 /**
  * @brief Gets the info from the csv's.
