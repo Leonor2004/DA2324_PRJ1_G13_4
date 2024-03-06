@@ -63,6 +63,7 @@ void csvInfo::createStations() {
         stringstream s(line);
         getline(s, id, ',');
         getline(s, code, ',');
+        if (id == ",") break;
 
         Station sta = Station(stoi(id), code);
         stationSet.insert(code);
