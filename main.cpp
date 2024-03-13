@@ -7,7 +7,7 @@
  *
  * DESCRIÇÃO DO PROJETOOOOOOOOO
  *
- * This project was made by: Filipa Fidalgo (up202208039) and Leonor Couto (up202205796).
+ * This project was made by: Filipa Fidalgo (up202208039), Leonor Couto (up202205796) and Frederica Pereira (up202108167).
  */
 
 #include "csvInfo.h"
