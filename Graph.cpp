@@ -154,7 +154,7 @@ void Vertex::deleteEdge(Edge *edge) {
 
 /********************** Edge  ****************************/
 
-Edge::Edge(Vertex *orig, Vertex *dest, double w): orig(orig), dest(dest), weight(w) {}
+Edge::Edge(Vertex *orig, Vertex *dest, double w): orig(orig), dest(dest), weight(w), flow(w) {}
 
 Vertex* Edge::getDest() const {
     return this->dest;

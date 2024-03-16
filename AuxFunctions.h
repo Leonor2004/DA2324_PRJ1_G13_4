@@ -7,7 +7,13 @@ class AuxFunctions {
 private:
 public:
     AuxFunctions();
-    void maxWaterCity(string city);
+    static void testAndVisit(std::queue<Vertex*> &q, Edge* e, Vertex* w, double residual);
+    static bool findAugmentingPaths(Vertex* s, Vertex* t);
+    static double findMinResidualAlongPath(Vertex* s, Vertex* t);
+    static void augmentFlowAlongPath(Vertex* s, Vertex* t);
+    static void edmondsKarp(string source, string target);
+    static void MaxWaterCity(int idx);
+
 };
 
 

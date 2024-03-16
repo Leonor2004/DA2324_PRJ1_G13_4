@@ -50,11 +50,20 @@ void clearMenus() {
  */
 int main() {
     auto start = chrono::high_resolution_clock::now();
-    csvInfo csvInfo;
     csvInfo::createReservoir();
     csvInfo::createStations();
     csvInfo::createCities();
     csvInfo::createPipes();
+
+    cout << csvInfo::reservoirSet.size() << endl;
+    cout << csvInfo::reservoirsVector.size() << endl;
+    cout << csvInfo::stationSet.size() << endl;
+    cout << csvInfo::stationsVector.size() << endl;
+    cout << csvInfo::cityNameSet.size() << endl;
+    cout << csvInfo::cityMap.size() << endl;
+    cout << csvInfo::citiesVector.size() << endl;
+    cout << csvInfo::pipesGraph.getVertexSet().size() << endl;
+
     auto end = chrono::high_resolution_clock::now();
     chrono::duration<double> dif = end - start;
     cout << dif.count() << " seconds" << endl;
@@ -186,9 +195,9 @@ void amountWaterOneCity() {
             cin.ignore(INT_MAX , '\n');   // Ignore the invalid input
         }
     }
-    AuxFunctions::maxWaterCity(city);
 
-
+    AuxFunctions::MaxWaterCity(csvInfo::cityMap[city]);
+    over = true;
 }
 
 /**
@@ -200,7 +209,10 @@ void amountWaterOneCity() {
  */
 
 void amountWaterEachCity() {
-
+    for (int i = 0; i < csvInfo::cityNameSet.size(); i++) {
+        AuxFunctions::MaxWaterCity(i);
+    }
+    over = true;
 }
 
 /**
@@ -212,6 +224,6 @@ void amountWaterEachCity() {
  */
 
 bool verifyCity(string city) {
-    if (csvInfo::citySet.find(city) == csvInfo::citySet.end()) return false;
+    if (csvInfo::cityNameSet.find(city) == csvInfo::cityNameSet.end()) return false;
     return true;
 }

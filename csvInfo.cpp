@@ -1,3 +1,4 @@
+#include <map>
 #include "csvInfo.h"
 
 vector<Reservoir> csvInfo::reservoirsVector;
@@ -6,7 +7,8 @@ vector<City> csvInfo::citiesVector;
 Graph csvInfo::pipesGraph;
 std::set<std::string> csvInfo::reservoirSet;
 std::set<std::string> csvInfo::stationSet;
-std::set<std::string> csvInfo::citySet;
+std::set<std::string> csvInfo::cityNameSet;
+std::map<std::string, int> csvInfo::cityMap;
 
 csvInfo::csvInfo() = default;
 
@@ -75,8 +77,9 @@ void csvInfo::createStations() {
 }
 
 void csvInfo::createCities() {
-    reservoirSet.clear();
-    reservoirsVector.clear();
+    cityMap.clear();
+    cityNameSet.clear();
+    citiesVector.clear();
     fstream file;
     file.open("../Project1DataSetSmall/Cities_Madeira.csv");
     if (!file.is_open()) {
@@ -84,6 +87,7 @@ void csvInfo::createCities() {
         return;
     }
 
+    int i = 0;
     string line;
     string city;
     string id;
@@ -101,17 +105,18 @@ void csvInfo::createCities() {
         getline(s, population);
 
         City res = City(city, stoi(id), code, stod(demand), stoi(population));
-        citySet.insert(code);
+        cityMap[city] = i;
+        cityNameSet.insert(city);
         citiesVector.push_back(res);
         int aux = citiesVector.size();
         City* c = &citiesVector[aux - 1];
         pipesGraph.addVertex(code, 0, c, nullptr, nullptr);
+        i++;
     }
     file.close();
 }
 
 void csvInfo::createPipes() {
-    pipesGraph.clear();
     fstream file;
     file.open("../Project1DataSetSmall/Pipes_Madeira.csv");
     if (!file.is_open()) {
@@ -133,7 +138,7 @@ void csvInfo::createPipes() {
         getline(s, capacity, ',');
         getline(s, direction);
 
-        if (direction == "1") pipesGraph.addBidirectionalEdge(A, B, stoi(capacity));
+        if (direction == "0") pipesGraph.addBidirectionalEdge(A, B, stoi(capacity));
         else pipesGraph.addEdge(A, B, stoi(capacity));
     }
     file.close();

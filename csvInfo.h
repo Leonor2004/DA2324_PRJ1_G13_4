@@ -5,6 +5,7 @@
 #include <sstream>
 #include <string>
 #include <set>
+#include <map>
 #include "Graph.h"
 
 /**
@@ -49,9 +50,14 @@ public:
     static std::set<std::string> stationSet;
 
     /**
-     * Set with the code of all cities
+     * Map with the name of all cities and its corresponding index
      */
-    static std::set<std::string> citySet;
+    static map<std::string, int> cityMap;
+
+    /**
+     * Set with the name of all cities
+     */
+    static std::set<std::string> cityNameSet;
 
     /**
      * @brief csvInfo::createReservoir()
@@ -71,7 +77,7 @@ public:
 
     /**
      * @brief csvInfo::createCity()
-     * Creates a set with the code of all cities and a vector with the info of all cities
+     * Creates a set with the name of all cities and a vector with the info of all cities
      *
      * Complexity: ???
      */
