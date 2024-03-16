@@ -175,15 +175,16 @@ void mainMenu() {
 
 void amountWaterOneCity() {
     string city;
+    getline(cin, city);
     while (true) {
-        cout << "Write the city name: ";
-        if (cin >> city) {
+        cout << "Enter the name of the city: ";
+        if (getline(cin, city)) {
             if (verifyCity(city)) {
                 break;  // Input is valid, exit the loop
             }
             else if (city == "q") {
-                over = true;
-                break;
+                menus.pop();
+                return;
             }
             else {
                 cout << "Invalid city name!" << endl;
@@ -192,7 +193,7 @@ void amountWaterOneCity() {
         else {
             cout << "Invalid input! Please enter a valid city name." << endl;
             cin.clear();          // Clear the error state
-            cin.ignore(INT_MAX , '\n');   // Ignore the invalid input
+            cin.ignore(INT_MAX , '\n'); // Ignore the invalid input
         }
     }
 
