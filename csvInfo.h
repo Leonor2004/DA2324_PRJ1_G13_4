@@ -59,6 +59,8 @@ public:
      */
     static std::set<std::string> cityNameSet;
 
+    static vector<vector<string>> maxWatterPerCity;
+
     /**
      * @brief csvInfo::createReservoir()
      * Creates a set with the code of all reservoirs and a vector with the info of all reservoirs
@@ -90,6 +92,10 @@ public:
      * Complexity: ???
      */
     static void createPipes();
+
+    static void writeToMaxWaterPerCity(vector<string> v);
+
+    static void readMaxWaterPerCity();
 };
 
 #endif //DA2324_PRJ1_G13_4_CSVINFO_H

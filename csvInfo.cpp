@@ -9,6 +9,7 @@ std::set<std::string> csvInfo::reservoirSet;
 std::set<std::string> csvInfo::stationSet;
 std::set<std::string> csvInfo::cityNameSet;
 std::map<std::string, int> csvInfo::cityMap;
+vector<vector<string>> csvInfo::maxWatterPerCity;
 
 csvInfo::csvInfo() = default;
 
@@ -148,3 +149,40 @@ void csvInfo::createPipes() {
     file.close();
 }
 
+void csvInfo::writeToMaxWaterPerCity(vector<string> v) {
+    ofstream fileName;
+    fileName.open("../outputFiles/maxWaterPerCity.csv");
+    fileName << "CityName,CityCode,MaxWater" << endl;
+    for (string i : v) {
+        fileName << i << endl;
+    }
+    fileName.close();
+}
+
+void csvInfo::readMaxWaterPerCity() {
+    fstream file;
+    file.open("../outputFiles/maxWaterPerCity.csv");
+    if (!file.is_open()) {
+        cerr << "Error: Unable to open the file." << endl;
+        return;
+    }
+
+    string line;
+    string city;
+    string code;
+    string value;
+
+    getline(file, line);    // discard header line
+    while(getline(file, line)) {
+        stringstream s(line);
+        getline(s, city, ',');
+        getline(s, code, ',');
+        getline(s, value);
+
+        vector<string> aux;
+        aux.push_back(city);
+        aux.push_back(value);
+        maxWatterPerCity.push_back(aux);
+    }
+    file.close();
+}

@@ -1,4 +1,7 @@
 #include "AuxFunctions.h"
+#include <cmath>
+
+vector<string> AuxFunctions::maxWaterPerCity;
 
 AuxFunctions::AuxFunctions() = default;
 
@@ -71,7 +74,7 @@ void AuxFunctions::edmondsKarp(string source, string target) {
 }
 
 void AuxFunctions::MaxWaterCity(int idx) {
-
+    stringstream  aux;
     for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
         for (Edge* e : v->getAdj()) {
             e->setFlow(0);
@@ -89,4 +92,8 @@ void AuxFunctions::MaxWaterCity(int idx) {
     }
 
     cout << csvInfo::citiesVector[idx].getCity() << ", " << csvInfo::citiesVector[idx].getCode() << ", " << sum << endl;
+    aux << csvInfo::citiesVector[idx].getCity() << ",";
+    aux << csvInfo::citiesVector[idx].getCode() << ",";
+    aux << std::to_string(static_cast<long long>(std::round(sum)));
+    maxWaterPerCity.push_back(aux.str());
 }

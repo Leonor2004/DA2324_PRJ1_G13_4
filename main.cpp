@@ -21,10 +21,11 @@ int main();
 void mainMenu();
 void amountWaterEachCity();
 void amountWaterOneCity();
+void waterNeedCheck();
 
 bool verifyCity(string basicString);
 
-map<string, int> m = {{"main", 0}, {"waterEach", 1}, {"waterSpecific", 2}};
+map<string, int> m = {{"main", 0}, {"waterEach", 1}, {"waterSpecific", 2}, {"waterNeedCheck", 3}};
 stack<string> menus;
 bool over = false;
 bool quit = false;
@@ -81,6 +82,8 @@ int main() {
             case 2:
                 amountWaterOneCity();
                 break;
+            case 3:
+                waterNeedCheck();
             default:
                 quit = true;
         }
@@ -134,6 +137,7 @@ void mainMenu() {
     cout << endl << "----------------------------" << endl;
     cout << "1 - Maximum amount of water that can reach each city." << endl;
     cout << "2 - Maximum amount of water that can reach a specific city." << endl;
+    cout << "3 - Can an existing network configuration meet the water needs of its costumer?" << endl;
     cout << "0 - Quit." << endl;
     cout << endl;
     cout << "Note: If you enter a 'q' when asked for a city," << endl;
@@ -150,11 +154,14 @@ void mainMenu() {
                 case 2:
                     menus.emplace("waterSpecific");
                     return;
+                case 3:
+                    menus.emplace("waterNeedCheck");
+                    return;
                 case 0:
                     menus.pop();
                     return;
                 default:
-                    cout << "Invalid number! The number should be between 0 and 2." << endl;
+                    cout << "Invalid number! The number should be between 0 and 3." << endl;
             }
         }
         else {
@@ -197,7 +204,9 @@ void amountWaterOneCity() {
         }
     }
 
+    AuxFunctions::maxWaterPerCity.clear();
     AuxFunctions::MaxWaterCity(csvInfo::cityMap[city]);
+    csvInfo::writeToMaxWaterPerCity(AuxFunctions::maxWaterPerCity);
     over = true;
 }
 
@@ -205,16 +214,28 @@ void amountWaterOneCity() {
  * @brief Function to get the maximum amount of water that can reach each city.
  *
  * Complexity: ???
- *
- * @return
  */
 
 void amountWaterEachCity() {
+    AuxFunctions::maxWaterPerCity.clear();
     for (int i = 0; i < csvInfo::cityNameSet.size(); i++) {
         AuxFunctions::MaxWaterCity(i);
     }
+    csvInfo::writeToMaxWaterPerCity(AuxFunctions::maxWaterPerCity);
     over = true;
 }
+
+
+void waterNeedCheck(){
+    amountWaterEachCity();
+    csvInfo::readMaxWaterPerCity;
+    unsigned int t = csvInfo::maxWatterPerCity.size();
+    for (int i = 0; i<t;i++){
+        //correr vetor e coiso das cidades e dar matching do indice(i)
+    }
+
+}
+
 
 /**
  * @brief Checks if the city exists.
@@ -228,3 +249,4 @@ bool verifyCity(string city) {
     if (csvInfo::cityNameSet.find(city) == csvInfo::cityNameSet.end()) return false;
     return true;
 }
+

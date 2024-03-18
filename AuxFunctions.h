@@ -6,6 +6,7 @@
 class AuxFunctions {
 private:
 public:
+    static vector<string> maxWaterPerCity;
     AuxFunctions();
     static void testAndVisit(std::queue<Vertex*> &q, Edge* e, Vertex* w, double residual);
     static bool findAugmentingPaths(Vertex* s, Vertex* t);
