@@ -206,6 +206,7 @@ void amountWaterOneCity() {
 
     AuxFunctions::maxWaterPerCity.clear();
     AuxFunctions::MaxWaterCity(csvInfo::cityMap[city]);
+    cout << AuxFunctions::maxWaterPerCity[0] << endl;
     csvInfo::writeToMaxWaterPerCity(AuxFunctions::maxWaterPerCity);
     over = true;
 }
@@ -222,18 +223,37 @@ void amountWaterEachCity() {
         AuxFunctions::MaxWaterCity(i);
     }
     csvInfo::writeToMaxWaterPerCity(AuxFunctions::maxWaterPerCity);
+    for (string i : AuxFunctions::maxWaterPerCity) {
+        cout << i << endl;
+    }
     over = true;
 }
 
 
 void waterNeedCheck(){
-    amountWaterEachCity();
-    csvInfo::readMaxWaterPerCity;
+    for (int i = 0; i < csvInfo::cityNameSet.size(); i++) {
+        AuxFunctions::MaxWaterCity(i);
+    }
+    csvInfo::readMaxWaterPerCity();
+    vector<string> final;
+    stringstream  aux;
+
     unsigned int t = csvInfo::maxWatterPerCity.size();
     for (int i = 0; i<t;i++){
-        //correr vetor e coiso das cidades e dar matching do indice(i)
+        if (csvInfo::citiesVector[i].getDemand() > stoi(csvInfo::maxWatterPerCity[i][1])) {
+            aux << csvInfo::citiesVector[i].getCity() << "," << csvInfo::citiesVector[i].getCode() << "," << csvInfo::citiesVector[i].getDemand() - stoi(csvInfo::maxWatterPerCity[i][1]);
+            final.push_back(aux.str());
+            aux.str("");
+        }
     }
 
+    if (final.empty()) {
+        cout << "An existing network configuration meet the water needs of all the delivery sites.";
+    }
+
+    for (const string& i : final) {
+        cout << i << endl;
+    }
 }
 
 

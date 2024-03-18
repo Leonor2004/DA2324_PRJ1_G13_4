@@ -91,7 +91,6 @@ void AuxFunctions::MaxWaterCity(int idx) {
         sum += e->getFlow();
     }
 
-    cout << csvInfo::citiesVector[idx].getCity() << ", " << csvInfo::citiesVector[idx].getCode() << ", " << sum << endl;
     aux << csvInfo::citiesVector[idx].getCity() << ",";
     aux << csvInfo::citiesVector[idx].getCode() << ",";
     aux << std::to_string(static_cast<long long>(std::round(sum)));
