@@ -147,3 +147,4 @@ void csvInfo::createPipes() {
     }
     file.close();
 }
+
