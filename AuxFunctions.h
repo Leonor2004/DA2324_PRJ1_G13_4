@@ -99,7 +99,7 @@ public:
     static void simulateReservoirRemoval(Graph& graph, const std::string& reservoirCode);
 
 
-    static void simulatePumpingStationRemoval(int id);
+    static void simulatePumpingStationRemoval(Graph& graph,string code);
 
 };
 

@@ -22,10 +22,11 @@ void mainMenu();
 void amountWaterEachCity();
 void amountWaterOneCity();
 void waterNeedCheck();
+void pumpingStationRemoval();
 
 bool verifyCity(string basicString);
 
-map<string, int> m = {{"main", 0}, {"waterEach", 1}, {"waterSpecific", 2}, {"waterNeedCheck", 3}};
+map<string, int> m = {{"main", 0}, {"waterEach", 1}, {"waterSpecific", 2}, {"waterNeedCheck", 3},{"stationRemoval",4}};
 stack<string> menus;
 bool over = false;
 bool quit = false;
@@ -84,6 +85,9 @@ int main() {
                 break;
             case 3:
                 waterNeedCheck();
+                break;
+            case 4:
+                pumpingStationRemoval();
             default:
                 quit = true;
         }
@@ -137,6 +141,7 @@ void mainMenu() {
     cout << "1 - Maximum amount of water that can reach each city." << endl;
     cout << "2 - Maximum amount of water that can reach a specific city." << endl;
     cout << "3 - Can an existing network configuration meet the water needs of its costumer?" << endl;
+    cout << "4 - stationRemoval" << endl;
     cout << "0 - Quit." << endl;
     cout << endl;
     cout << "Note: If you enter a 'q' when asked for a city," << endl;
@@ -155,6 +160,9 @@ void mainMenu() {
                     return;
                 case 3:
                     menus.emplace("waterNeedCheck");
+                    return;
+                case 4:
+                    menus.emplace("stationRemoval");
                     return;
                 case 0:
                     menus.pop();
@@ -229,6 +237,7 @@ void amountWaterEachCity() {
  * Complexity :???
  */
 void waterNeedCheck(){
+    AuxFunctions::maxWaterPerCity.clear();
     AuxFunctions::MaxFlow();
     csvInfo::readMaxWaterPerCity();
     vector<string> final;
@@ -260,13 +269,27 @@ void waterNeedCheck(){
  *
  */
 void pumpingStationRemoval(){
+    AuxFunctions::maxWaterPerCity.clear();
     AuxFunctions::MaxFlow();
     csvInfo::readMaxWaterPerCity();
+    auto maxWaterPerCityInicial = csvInfo::maxWatterPerCity;
     unsigned int t = csvInfo::stationsVector.size();
     for (int i = 0; i<t; i++){
-        AuxFunctions::simulatePumpingStationRemoval(csvInfo::stationsVector[i].getId());
+        AuxFunctions::simulatePumpingStationRemoval(csvInfo::pipesGraph,csvInfo::stationsVector[i].getCode());
+        csvInfo::readMaxWaterPerCity();
+        auto maxWaterPerCity = csvInfo::maxWatterPerCity;
+        for (auto a : maxWaterPerCity){
+            for(auto b : maxWaterPerCityInicial){
+                if(a[0] == b[0] && stoi(a[1])< stoi(b[1])){
+                    int d = stoi(b[1]) - stoi(a[1]);
+                    cout << csvInfo::stationsVector[i].getCode() << " - " << a[0] << " : -" << d << endl;
+                }
+            }
+        }
     }
-    //TODO
+
+
+    over = true;
 }
 
 /**

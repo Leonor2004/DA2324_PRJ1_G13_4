@@ -126,10 +126,16 @@ void AuxFunctions::simulateReservoirRemoval(Graph& graph, const std::string& res
 }
 
 
-void AuxFunctions::simulatePumpingStationRemoval(int id){
-    /*for (auto p : csvInfo::stationsVector){
-        if (p.getId()==id){
+void AuxFunctions::simulatePumpingStationRemoval(Graph& graph,string code){
+    Vertex* v = graph.findVertex(code);
+    for(auto e : v->getAdj()){
+        e->setWeight(0);
+    }
+    maxWaterPerCity.clear();
+    MaxFlow();
+    csvInfo::readMaxWaterPerCity();
 
-        }
-    }*/ //todo
+    for(auto e : v->getAdj()){
+        e->setWeight(e->getCapacity());
+    }
 }
