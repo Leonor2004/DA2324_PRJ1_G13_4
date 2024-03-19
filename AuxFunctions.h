@@ -77,19 +77,25 @@ public:
      * @brief ??? T2.1
      *
      * Complexity: O(n^3)
-     *
-     * @param idx : Id of the city
      */
-    static void MaxWaterCity(int idx);
+    static void MaxWaterCity();
+
 
     /**
-     * @brief ???
+     * @brief ??? T2.1
      *
-     * Complexity : ???
-     *
-     * @param graph
-     * @param reservoirCode
+     * Complexity: ???
      */
+    static void MaxFlow();
+
+        /**
+         * @brief ???
+         *
+         * Complexity : ???
+         *
+         * @param graph
+         * @param reservoirCode
+         */
     static void simulateReservoirRemoval(Graph& graph, const std::string& reservoirCode);
 
 

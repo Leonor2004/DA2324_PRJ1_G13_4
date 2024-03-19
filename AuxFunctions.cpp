@@ -42,11 +42,7 @@ double AuxFunctions::findMinResidualAlongPath(Vertex* s, Vertex* t) {
             v = e->getOrig();
         }
         else {
-            if (e->getDest()->getType() == 0) {
-                f = std::min(f, e->getFlow());
-                f = std::min(f, e->getDest()->getCity()->getDemand() * 1.0);
-            }
-            else f = std::min(f, e->getFlow());
+            f = std::min(f, e->getFlow());
             v = e->getDest();
         }
     }
@@ -77,7 +73,7 @@ void AuxFunctions::edmondsKarp(string source, string target) {
     }
 }
 
-void AuxFunctions::MaxWaterCity(int idx) {
+void AuxFunctions::MaxWaterCity() {
     stringstream  aux;
     for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
         for (Edge* e : v->getAdj()) {
@@ -86,19 +82,32 @@ void AuxFunctions::MaxWaterCity(int idx) {
     }
 
     for (string i : csvInfo::reservoirSet) {
-        AuxFunctions::edmondsKarp(i, csvInfo::citiesVector[idx].getCode());
+        AuxFunctions::edmondsKarp(i, "super_sink");
     }
 
-    double sum = 0;
-    Vertex* s = csvInfo::pipesGraph.findVertex(csvInfo::citiesVector[idx].getCode());
-    for (Edge* e : s->getIncoming()) {
-        sum += e->getFlow();
+    for (int idx = 0; idx < csvInfo::citiesVector.size(); idx++) {
+        Vertex* s = csvInfo::pipesGraph.findVertex(csvInfo::citiesVector[idx].getCode());
+        double flow = s->getAdj()[0]->getFlow();
+        aux.str("");
+        aux << csvInfo::citiesVector[idx].getCity() << ",";
+        aux << csvInfo::citiesVector[idx].getCode() << ",";
+        aux << std::to_string(static_cast<long long>(std::round(flow)));
+        maxWaterPerCity.push_back(aux.str());
+    }
+}
+
+void AuxFunctions::MaxFlow() {
+    csvInfo::pipesGraph.addVertex("super_sink", -1, -1);
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        if (v->getType() == 0) {
+            csvInfo::pipesGraph.addEdge(v->getInfo(), "super_sink", csvInfo::citiesVector[v->getPos()].getDemand() * 1.0);
+        }
     }
 
-    aux << csvInfo::citiesVector[idx].getCity() << ",";
-    aux << csvInfo::citiesVector[idx].getCode() << ",";
-    aux << std::to_string(static_cast<long long>(std::round(sum)));
-    maxWaterPerCity.push_back(aux.str());
+    AuxFunctions::MaxWaterCity();
+    csvInfo::writeToMaxWaterPerCity(maxWaterPerCity);
+
+    csvInfo::pipesGraph.removeVertex("super_sink");
 }
 
 void AuxFunctions::simulateReservoirRemoval(Graph& graph, const std::string& reservoirCode) {
@@ -108,9 +117,7 @@ void AuxFunctions::simulateReservoirRemoval(Graph& graph, const std::string& res
         edge->setWeight(0);
     }
 
-    for (int i = 0; i < csvInfo::cityNameSet.size(); i++) {
-        AuxFunctions::MaxWaterCity(i);
-    }
+    MaxFlow();
     csvInfo::readMaxWaterPerCity();
 
     for (Edge* edge : reservoirVertex->getAdj()) {
@@ -120,6 +127,9 @@ void AuxFunctions::simulateReservoirRemoval(Graph& graph, const std::string& res
 
 
 void AuxFunctions::simulatePumpingStationRemoval(int id){
-    int i =0;
-    //TODO
+    /*for (auto p : csvInfo::stationsVector){
+        if (p.getId()==id){
+
+        }
+    }*/ //todo
 }

@@ -2,7 +2,7 @@
 
 /************************* Vertex  **************************/
 
-Vertex::Vertex(string in, int t, City* c, Reservoir* r, Station* s): info(in), type(t), city(c), reservoir(r), station(s) {}
+Vertex::Vertex(string in, int t, int pos): info(in), type(t), vectorPos(pos) {}
 /*
  * Auxiliary function to add an outgoing edge to a vertex (this),
  * with a given destination vertex (d) and edge weight (w).
@@ -113,28 +113,8 @@ void Vertex::setPath(Edge *path) {
     this->path = path;
 }
 
-void Vertex::setCity(City* c) {
-    this->city = c;
-}
-
-void Vertex::setReservoir(Reservoir* r) {
-    this->reservoir = r;
-}
-
-void Vertex::setStation(Station* s) {
-    this->station = s;
-}
-
-City* Vertex::getCity() {
-    return this->city;
-}
-
-Reservoir* Vertex::getReservoir() {
-    return this->reservoir;
-}
-
-Station* Vertex::getStation() {
-    return this->station;
+int Vertex::getPos() {
+    return this->vectorPos;
 }
 
 void Vertex::deleteEdge(Edge *edge) {
@@ -233,10 +213,10 @@ int Graph::findVertexIdx(const string &in) const {
  *  Adds a vertex with a given content or info (in) to a graph (this).
  *  Returns true if successful, and false if a vertex with that content already exists.
  */
-bool Graph::addVertex(const string &in, int t, City* c, Reservoir* r, Station* s) {
+bool Graph::addVertex(const string &in, int t, int pos) {
     if (findVertex(in) != nullptr)
         return false;
-    vertexSet.push_back(new Vertex(in, t, c, r, s));
+    vertexSet.push_back(new Vertex(in, t, pos));
     return true;
 }
 

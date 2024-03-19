@@ -21,7 +21,7 @@ class Edge;
 
 class Vertex {
 public:
-    Vertex(string in, int type, City* c, Reservoir* r, Station* s);
+    Vertex(string in, int type, int pos);
     bool operator<(Vertex & vertex) const;
 
     string getInfo() const;
@@ -33,12 +33,7 @@ public:
     double getDist() const;
     Edge *getPath() const;
     std::vector<Edge *> getIncoming() const;
-    void setCity(City* c);
-    void setReservoir(Reservoir* r);
-    void setStation(Station* s);
-    City* getCity();
-    Reservoir* getReservoir();
-    Station* getStation();
+    int getPos();
 
     void setInfo(string info);
     void setVisited(bool visited);
@@ -55,9 +50,7 @@ protected:
     int type;                   // 0->City; 1->Reservoir; 2->Station
     std::vector<Edge *> adj;  // outgoing edges
 
-    City* city = nullptr;
-    Reservoir* reservoir = nullptr;
-    Station* station = nullptr;
+    int vectorPos;              // position in the vector of its type (citiesVector, reservoirVector, stationsVector)
 
     // auxiliary fields
     bool visited = false; // used by DFS, BFS, Prim ...
@@ -119,7 +112,7 @@ public:
      *  Adds a vertex with a given content or info (in) to a graph (this).
      *  Returns true if successful, and false if a vertex with that content already exists.
      */
-    bool addVertex(const string &in, int t, City* c, Reservoir* r, Station* s);
+    bool addVertex(const string &in, int t, int pos);
     bool removeVertex(const string &in);
 
     /*
