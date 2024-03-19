@@ -79,6 +79,8 @@ public:
 
     Vertex * getDest() const;
     double getWeight() const;
+    void setWeight(double w);
+    double getCapacity() const;
     bool isSelected() const;
     Vertex * getOrig() const;
     Edge *getReverse() const;
@@ -87,9 +89,12 @@ public:
     void setSelected(bool selected);
     void setReverse(Edge *reverse);
     void setFlow(double flow);
+
+
 protected:
     Vertex * dest; // destination vertex
-    double weight; // edge weight, can also be used for capacity
+    double weight; // edge weight
+    double capacity; // edge capacity, don't change
 
     // auxiliary fields
     bool selected = false;

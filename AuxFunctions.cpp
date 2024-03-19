@@ -42,7 +42,11 @@ double AuxFunctions::findMinResidualAlongPath(Vertex* s, Vertex* t) {
             v = e->getOrig();
         }
         else {
-            f = std::min(f, e->getFlow());
+            if (e->getDest()->getType() == 0) {
+                f = std::min(f, e->getFlow());
+                f = std::min(f, e->getDest()->getCity()->getDemand() * 1.0);
+            }
+            else f = std::min(f, e->getFlow());
             v = e->getDest();
         }
     }
@@ -55,11 +59,11 @@ void AuxFunctions::augmentFlowAlongPath(Vertex* s, Vertex* t) {
         Edge* e = v->getPath();
         double flow = e->getFlow();
         if (e->getDest() == v) {
-            e->setFlow(flow + f);
+            e->setFlow(std::min(flow + f, e->getWeight()));
             v = e->getOrig();
         }
         else {
-            e->setFlow(flow - f);
+            e->setFlow(std::max(flow - f, 0.0));
             v = e->getDest();
         }
     }
@@ -95,4 +99,27 @@ void AuxFunctions::MaxWaterCity(int idx) {
     aux << csvInfo::citiesVector[idx].getCode() << ",";
     aux << std::to_string(static_cast<long long>(std::round(sum)));
     maxWaterPerCity.push_back(aux.str());
+}
+
+void AuxFunctions::simulateReservoirRemoval(Graph& graph, const std::string& reservoirCode) {
+    Vertex* reservoirVertex = graph.findVertex(reservoirCode);
+
+    for (Edge* edge : reservoirVertex->getAdj()) {
+        edge->setWeight(0);
+    }
+
+    for (int i = 0; i < csvInfo::cityNameSet.size(); i++) {
+        AuxFunctions::MaxWaterCity(i);
+    }
+    csvInfo::readMaxWaterPerCity();
+
+    for (Edge* edge : reservoirVertex->getAdj()) {
+        edge->setWeight(edge->getCapacity());
+    }
+}
+
+
+void AuxFunctions::simulatePumpingStationRemoval(int id){
+    int i =0;
+    //TODO
 }

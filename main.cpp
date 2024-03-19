@@ -129,7 +129,6 @@ int main() {
  *
  * Complexity: O(n)
  */
-
 void mainMenu() {
     int op = 0;
     cout << endl << "----------------------------" << endl;
@@ -175,11 +174,10 @@ void mainMenu() {
 /**
  * @brief Function to get the maximum amount of water that can reach a specific city.
  *
- * Complexity: ???
+ * Complexity: O(
  *
  * @return 0 quit / 1 main menu / 2 request menu.
  */
-
 void amountWaterOneCity() {
     string city;
     getline(cin, city);
@@ -205,8 +203,10 @@ void amountWaterOneCity() {
     }
 
     AuxFunctions::maxWaterPerCity.clear();
-    AuxFunctions::MaxWaterCity(csvInfo::cityMap[city]);
-    cout << AuxFunctions::maxWaterPerCity[0] << endl;
+    for (int i = 0; i < csvInfo::cityNameSet.size(); i++) {
+        AuxFunctions::MaxWaterCity(i);
+    }
+    cout << AuxFunctions::maxWaterPerCity[csvInfo::cityMap[city]] << endl;
     csvInfo::writeToMaxWaterPerCity(AuxFunctions::maxWaterPerCity);
     over = true;
 }
@@ -229,7 +229,11 @@ void amountWaterEachCity() {
     over = true;
 }
 
-
+/**
+ * @brief Checks if the water that is reaching the citys is enough for the demand of the city
+ *
+ * Complexity :???
+ */
 void waterNeedCheck(){
     for (int i = 0; i < csvInfo::cityNameSet.size(); i++) {
         AuxFunctions::MaxWaterCity(i);
@@ -256,11 +260,27 @@ void waterNeedCheck(){
     }
 }
 
+/**
+ * @brief
+ *
+ *
+ */
+void pumpingStationRemoval(){
+    for (int i = 0; i < csvInfo::cityNameSet.size(); i++) {
+        AuxFunctions::MaxWaterCity(i);
+    }
+    csvInfo::readMaxWaterPerCity();
+    unsigned int t = csvInfo::stationsVector.size();
+    for (int i = 0; i<t; i++){
+        AuxFunctions::simulatePumpingStationRemoval(csvInfo::stationsVector[i].getId());
+    }
+    //TODO
+}
 
 /**
  * @brief Checks if the city exists.
  *
- * Complexity: ???
+ * Complexity: O(1)
  *
  * @return
  */

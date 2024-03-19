@@ -154,7 +154,7 @@ void Vertex::deleteEdge(Edge *edge) {
 
 /********************** Edge  ****************************/
 
-Edge::Edge(Vertex *orig, Vertex *dest, double w): orig(orig), dest(dest), weight(w), flow(w) {}
+Edge::Edge(Vertex *orig, Vertex *dest, double w): orig(orig), dest(dest), weight(w), capacity(w), flow(w) {}
 
 Vertex* Edge::getDest() const {
     return this->dest;
@@ -162,6 +162,14 @@ Vertex* Edge::getDest() const {
 
 double Edge::getWeight() const {
     return this->weight;
+}
+
+void Edge::setWeight(double w){
+    this->weight = w;
+}
+
+double Edge::getCapacity() const{
+    return this->capacity;
 }
 
 Vertex* Edge::getOrig() const {
