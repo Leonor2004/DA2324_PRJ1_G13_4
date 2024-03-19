@@ -59,6 +59,9 @@ public:
      */
     static std::set<std::string> cityNameSet;
 
+    /**
+     * ???
+     */
     static vector<vector<string>> maxWatterPerCity;
 
     /**

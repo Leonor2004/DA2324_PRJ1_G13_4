@@ -81,9 +81,7 @@ void AuxFunctions::MaxWaterCity() {
         }
     }
 
-    for (string i : csvInfo::reservoirSet) {
-        AuxFunctions::edmondsKarp(i, "super_sink");
-    }
+    AuxFunctions::edmondsKarp("super_source", "super_sink");
 
     for (int idx = 0; idx < csvInfo::citiesVector.size(); idx++) {
         Vertex* s = csvInfo::pipesGraph.findVertex(csvInfo::citiesVector[idx].getCode());
@@ -98,6 +96,8 @@ void AuxFunctions::MaxWaterCity() {
 
 void AuxFunctions::MaxFlow() {
     maxWaterPerCity.clear();
+
+    // add super sink
     csvInfo::pipesGraph.addVertex("super_sink", -1, -1);
     for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
         if (v->getType() == 0) {
@@ -105,14 +105,23 @@ void AuxFunctions::MaxFlow() {
         }
     }
 
+    // add super source
+    csvInfo::pipesGraph.addVertex("super_source", -1, -1);
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        if (v->getType() == 1) {
+            csvInfo::pipesGraph.addEdge("super_source", v->getInfo(), csvInfo::reservoirsVector[v->getPos()].getMaxDelivery() * 1.0);
+        }
+    }
+
     AuxFunctions::MaxWaterCity();
     csvInfo::writeToMaxWaterPerCity(maxWaterPerCity);
 
     csvInfo::pipesGraph.removeVertex("super_sink");
+    csvInfo::pipesGraph.removeVertex("super_source");
 }
 
-void AuxFunctions::simulateReservoirRemoval(Graph& graph, const std::string& reservoirCode) {
-    Vertex* reservoirVertex = graph.findVertex(reservoirCode);
+void AuxFunctions::simulateReservoirRemoval(const std::string& reservoirCode) {
+    Vertex* reservoirVertex = csvInfo::pipesGraph.findVertex(reservoirCode);
 
     for (Edge* edge : reservoirVertex->getAdj()) {
         edge->setWeight(0);
@@ -127,8 +136,8 @@ void AuxFunctions::simulateReservoirRemoval(Graph& graph, const std::string& res
 }
 
 
-void AuxFunctions::simulatePumpingStationRemoval(Graph& graph,string code){
-    Vertex* v = graph.findVertex(code);
+void AuxFunctions::simulatePumpingStationRemoval(string code){
+    Vertex* v = csvInfo::pipesGraph.findVertex(code);
     for(auto e : v->getAdj()){
         e->setWeight(0);
     }
@@ -139,4 +148,17 @@ void AuxFunctions::simulatePumpingStationRemoval(Graph& graph,string code){
     for(auto e : v->getAdj()){
         e->setWeight(e->getCapacity());
     }
+}
+
+/**
+ *
+ * @param e
+ */
+void AuxFunctions::simulatePipelineFailure(Edge* e){
+    e->setWeight(0);
+
+    MaxFlow();
+    csvInfo::readMaxWaterPerCity();
+
+    e->setWeight(e->getCapacity());
 }

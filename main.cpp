@@ -23,10 +23,11 @@ void amountWaterEachCity();
 void amountWaterOneCity();
 void waterNeedCheck();
 void pumpingStationRemoval();
+void pipelineFailures();
 
 bool verifyCity(string basicString);
 
-map<string, int> m = {{"main", 0}, {"waterEach", 1}, {"waterSpecific", 2}, {"waterNeedCheck", 3},{"stationRemoval",4}};
+map<string, int> m = {{"main", 0}, {"waterEach", 1}, {"waterSpecific", 2}, {"waterNeedCheck", 3}, {"", 4}, {"", 5}, {"stationRemoval",6}, {"pipelineFailures", 7}};
 stack<string> menus;
 bool over = false;
 bool quit = false;
@@ -87,7 +88,17 @@ int main() {
                 waterNeedCheck();
                 break;
             case 4:
+                //TODO
+                break;
+            case 5:
+                //TODO
+                break;
+            case 6:
                 pumpingStationRemoval();
+                break;
+            case 7:
+                pipelineFailures();
+                break;
             default:
                 quit = true;
         }
@@ -136,10 +147,13 @@ void mainMenu() {
     cout << endl << "----------------------------" << endl;
     cout << endl << "      Main Menu   " << endl;
     cout << endl << "----------------------------" << endl;
-    cout << "1 - Maximum amount of water that can reach each city." << endl;
-    cout << "2 - Maximum amount of water that can reach a specific city." << endl;
-    cout << "3 - Can an existing network configuration meet the water needs of its costumer?" << endl;
-    cout << "4 - stationRemoval" << endl;
+    cout << "1 - (T2.1) Maximum amount of water that can reach each city." << endl;
+    cout << "2 - (T2.1) Maximum amount of water that can reach a specific city." << endl;
+    cout << "3 - (T2.2) Can an existing network configuration meet the water needs of its costumer?" << endl;
+    cout << "4 - (T2.3) ..." << endl;
+    cout << "5 - (T3.1) Delivery capacity of the network if one specific water reservoir is out of comission. " << endl;
+    cout << "6 - (T3.2) Pumping stations removal consequences." << endl;
+    cout << "7 - (T3.3) Pipeline failures consequences." << endl;
     cout << "0 - Quit." << endl;
     cout << endl;
     cout << "Note: If you enter a 'q' when asked for a city," << endl;
@@ -160,13 +174,24 @@ void mainMenu() {
                     menus.emplace("waterNeedCheck");
                     return;
                 case 4:
+                    //TODO
+                    // menus.emplace("");
+                    return;
+                case 5:
+                    //TODO
+                    // menus.emplace("");
+                    return;
+                case 6:
                     menus.emplace("stationRemoval");
+                    return;
+                case 7:
+                    menus.emplace("pipelineFailures");
                     return;
                 case 0:
                     menus.pop();
                     return;
                 default:
-                    cout << "Invalid number! The number should be between 0 and 3." << endl;
+                    cout << "Invalid number! The number should be between 0 and 7." << endl;
             }
         }
         else {
@@ -181,8 +206,6 @@ void mainMenu() {
  * @brief Function to get the maximum amount of water that can reach a specific city.
  *
  * Complexity: O(
- *
- * @return 0 quit / 1 main menu / 2 request menu.
  */
 void amountWaterOneCity() {
     string city;
@@ -269,7 +292,7 @@ void pumpingStationRemoval(){
     auto maxWaterPerCityInicial = csvInfo::maxWatterPerCity;
     unsigned int t = csvInfo::stationsVector.size();
     for (int i = 0; i<t; i++){
-        AuxFunctions::simulatePumpingStationRemoval(csvInfo::pipesGraph,csvInfo::stationsVector[i].getCode());
+        AuxFunctions::simulatePumpingStationRemoval(csvInfo::stationsVector[i].getCode());
         for (auto a : csvInfo::maxWatterPerCity){
             for(auto b : maxWaterPerCityInicial){
                 if(a[0] == b[0] && stoi(a[1])< stoi(b[1])){
@@ -286,9 +309,44 @@ void pumpingStationRemoval(){
 }
 
 /**
+ * @brief
+ *
+ *
+ */
+
+void pipelineFailures() {
+    AuxFunctions::MaxFlow();
+    csvInfo::readMaxWaterPerCity();
+    auto maxWaterPerCityInicial = csvInfo::maxWatterPerCity;
+
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        for (Edge* e : v->getAdj()) {
+            bool first = true;
+            AuxFunctions::simulatePipelineFailure(e);
+            for (auto a : csvInfo::maxWatterPerCity){
+                for(auto b : maxWaterPerCityInicial){
+                    if(a[0] == b[0] && stoi(a[1])< stoi(b[1])) {
+                        if (first) {
+                            cout << e->getOrig()->getInfo() << " -> " << e->getDest()->getInfo() << ": " << endl;
+                            first = false;
+                        }
+                        int d = stoi(b[1]) - stoi(a[1]);
+                        cout << a[0] << ": -" << d << endl;
+                        break;
+                    }
+                }
+            }
+            if (!first) cout << endl;
+        }
+    }
+
+    over = true;
+}
+
+/**
  * @brief Checks if the city exists.
  *
- * Complexity: O(1)
+ * Complexity: ???
  *
  * @return
  */

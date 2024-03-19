@@ -29,7 +29,7 @@ public:
      * @param w : Vertex
      * @param residual : Flow or the difference between the weigh and the flow of an edge
      */
-    static void testAndVisit(std::queue<Vertex*> &q, Edge* e, Vertex* w, double residual);
+    static void testAndVisit(std::queue<Vertex *> &q, Edge *e, Vertex *w, double residual);
 
     /**
      * @brief Find augmenting paths in a graph from a given source vertex to a target vertex
@@ -40,7 +40,7 @@ public:
      * @param t : Target vertex
      * @return True or false
      */
-    static bool findAugmentingPaths(Vertex* s, Vertex* t);
+    static bool findAugmentingPaths(Vertex *s, Vertex *t);
 
     /**
      * @brief Calculates the minimum residual capacity along a path from source vertex s to target vertex t in a graph
@@ -51,7 +51,7 @@ public:
      * @param t : Target vertex
      * @return Double with the minimum residual capacity along the path
      */
-    static double findMinResidualAlongPath(Vertex* s, Vertex* t);
+    static double findMinResidualAlongPath(Vertex *s, Vertex *t);
 
     /**
      * @brief Augments the flow along a path from source vertex s to target vertex t in a graph by the minimum residual capacity
@@ -61,7 +61,7 @@ public:
      * @param s : Source vertex
      * @param t : Target vertex
      */
-    static void augmentFlowAlongPath(Vertex* s, Vertex* t);
+    static void augmentFlowAlongPath(Vertex *s, Vertex *t);
 
     /**
      * @brief Edmonds Karp algorithm
@@ -88,20 +88,19 @@ public:
      */
     static void MaxFlow();
 
-        /**
-         * @brief ???
-         *
-         * Complexity : ???
-         *
-         * @param graph
-         * @param reservoirCode
-         */
-    static void simulateReservoirRemoval(Graph& graph, const std::string& reservoirCode);
+    /**
+     * @brief ???
+     *
+     * Complexity : ???
+     *
+     * @param graph
+     */
+    static void simulateReservoirRemoval(const std::string &reservoirCode);
 
 
-    static void simulatePumpingStationRemoval(Graph& graph,string code);
+    static void simulatePumpingStationRemoval(string code);
 
+    static void simulatePipelineFailure(Edge *e);
 };
-
 
 #endif //DA2324_PRJ1_G13_4_AUXFUNCTIONS_H
