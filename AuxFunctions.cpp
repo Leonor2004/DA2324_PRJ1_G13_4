@@ -97,6 +97,7 @@ void AuxFunctions::MaxWaterCity() {
 }
 
 void AuxFunctions::MaxFlow() {
+    maxWaterPerCity.clear();
     csvInfo::pipesGraph.addVertex("super_sink", -1, -1);
     for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
         if (v->getType() == 0) {
@@ -131,7 +132,7 @@ void AuxFunctions::simulatePumpingStationRemoval(Graph& graph,string code){
     for(auto e : v->getAdj()){
         e->setWeight(0);
     }
-    maxWaterPerCity.clear();
+
     MaxFlow();
     csvInfo::readMaxWaterPerCity();
 

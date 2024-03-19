@@ -160,6 +160,7 @@ void csvInfo::writeToMaxWaterPerCity(vector<string> v) {
 }
 
 void csvInfo::readMaxWaterPerCity() {
+    maxWatterPerCity.clear();
     fstream file;
     file.open("../outputFiles/maxWaterPerCity.csv");
     if (!file.is_open()) {
