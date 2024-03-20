@@ -1,7 +1,7 @@
 #include "AuxFunctions.h"
 #include <cmath>
 
-vector<string> AuxFunctions::maxWaterPerCity;
+vector<vector<string>> AuxFunctions::maxWaterPerCity;
 vector<vector<string>> AuxFunctions::maxWaterPerCityBalanced;
 
 AuxFunctions::AuxFunctions() = default;
@@ -75,7 +75,7 @@ void AuxFunctions::edmondsKarp(string source, string target) {
 }
 
 void AuxFunctions::MaxWaterCity() {
-    stringstream  aux;
+    vector<string>  aux;
     for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
         for (Edge* e : v->getAdj()) {
             e->setFlow(0);
@@ -87,15 +87,15 @@ void AuxFunctions::MaxWaterCity() {
     for (int idx = 0; idx < csvInfo::citiesVector.size(); idx++) {
         Vertex* s = csvInfo::pipesGraph.findVertex(csvInfo::citiesVector[idx].getCode());
         double flow = s->getAdj()[0]->getFlow();
-        aux.str("");
-        aux << csvInfo::citiesVector[idx].getCity() << ",";
-        aux << csvInfo::citiesVector[idx].getCode() << ",";
-        aux << std::to_string(static_cast<long long>(std::round(flow)));
-        maxWaterPerCity.push_back(aux.str());
+        aux.clear();
+        aux.push_back(csvInfo::citiesVector[idx].getCity());
+        aux.push_back(csvInfo::citiesVector[idx].getCode());
+        aux.push_back(std::to_string(static_cast<long long>(std::round(flow))));
+        maxWaterPerCity.push_back(aux);
     }
 }
 
-void AuxFunctions::MaxFlow() {
+void AuxFunctions::MaxFlow(bool csv) {
     maxWaterPerCity.clear();
 
     // add super sink
@@ -115,7 +115,7 @@ void AuxFunctions::MaxFlow() {
     }
 
     AuxFunctions::MaxWaterCity();
-    csvInfo::writeToMaxWaterPerCity(maxWaterPerCity);
+    if (csv) csvInfo::writeToMaxWaterPerCity(maxWaterPerCity);
 
     csvInfo::pipesGraph.removeVertex("super_sink");
     csvInfo::pipesGraph.removeVertex("super_source");
@@ -128,8 +128,7 @@ void AuxFunctions::simulateReservoirRemoval(const std::string& reservoirCode) {
         edge->setWeight(0);
     }
 
-    MaxFlow();
-    csvInfo::readMaxWaterPerCity();
+    MaxFlow(false);
 
     for (Edge* edge : reservoirVertex->getAdj()) {
         edge->setWeight(edge->getCapacity());
@@ -142,8 +141,7 @@ void AuxFunctions::simulatePumpingStationRemoval(string code){
             e->setWeight(0);
     }
 
-    MaxFlow();
-    csvInfo::readMaxWaterPerCity();
+    MaxFlow(false);
 
     for(auto e : v->getAdj()){
           e->setWeight(e->getCapacity());
@@ -153,8 +151,7 @@ void AuxFunctions::simulatePumpingStationRemoval(string code){
 void AuxFunctions::simulatePipelineFailure(Edge* e){
     e->setWeight(0);
 
-    MaxFlow();
-    csvInfo::readMaxWaterPerCity();
+    MaxFlow(false);
 
     e->setWeight(e->getCapacity());
 }
@@ -187,8 +184,8 @@ vector<double> AuxFunctions::compute_metrics() {
     return metrics;
 }
 
-void AuxFunctions::compare_metrics(vector<double> i, vector<double> f) {
-    cout << "            initial >> final" << endl;
+void AuxFunctions::print_metrics(vector<double> i, vector<double> f) {
+    cout << "          initial >> final" << endl;
     cout << "average:  " << i[0] << " >> " << f[0] << endl;
     cout << "variance: " << i[1] << " >> " << f[1] << endl;
     cout << "max diff: " << i[2] << " >> " << f[2] << endl;
@@ -216,18 +213,7 @@ void AuxFunctions::balanceNetwork() {
     MaxWaterCity();
 
     //TODO
-    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
-        if (v->getType() == 1) {
-            int c = csvInfo::reservoirsVector[v->getPos()].getMaxDelivery();
-            int out = 0;
-            for (Edge* e : v->getIncoming()) {
-                out += e->getFlow();
-            }
-            for (Edge* e : v->getIncoming()) {
-                // e->setWeight(e->getWeight() / out)
-            }
-        }
-    }
+
 
     csvInfo::pipesGraph.removeVertex("super_sink");
     csvInfo::pipesGraph.removeVertex("super_source");

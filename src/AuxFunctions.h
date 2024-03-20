@@ -10,7 +10,7 @@ public:
     /**
      * @brief Vector of max water per city
      */
-    static vector<string> maxWaterPerCity;
+    static vector<vector<string>> maxWaterPerCity;
 
     /**
      * @brief Vector of max water per city
@@ -89,9 +89,9 @@ public:
     /**
      * @brief ??? T2.1
      *
-     * Complexity: O(n^2)
+     * ???
      */
-    static void MaxFlow();
+    static void MaxFlow(bool csv);
 
     /**
      * @brief Simulate reservoir removal
@@ -122,7 +122,7 @@ public:
 
     static vector<double> compute_metrics();
 
-    static void compare_metrics(vector<double> i, vector<double> f);
+    static void print_metrics(vector<double> i, vector<double> f);
 
         /**
          *
