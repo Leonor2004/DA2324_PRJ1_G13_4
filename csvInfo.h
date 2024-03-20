@@ -60,44 +60,52 @@ public:
     static std::set<std::string> cityNameSet;
 
     /**
-     * ???
+     * Vector of vectors with the City's name and water that is getting there
      */
     static vector<vector<string>> maxWatterPerCity;
 
     /**
-     * @brief csvInfo::createReservoir()
-     * Creates a set with the code of all reservoirs and a vector with the info of all reservoirs
+     * @brief Creates a set with the code of all reservoirs and a vector with the info of all reservoirs
      *
-     * Complexity: ???
+     * Complexity: O(n log(n))
      */
     static void createReservoir();
 
     /**
-     * @brief csvInfo::createStations()
-     * Creates a set with the code of all stations and a vector with the info of all stations
+     * @brief Creates a set with the code of all stations and a vector with the info of all stations
      *
-     * Complexity: ???
+     * Complexity: O(n log(n))
      */
     static void createStations();
 
     /**
-     * @brief csvInfo::createCity()
-     * Creates a set with the name of all cities and a vector with the info of all cities
+     * @brief Creates a set with the name of all cities and a vector with the info of all cities
      *
-     * Complexity: ???
+     * Complexity: O(n log(n))
      */
     static void createCities();
 
     /**
-     * @brief csvInfo::createpipes()
-     * Adds the pipes as edges of the graph
+     * @brief Adds the pipes as edges of the graph
      *
-     * Complexity: ???
+     * Complexity: O(n)
      */
     static void createPipes();
 
+    /**
+     * @brief Write information present in the vector to file MaxWaterPerCity.csv
+     *
+     * Complexity: O(n)
+     *
+     * @param v: Vector of information
+     */
     static void writeToMaxWaterPerCity(vector<string> v);
 
+    /**
+     * @brief Read information present in MaxWaterPerCity.csv
+     *
+     * Complexity: O(n)
+     */
     static void readMaxWaterPerCity();
 };
 

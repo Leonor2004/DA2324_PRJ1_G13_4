@@ -139,21 +139,18 @@ void AuxFunctions::simulateReservoirRemoval(const std::string& reservoirCode) {
 void AuxFunctions::simulatePumpingStationRemoval(string code){
     Vertex* v = csvInfo::pipesGraph.findVertex(code);
     for(auto e : v->getAdj()){
-        e->setWeight(0);
+            e->setWeight(0);
     }
 
     MaxFlow();
     csvInfo::readMaxWaterPerCity();
 
     for(auto e : v->getAdj()){
-        e->setWeight(e->getCapacity());
+          e->setWeight(e->getCapacity());
     }
 }
 
-/**
- *
- * @param e
- */
+
 void AuxFunctions::simulatePipelineFailure(Edge* e){
     e->setWeight(0);
 

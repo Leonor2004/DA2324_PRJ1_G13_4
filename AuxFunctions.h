@@ -56,7 +56,7 @@ public:
     /**
      * @brief Augments the flow along a path from source vertex s to target vertex t in a graph by the minimum residual capacity
      *
-     * Complexity: ???
+     * Complexity: O(n)
      *
      * @param s : Source vertex
      * @param t : Target vertex
@@ -76,7 +76,7 @@ public:
     /**
      * @brief ??? T2.1
      *
-     * Complexity: O(n^3)
+     * Complexity: O(n^2)
      */
     static void MaxWaterCity();
 
@@ -84,22 +84,35 @@ public:
     /**
      * @brief ??? T2.1
      *
-     * Complexity: ???
+     * Complexity: O(n^2)
      */
     static void MaxFlow();
 
     /**
-     * @brief ???
+     * @brief Simulate reservoir removal
      *
-     * Complexity : ???
+     * Complexity: O(n^2)
      *
-     * @param graph
+     * @param reservoirCode : Reservoir Code
      */
     static void simulateReservoirRemoval(const std::string &reservoirCode);
 
-
+    /**
+     * @brief Simulate pumping station removal
+     *
+     * Complexity: O(n^2)
+     *
+     * @param code : Pumping station code
+     */
     static void simulatePumpingStationRemoval(string code);
 
+    /**
+     * @brief Simulate pipeline failure
+     *
+     * Complexity: O(n^2)
+     *
+     * @param e : Pipeline edge
+     */
     static void simulatePipelineFailure(Edge *e);
 };
 

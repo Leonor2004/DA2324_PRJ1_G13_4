@@ -22,12 +22,14 @@ void mainMenu();
 void amountWaterEachCity();
 void amountWaterOneCity();
 void waterNeedCheck();
+void simulateReservoirRemoval();
 void pumpingStationRemoval();
 void pipelineFailures();
 
 bool verifyCity(string basicString);
+bool verifyReservoir(string code);
 
-map<string, int> m = {{"main", 0}, {"waterEach", 1}, {"waterSpecific", 2}, {"waterNeedCheck", 3}, {"", 4}, {"", 5}, {"stationRemoval",6}, {"pipelineFailures", 7}};
+map<string, int> m = {{"main", 0}, {"waterEach", 1}, {"waterSpecific", 2}, {"waterNeedCheck", 3}, {"", 4}, {"reservoirRemoval", 5}, {"stationRemoval",6}, {"pipelineFailures", 7}};
 stack<string> menus;
 bool over = false;
 bool quit = false;
@@ -47,7 +49,7 @@ void clearMenus() {
 /**
  * @brief Main function to initialize data and run the program.
  *
- * Complexity: ???
+ * Complexity: O(n)
  *
  * @return Program exit status.
  */
@@ -91,7 +93,7 @@ int main() {
                 //TODO
                 break;
             case 5:
-                //TODO
+                simulateReservoirRemoval();
                 break;
             case 6:
                 pumpingStationRemoval();
@@ -178,8 +180,7 @@ void mainMenu() {
                     // menus.emplace("");
                     return;
                 case 5:
-                    //TODO
-                    // menus.emplace("");
+                    menus.emplace("reservoirRemoval");
                     return;
                 case 6:
                     menus.emplace("stationRemoval");
@@ -188,7 +189,7 @@ void mainMenu() {
                     menus.emplace("pipelineFailures");
                     return;
                 case 0:
-                    menus.pop();
+                    quit = true;
                     return;
                 default:
                     cout << "Invalid number! The number should be between 0 and 7." << endl;
@@ -205,7 +206,7 @@ void mainMenu() {
 /**
  * @brief Function to get the maximum amount of water that can reach a specific city.
  *
- * Complexity: O(
+ * Complexity: O(n^2)
  */
 void amountWaterOneCity() {
     string city;
@@ -239,9 +240,8 @@ void amountWaterOneCity() {
 /**
  * @brief Function to get the maximum amount of water that can reach each city.
  *
- * Complexity: ???
+ * Complexity: O(n)
  */
-
 void amountWaterEachCity() {
     AuxFunctions::MaxFlow();
     for (string i : AuxFunctions::maxWaterPerCity) {
@@ -253,7 +253,7 @@ void amountWaterEachCity() {
 /**
  * @brief Checks if the water that is reaching the citys is enough for the demand of the city
  *
- * Complexity :???
+ * Complexity: O(n^2)
  */
 void waterNeedCheck(){
     AuxFunctions::MaxFlow();
@@ -279,12 +279,60 @@ void waterNeedCheck(){
         cout << i << endl;
     }
     over = true;
+
 }
 
 /**
- * @brief
+ * @brief Simulate specific reservoir removal
  *
+ * Complexity: O(n^2)
+ */
+void simulateReservoirRemoval(){
+    AuxFunctions::MaxFlow();
+    csvInfo::readMaxWaterPerCity();
+
+    string code;
+    getline(cin, code);
+    while (true) {
+        cout << "Enter the Reservoir Code: ";
+        if (getline(cin, code)) {
+            if (verifyReservoir(code)) {
+                break;  // Input is valid, exit the loop
+            }
+            else if (code == "q") {
+                menus.pop();
+                return;
+            }
+            else {
+                cout << "Invalid Reservoir code!" << endl;
+            }
+        }
+        else {
+            cout << "Invalid input! Please enter a valid Reservoir code." << endl;
+            cin.clear();          // Clear the error state
+            cin.ignore(INT_MAX , '\n'); // Ignore the invalid input
+        }
+    }
+
+    auto maxWaterPerCityInicial = csvInfo::maxWatterPerCity;
+    AuxFunctions::simulateReservoirRemoval(code);
+    for (auto a: csvInfo::maxWatterPerCity) {
+        for (auto b: maxWaterPerCityInicial) {
+            if (a[0] == b[0] && stoi(a[1]) < stoi(b[1])) {
+                int d = stoi(b[1]) - stoi(a[1]);
+                cout << code << " - " << a[0] << " : -" << d << endl;
+                break;
+            }
+        }
+    }
+    over = true;
+
+}
+
+/**
+ * @brief Pumping station removal
  *
+ * Complexity: O(n^3)
  */
 void pumpingStationRemoval(){
     AuxFunctions::MaxFlow();
@@ -303,17 +351,14 @@ void pumpingStationRemoval(){
             }
         }
     }
-
-
     over = true;
 }
 
 /**
- * @brief
+ * @brief Pipeline failures
  *
- *
+ * Complexity: O(n^4)
  */
-
 void pipelineFailures() {
     AuxFunctions::MaxFlow();
     csvInfo::readMaxWaterPerCity();
@@ -344,15 +389,27 @@ void pipelineFailures() {
 }
 
 /**
- * @brief Checks if the city exists.
+ * @brief Checks if the city exists
  *
- * Complexity: ???
+ * Complexity: O(log(n))
  *
- * @return
+ * @param city :
+ * @return True or false
  */
-
 bool verifyCity(string city) {
     if (csvInfo::cityNameSet.find(city) == csvInfo::cityNameSet.end()) return false;
     return true;
 }
 
+/**
+ * @brief Checks if the reservoir exists
+ *
+ * Complexity: O(log(n))
+ *
+ * @param code : Reservoir code
+ * @return True or false
+ */
+bool verifyReservoir(string code) {
+    if (csvInfo::reservoirSet.find(code) == csvInfo::reservoirSet.end()) return false;
+    return true;
+}
