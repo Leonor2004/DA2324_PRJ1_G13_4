@@ -160,7 +160,7 @@ void mainMenu() {
     cout << "7 - (T3.3) Pipeline failures consequences." << endl;
     cout << "0 - Quit." << endl;
     cout << endl;
-    cout << "Note: If you enter a 'q' when asked for a city," << endl;
+    cout << "Note: If you enter a 'q' when asked for an input," << endl;
     cout << "you will return to the main menu." << endl;
     cout << endl;
 
