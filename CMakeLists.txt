@@ -7,16 +7,16 @@ include_directories(.)
 
 add_executable(DA2324_PRJ1_G13_4
         main.cpp
-        City.cpp
-        City.h
-        Reservoir.cpp
-        Reservoir.h
-        Station.cpp
-        Station.h
-        Graph.h
-        Graph.cpp
-        csvInfo.h
-        csvInfo.cpp
-        AuxFunctions.cpp
-        AuxFunctions.h
+        src/City.cpp
+        src/City.h
+        src/Reservoir.cpp
+        src/Reservoir.h
+        src/Station.cpp
+        src/Station.h
+        src/Graph.h
+        src/Graph.cpp
+        src/csvInfo.h
+        src/csvInfo.cpp
+        src/AuxFunctions.cpp
+        src/AuxFunctions.h
 )

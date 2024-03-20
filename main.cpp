@@ -13,7 +13,8 @@
 #include <map>
 #include <stack>
 #include <chrono>
-#include "AuxFunctions.h"
+#include <cmath>
+#include "src/AuxFunctions.h"
 
 void clearMenus();
 
@@ -25,11 +26,12 @@ void waterNeedCheck();
 void simulateReservoirRemoval();
 void pumpingStationRemoval();
 void pipelineFailures();
+void balanceNetwork();
 
 bool verifyCity(string basicString);
 bool verifyReservoir(string code);
 
-map<string, int> m = {{"main", 0}, {"waterEach", 1}, {"waterSpecific", 2}, {"waterNeedCheck", 3}, {"", 4}, {"reservoirRemoval", 5}, {"stationRemoval",6}, {"pipelineFailures", 7}};
+map<string, int> m = {{"main", 0}, {"waterEach", 1}, {"waterSpecific", 2}, {"waterNeedCheck", 3}, {"balanceNetwork", 4}, {"reservoirRemoval", 5}, {"stationRemoval",6}, {"pipelineFailures", 7}};
 stack<string> menus;
 bool over = false;
 bool quit = false;
@@ -90,7 +92,7 @@ int main() {
                 waterNeedCheck();
                 break;
             case 4:
-                //TODO
+                balanceNetwork();
                 break;
             case 5:
                 simulateReservoirRemoval();
@@ -152,7 +154,7 @@ void mainMenu() {
     cout << "1 - (T2.1) Maximum amount of water that can reach each city." << endl;
     cout << "2 - (T2.1) Maximum amount of water that can reach a specific city." << endl;
     cout << "3 - (T2.2) Can an existing network configuration meet the water needs of its costumer?" << endl;
-    cout << "4 - (T2.3) ..." << endl;
+    cout << "4 - (T2.3) Balance Network." << endl;
     cout << "5 - (T3.1) Delivery capacity of the network if one specific water reservoir is out of comission. " << endl;
     cout << "6 - (T3.2) Pumping stations removal consequences." << endl;
     cout << "7 - (T3.3) Pipeline failures consequences." << endl;
@@ -176,8 +178,7 @@ void mainMenu() {
                     menus.emplace("waterNeedCheck");
                     return;
                 case 4:
-                    //TODO
-                    // menus.emplace("");
+                    menus.emplace("balanceNetwork");
                     return;
                 case 5:
                     menus.emplace("reservoirRemoval");
@@ -385,6 +386,25 @@ void pipelineFailures() {
         }
     }
 
+    over = true;
+}
+
+/**
+ * @brief
+ *
+ * Complexity: ???
+ */
+void balanceNetwork() {
+    AuxFunctions::MaxFlow();
+    csvInfo::readMaxWaterPerCity();
+    auto maxWaterPerCityInicial = csvInfo::maxWatterPerCity;
+
+    vector<double> initial_metrics = AuxFunctions::compute_metrics();
+
+    AuxFunctions::balanceNetwork();
+
+    vector<double> final_metrics = AuxFunctions::compute_metrics();
+    AuxFunctions::compare_metrics(initial_metrics, final_metrics);
     over = true;
 }
 

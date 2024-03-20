@@ -13,6 +13,11 @@ public:
     static vector<string> maxWaterPerCity;
 
     /**
+     * @brief Vector of max water per city
+     */
+    static vector<vector<string>> maxWaterPerCityBalanced;
+
+    /**
      * @brief Default constructor
      *
      * Complexity: O(1)
@@ -114,6 +119,15 @@ public:
      * @param e : Pipeline edge
      */
     static void simulatePipelineFailure(Edge *e);
+
+    static vector<double> compute_metrics();
+
+    static void compare_metrics(vector<double> i, vector<double> f);
+
+        /**
+         *
+         */
+    static void balanceNetwork();
 };
 
 #endif //DA2324_PRJ1_G13_4_AUXFUNCTIONS_H

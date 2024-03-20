@@ -2,6 +2,7 @@
 #include <cmath>
 
 vector<string> AuxFunctions::maxWaterPerCity;
+vector<vector<string>> AuxFunctions::maxWaterPerCityBalanced;
 
 AuxFunctions::AuxFunctions() = default;
 
@@ -135,7 +136,6 @@ void AuxFunctions::simulateReservoirRemoval(const std::string& reservoirCode) {
     }
 }
 
-
 void AuxFunctions::simulatePumpingStationRemoval(string code){
     Vertex* v = csvInfo::pipesGraph.findVertex(code);
     for(auto e : v->getAdj()){
@@ -150,7 +150,6 @@ void AuxFunctions::simulatePumpingStationRemoval(string code){
     }
 }
 
-
 void AuxFunctions::simulatePipelineFailure(Edge* e){
     e->setWeight(0);
 
@@ -158,4 +157,78 @@ void AuxFunctions::simulatePipelineFailure(Edge* e){
     csvInfo::readMaxWaterPerCity();
 
     e->setWeight(e->getCapacity());
+}
+
+vector<double> AuxFunctions::compute_metrics() {
+    double num = 0.0;
+    double sum = 0.0;
+    double max = 0.0;
+    double aux = 0.0;
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        for (Edge* e : v->getAdj()) {
+            aux = e->getWeight() - e->getFlow();
+            sum += aux;
+            num++;
+            if (aux > max) max = aux;
+        }
+    }
+
+    double avg = sum * 1.0 / num;
+    double var_diff = 0;
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        for (Edge* e : v->getAdj()) {
+            var_diff += pow(e->getWeight() - e->getFlow() - avg, 2);
+        }
+    }
+    var_diff /= num;
+
+    vector<double> metrics;
+    metrics = {avg, var_diff, max};
+    return metrics;
+}
+
+void AuxFunctions::compare_metrics(vector<double> i, vector<double> f) {
+    cout << "            initial >> final" << endl;
+    cout << "average:  " << i[0] << " >> " << f[0] << endl;
+    cout << "variance: " << i[1] << " >> " << f[1] << endl;
+    cout << "max diff: " << i[2] << " >> " << f[2] << endl;
+}
+
+void AuxFunctions::balanceNetwork() {
+    maxWaterPerCity.clear();
+
+    // add super sink
+    csvInfo::pipesGraph.addVertex("super_sink", -1, -1);
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        if (v->getType() == 0) {
+            csvInfo::pipesGraph.addEdge(v->getInfo(), "super_sink", csvInfo::citiesVector[v->getPos()].getDemand() * 1.0);
+        }
+    }
+
+    // add super source
+    csvInfo::pipesGraph.addVertex("super_source", -1, -1);
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        if (v->getType() == 1) {
+            csvInfo::pipesGraph.addEdge("super_source", v->getInfo(), csvInfo::reservoirsVector[v->getPos()].getMaxDelivery() * 1.0);
+        }
+    }
+
+    MaxWaterCity();
+
+    //TODO
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        if (v->getType() == 1) {
+            int c = csvInfo::reservoirsVector[v->getPos()].getMaxDelivery();
+            int out = 0;
+            for (Edge* e : v->getIncoming()) {
+                out += e->getFlow();
+            }
+            for (Edge* e : v->getIncoming()) {
+                // e->setWeight(e->getWeight() / out)
+            }
+        }
+    }
+
+    csvInfo::pipesGraph.removeVertex("super_sink");
+    csvInfo::pipesGraph.removeVertex("super_source");
 }
