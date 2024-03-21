@@ -147,6 +147,7 @@ int main() {
  * Complexity: O(n)
  */
 void mainMenu() {
+
     int op = 0;
     cout << endl << "----------------------------" << endl;
     cout << endl << "      Main Menu   " << endl;
@@ -386,9 +387,9 @@ void pipelineFailures() {
 }
 
 /**
- * @brief
+ * @brief Balance Network
  *
- * Complexity: ???
+ * Complexity: O(VE)
  */
 void balanceNetwork() {
     AuxFunctions::MaxFlow(false);
@@ -408,7 +409,7 @@ void balanceNetwork() {
  *
  * Complexity: O(log(n))
  *
- * @param city :
+ * @param city : City's name
  * @return True or false
  */
 bool verifyCity(string city) {

@@ -160,7 +160,7 @@ vector<double> AuxFunctions::compute_metrics() {
     double num = 0.0;
     double sum = 0.0;
     double max = 0.0;
-    double aux = 0.0;
+    double aux;
     for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
         for (Edge* e : v->getAdj()) {
             aux = e->getWeight() - e->getFlow();
@@ -211,10 +211,32 @@ void AuxFunctions::balanceNetwork() {
     }
 
     MaxWaterCity();
+    vector<double> metrics = AuxFunctions::compute_metrics();
 
-    //TODO
+    for (int i = 0; i < 1000; i++) {
+        for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+            for (Edge* e : v->getAdj()) {
+                if (e->getWeight() > e->getFlow() + metrics[0] * 0.01) e->setFlow(e->getFlow() + metrics[0] * 0.01);
+            }
+        }
+    }
+
+//    for testing purposes
+//    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+//        if (v->getType() == 0) {
+//            for (Edge* e : v->getAdj()) {
+//                cout << v->getInfo() << " " << e->getFlow() << endl;
+//            }
+//        }
+//    }
 
 
     csvInfo::pipesGraph.removeVertex("super_sink");
     csvInfo::pipesGraph.removeVertex("super_source");
+
+//    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+//        for (Edge* e : v->getAdj()) {
+//            cout << e->getOrig()->getInfo() << " -> " << e->getDest()->getInfo() << " " << e->getCapacity() - e->getFlow() << endl;
+//        }
+//    }
 }

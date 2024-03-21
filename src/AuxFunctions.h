@@ -8,12 +8,12 @@ private:
 public:
 
     /**
-     * @brief Vector of max water per city
+     * @brief Vector of vectors of max water per city
      */
     static vector<vector<string>> maxWaterPerCity;
 
     /**
-     * @brief Vector of max water per city
+     * @brief Vector vector of max water per city
      */
     static vector<vector<string>> maxWaterPerCityBalanced;
 
@@ -79,7 +79,7 @@ public:
     static void edmondsKarp(string source, string target);
 
     /**
-     * @brief ??? T2.1
+     * @brief Calculate Max Water per City
      *
      * Complexity: O(n^2)
      */
@@ -87,9 +87,9 @@ public:
 
 
     /**
-     * @brief ??? T2.1
+     * @brief Calculate Max Flow
      *
-     * ???
+     * Complexity: O(n^2)
      */
     static void MaxFlow(bool csv);
 
@@ -120,13 +120,30 @@ public:
      */
     static void simulatePipelineFailure(Edge *e);
 
+    /**
+     * @brief Compute the metrics to calculate balace network
+     *
+     * Complexity: O(VE)
+     *
+     * @return Metrics vector
+     */
     static vector<double> compute_metrics();
 
+     /**
+      * @brief Print the metrics
+      *
+      * Complexity: O(1)
+      *
+      * @param i : Initial metrics
+      * @param f : Final metrics
+      */
     static void print_metrics(vector<double> i, vector<double> f);
 
-        /**
-         *
-         */
+    /**
+     * @brief Balance Network
+     *
+     * Complexity: O(VE)
+     */
     static void balanceNetwork();
 };
 
