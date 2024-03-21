@@ -229,14 +229,15 @@ void AuxFunctions::balanceNetwork() {
 //            }
 //        }
 //    }
-
+//    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+//        if (v->getType() == 1) {
+//            for (Edge* e : v->getIncoming()) {
+//                cout << v->getInfo() << " " << e->getFlow() << endl;
+//            }
+//        }
+//    }
 
     csvInfo::pipesGraph.removeVertex("super_sink");
     csvInfo::pipesGraph.removeVertex("super_source");
 
-//    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
-//        for (Edge* e : v->getAdj()) {
-//            cout << e->getOrig()->getInfo() << " -> " << e->getDest()->getInfo() << " " << e->getCapacity() - e->getFlow() << endl;
-//        }
-//    }
 }

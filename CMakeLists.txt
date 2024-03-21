@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 
 add_executable(DA2324_PRJ1_G13_4
-        main.cpp
+        src/main.cpp
         src/City.cpp
         src/City.h
         src/Reservoir.cpp
