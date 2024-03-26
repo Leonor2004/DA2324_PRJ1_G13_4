@@ -2,7 +2,6 @@
 #include <cmath>
 
 vector<vector<string>> AuxFunctions::maxWaterPerCity;
-vector<vector<string>> AuxFunctions::maxWaterPerCityBalanced;
 
 AuxFunctions::AuxFunctions() = default;
 
@@ -15,6 +14,7 @@ void AuxFunctions::testAndVisit(std::queue<Vertex*> &q, Edge* e, Vertex* w, doub
 }
 
 bool AuxFunctions::findAugmentingPaths(Vertex* s, Vertex* t) {
+//    cout << endl << "find paths" << endl;
     for(Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
         v->setVisited(false);
     }
@@ -25,12 +25,12 @@ bool AuxFunctions::findAugmentingPaths(Vertex* s, Vertex* t) {
         auto v = q.front();
         q.pop();
         for(Edge* e: v->getAdj()) {
+//            cout << e->getOrig()->getInfo() << " -> " << e->getDest()->getInfo() << " " << e->getFlow() << " " << e->getWeight() - e->getFlow() << endl;
             testAndVisit(q, e, e->getDest(), e->getWeight() - e->getFlow());
         }
-        for(Edge* e: v->getIncoming()) {
-            testAndVisit(q, e, e->getOrig(), e->getFlow());
-        }
     }
+    cout << endl;
+//    cout << "end find paths" << endl;
     return t->isVisited();
 }
 
@@ -212,11 +212,13 @@ void AuxFunctions::balanceNetwork() {
 
     MaxWaterCity();
     vector<double> metrics = AuxFunctions::compute_metrics();
+    double learning_rate = 0.01;
+    double avg = metrics[0];
 
     for (int i = 0; i < 1000; i++) {
         for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
             for (Edge* e : v->getAdj()) {
-                if (e->getWeight() > e->getFlow() + metrics[0] * 0.01) e->setFlow(e->getFlow() + metrics[0] * 0.01);
+                if (e->getWeight() > e->getFlow() + avg * learning_rate) e->setFlow(e->getFlow() + avg * learning_rate);
             }
         }
     }
@@ -237,7 +239,84 @@ void AuxFunctions::balanceNetwork() {
 //        }
 //    }
 
+    // remove super sink
     csvInfo::pipesGraph.removeVertex("super_sink");
+    // remove super source
     csvInfo::pipesGraph.removeVertex("super_source");
 
+}
+
+void AuxFunctions::removeFlow(Vertex* r, Vertex* sink) {
+//    cout << endl << "remove flow" << endl;
+    Vertex* current = sink;
+    double f = findMinflow(r, sink);
+    while (current != r) {
+        Edge* e = current->getPath();
+//        cout << e->getOrig()->getInfo() << " -> " << e->getDest()->getInfo() << " " << e->getFlow() << " " << f << endl;
+        e->setFlow(max(e->getFlow() - f, 0.0));
+//        cout << e->getOrig()->getInfo() << " -> " << e->getDest()->getInfo() << " " << e->getFlow() << endl;
+        current = e->getOrig();
+    }
+//    cout << endl << "end remove flow" << endl;
+}
+
+void AuxFunctions::simulateReservoirRemovalPart(string code) {
+    maxWaterPerCity.clear();
+
+
+    // initial max flow
+    AuxFunctions::MaxFlow(false);
+
+    Vertex* r = csvInfo::pipesGraph.findVertex(code);
+    for (City c : csvInfo::citiesVector) {
+        Vertex* sink = csvInfo::pipesGraph.findVertex(c.getCode());
+        cout << c.getCode() << endl;
+        if(findAugmentingPaths(r, sink)) {
+            removeFlow(r, sink);
+        }
+    }
+
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        for (Edge* e : v->getAdj()) {
+            e->setWeight(e->getCapacity());
+        }
+    }
+
+    // restore graph's weights
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        for (Edge *e: v->getAdj()) {
+            e->setWeight(e->getCapacity());
+        }
+    }
+
+    maxWaterPerCity.clear();
+    vector<string> aux;
+    for (int idx = 0; idx < csvInfo::citiesVector.size(); idx++) {
+        Vertex* s = csvInfo::pipesGraph.findVertex(csvInfo::citiesVector[idx].getCode());
+        double flow = 0;
+        for (Edge* e : s->getIncoming()) flow += e->getFlow();
+        aux.clear();
+        aux.push_back(csvInfo::citiesVector[idx].getCity());
+        aux.push_back(csvInfo::citiesVector[idx].getCode());
+        aux.push_back(std::to_string(static_cast<long long>(std::round(flow))));
+        maxWaterPerCity.push_back(aux);
+    }
+
+    // for testing purposes
+//    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+//        for (Edge* e : v->getAdj()) {
+//            cout << e->getOrig()->getInfo() << " " << e->getDest()->getInfo() << " " << e->getFlow() << " / " << e->getWeight() << endl;
+//        }
+//    }
+}
+
+double AuxFunctions::findMinflow(Vertex *r, Vertex *c) {
+    Vertex* current = c;
+    double m = INF;
+    while (current != r) {
+        Edge* e = current->getPath();
+        if (e->getFlow() < m) m = e->getFlow();
+        current = e->getOrig();
+    }
+    return m;
 }

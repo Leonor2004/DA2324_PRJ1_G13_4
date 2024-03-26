@@ -3,6 +3,9 @@
 
 #include "csvInfo.h"
 
+/**
+ * @brief Auxiliar Functions
+ */
 class AuxFunctions {
 private:
 public:
@@ -11,11 +14,6 @@ public:
      * @brief Vector of vectors of max water per city
      */
     static vector<vector<string>> maxWaterPerCity;
-
-    /**
-     * @brief Vector vector of max water per city
-     */
-    static vector<vector<string>> maxWaterPerCityBalanced;
 
     /**
      * @brief Default constructor
@@ -145,6 +143,19 @@ public:
      * Complexity: O(VE)
      */
     static void balanceNetwork();
+
+    /**
+     * @brief ???
+     *
+     * Complexity: ???
+     *
+     * @param code
+     */
+    static void simulateReservoirRemovalPart(string code);
+
+    static void removeFlow(Vertex* r, Vertex* sink);
+
+    static double findMinflow(Vertex *r, Vertex *c);
 };
 
 #endif //DA2324_PRJ1_G13_4_AUXFUNCTIONS_H

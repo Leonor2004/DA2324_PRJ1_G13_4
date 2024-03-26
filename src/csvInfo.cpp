@@ -16,8 +16,8 @@ void csvInfo::createReservoir() {
     reservoirSet.clear();
     reservoirsVector.clear();
     fstream file;
-    file.open("../Project1LargeDataSet/Reservoir.csv");
-//    file.open("../Project1DataSetSmall/Reservoirs_Madeira.csv");
+//    file.open("../Project1LargeDataSet/Reservoir.csv");
+    file.open("../Project1DataSetSmall/Reservoirs_Madeira.csv");
     if (!file.is_open()) {
         cerr << "Error: Unable to open the file." << endl;
         return;
@@ -52,8 +52,8 @@ void csvInfo::createStations() {
     stationSet.clear();
     stationsVector.clear();
     fstream file;
-    file.open("../Project1LargeDataSet/Stations.csv");
-//    file.open("../Project1DataSetSmall/Stations_Madeira.csv");
+//    file.open("../Project1LargeDataSet/Stations.csv");
+    file.open("../Project1DataSetSmall/Stations_Madeira.csv");
     if (!file.is_open()) {
         cerr << "Error: Unable to open the file." << endl;
         return;
@@ -83,8 +83,8 @@ void csvInfo::createCities() {
     cityNameSet.clear();
     citiesVector.clear();
     fstream file;
-    file.open("../Project1LargeDataSet/Cities.csv");
-//    file.open("../Project1DataSetSmall/Cities_Madeira.csv");
+//    file.open("../Project1LargeDataSet/Cities.csv");
+    file.open("../Project1DataSetSmall/Cities_Madeira.csv");
     if (!file.is_open()) {
         cerr << "Error: Unable to open the file." << endl;
         return;
@@ -121,8 +121,8 @@ void csvInfo::createCities() {
 
 void csvInfo::createPipes() {
     fstream file;
-    file.open("../Project1LargeDataSet/Pipes.csv");
-//    file.open("../Project1DataSetSmall/Pipes_Madeira.csv");
+//    file.open("../Project1LargeDataSet/Pipes.csv");
+    file.open("../Project1DataSetSmall/Pipes_Madeira.csv");
     if (!file.is_open()) {
         cerr << "Error: Unable to open the file." << endl;
         return;
