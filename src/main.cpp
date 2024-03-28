@@ -392,7 +392,6 @@ void pipelineFailures() {
                 }
             }
             if (!failure) cout << "   There are no consequences!" << endl;
-            cout << endl;
         }
     }
 

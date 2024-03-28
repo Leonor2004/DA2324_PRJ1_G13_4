@@ -29,7 +29,7 @@ bool AuxFunctions::findAugmentingPaths(Vertex* s, Vertex* t) {
             testAndVisit(q, e, e->getDest(), e->getWeight() - e->getFlow());
         }
     }
-    cout << endl;
+//    cout << endl;
 //    cout << "end find paths" << endl;
     return t->isVisited();
 }
