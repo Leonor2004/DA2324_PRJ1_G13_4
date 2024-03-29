@@ -42,7 +42,6 @@ void csvInfo::createReservoir() {
         reservoirSet.insert(code);
         reservoirsVector.push_back(res);
         int aux = reservoirsVector.size();
-        Reservoir* r = &reservoirsVector[aux - 1];
         pipesGraph.addVertex(code, 1, aux - 1);
     }
     file.close();
@@ -72,7 +71,6 @@ void csvInfo::createStations() {
         stationSet.insert(code);
         stationsVector.push_back(sta);
         int aux = stationsVector.size();
-        Station* st = &stationsVector[aux - 1];
         pipesGraph.addVertex(code, 2, aux - 1);
     }
     file.close();
@@ -112,7 +110,6 @@ void csvInfo::createCities() {
         cityNameSet.insert(city);
         citiesVector.push_back(res);
         int aux = citiesVector.size();
-        City* c = &citiesVector[aux - 1];
         pipesGraph.addVertex(code, 0, aux - 1);
         i++;
     }

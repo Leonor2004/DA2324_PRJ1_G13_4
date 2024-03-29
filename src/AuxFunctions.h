@@ -137,6 +137,8 @@ public:
       */
     static void print_metrics(vector<double> i, vector<double> f);
 
+    static bool findAugmentingPaths_balance(Vertex* s, Vertex* t, int delta);
+
     /**
      * @brief Balance Network
      *
@@ -156,6 +158,10 @@ public:
     static void removeFlow(Vertex* r, Vertex* sink);
 
     static double findMinflow(Vertex *r, Vertex *c);
+
+    static double maxWeight();
+
+    static int compute_delta(double maxW);
 };
 
 #endif //DA2324_PRJ1_G13_4_AUXFUNCTIONS_H
