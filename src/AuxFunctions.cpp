@@ -14,7 +14,6 @@ void AuxFunctions::testAndVisit(std::queue<Vertex*> &q, Edge* e, Vertex* w, doub
 }
 
 bool AuxFunctions::findAugmentingPaths(Vertex* s, Vertex* t) {
-//    cout << endl << "find paths" << endl;
     for(Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
         v->setVisited(false);
     }
@@ -25,16 +24,12 @@ bool AuxFunctions::findAugmentingPaths(Vertex* s, Vertex* t) {
         auto v = q.front();
         q.pop();
         for(Edge* e: v->getAdj()) {
-//            cout << e->getOrig()->getInfo() << " -> " << e->getDest()->getInfo() << " " << e->getFlow() << " " << e->getWeight() - e->getFlow() << endl;
             testAndVisit(q, e, e->getDest(), e->getWeight() - e->getFlow());
         }
         for(Edge* e: v->getIncoming()) {
-//            cout << e->getOrig()->getInfo() << " -> " << e->getDest()->getInfo() << " " << e->getFlow() << " " << e->getWeight() - e->getFlow() << endl;
             testAndVisit(q, e, e->getOrig(), e->getFlow());
         }
     }
-//    cout << endl;
-//    cout << "end find paths" << endl;
     return t->isVisited();
 }
 
@@ -207,7 +202,6 @@ void AuxFunctions::print_metrics(vector<double> i, vector<double> f) {
 }
 
 bool AuxFunctions::findAugmentingPaths_balance(Vertex* s, Vertex* t, int delta) {
-    cout << endl << "find paths" << endl;
     for(Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
         v->setVisited(false);
     }
@@ -219,19 +213,15 @@ bool AuxFunctions::findAugmentingPaths_balance(Vertex* s, Vertex* t, int delta) 
         q.pop();
         for(Edge* e: v->getAdj()) {
             if (e->getWeight() - e->getFlow() >= delta) {
-                cout << e->getOrig()->getInfo() << " -> " << e->getDest()->getInfo() << " " << e->getFlow() << " " << e->getWeight() - e->getFlow() << endl;
                 testAndVisit(q, e, e->getDest(), e->getWeight() - e->getFlow());
             }
         }
         for (Edge* e: v->getIncoming()) {
             if (e->getWeight() - e->getFlow() >= delta) {
-                cout << e->getOrig()->getInfo() << " -> " << e->getDest()->getInfo() << " " << e->getFlow() << " " << e->getWeight() - e->getFlow() << endl;
                 testAndVisit(q, e, e->getOrig(), e->getFlow());
             }
         }
     }
-    cout << endl;
-    cout << "end find paths" << endl;
     return t->isVisited();
 }
 
@@ -273,20 +263,20 @@ void AuxFunctions::balanceNetwork() {
     }
 
 //    for testing purposes
-    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
-        if (v->getType() == 0) {
-            for (Edge* e : v->getAdj()) {
-                cout << v->getInfo() << " " << e->getFlow() << endl;
-            }
-        }
-    }
-    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
-        if (v->getType() == 1) {
-            for (Edge* e : v->getIncoming()) {
-                cout << v->getInfo() << " " << e->getFlow() << endl;
-            }
-        }
-    }
+//    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+//        if (v->getType() == 0) {
+//            for (Edge* e : v->getAdj()) {
+//                cout << v->getInfo() << " " << e->getFlow() << endl;
+//            }
+//        }
+//    }
+//    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+//        if (v->getType() == 1) {
+//            for (Edge* e : v->getIncoming()) {
+//                cout << v->getInfo() << " " << e->getFlow() << endl;
+//            }
+//        }
+//    }
 
     // remove super sink
     csvInfo::pipesGraph.removeVertex("super_sink");
