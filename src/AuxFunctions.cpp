@@ -121,6 +121,7 @@ void AuxFunctions::MaxFlow(bool csv) {
 }
 
 
+
 void AuxFunctions::simulateReservoirRemoval(const std::string& reservoirCode) {
     Vertex* reservoirVertex = csvInfo::pipesGraph.findVertex(reservoirCode);
 
@@ -134,6 +135,7 @@ void AuxFunctions::simulateReservoirRemoval(const std::string& reservoirCode) {
         edge->setWeight(edge->getCapacity());
     }
 }
+
 
 
 void AuxFunctions::simulatePumpingStationRemoval(string code){
