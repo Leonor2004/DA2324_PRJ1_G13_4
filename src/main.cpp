@@ -375,23 +375,27 @@ void pumpingStationRemoval(){
  */
 void pipelineFailures() {
     AuxFunctions::MaxFlow(false);
+    vector<vector<string>> initial = AuxFunctions::maxWaterPerCity;
 
     for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
         for (Edge* e : v->getAdj()) {
             bool failure = false;
             AuxFunctions::simulatePipelineFailure(e);
             cout << e->getOrig()->getInfo() << " -> " << e->getDest()->getInfo() << ": " << endl;
+            int i = 0;
             for (auto a : AuxFunctions::maxWaterPerCity){
-                for(auto b : csvInfo::citiesVector){
-                    if (a[1] == b.getCode() && stoi(a[2]) < b.getDemand()) {
+                for(auto b : initial){
+                    if (a[1] == b[1] && stoi(a[2]) < stoi(b[2])) {
                         failure = true;
-                        int d = b.getDemand() - stoi(a[2]);
+                        int d = csvInfo::citiesVector[i].getDemand() - stoi(a[2]);
                         cout << a[0] << ": -" << d << endl;
                         break;
                     }
                 }
+                i++;
             }
             if (!failure) cout << "   There are no consequences!" << endl;
+            cout << endl;
         }
     }
 
@@ -446,7 +450,6 @@ void reservoirRemovalPart() {
 
     AuxFunctions::simulateReservoirRemovalPart(code);
 
-    cout << "final: " << endl;
     for (auto a: AuxFunctions::maxWaterPerCity) {
         for (auto b: csvInfo::citiesVector) {
             if (a[1] == b.getCode() && stoi(a[2]) < b.getDemand()) {

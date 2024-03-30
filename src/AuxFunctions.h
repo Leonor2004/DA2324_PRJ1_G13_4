@@ -163,7 +163,9 @@ public:
 
     static bool findAugmentingPaths_balance(Vertex* s, Vertex* t, int delta);
 
-    static bool findAugmentingPaths_ReservoirRemovalPart(Vertex* s, Vertex* t);
-};
+    static bool findAugmentingPaths_ReservoirRemovalPart(Vertex* s, Vertex* t, bool residual);
+
+    static void testAndVisit_ReservoirRemovalPart(std::queue<Vertex*> &q, Edge* e, Vertex* w, double flow);
+    };
 
 #endif //DA2324_PRJ1_G13_4_AUXFUNCTIONS_H
