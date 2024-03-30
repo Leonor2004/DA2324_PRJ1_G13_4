@@ -28,6 +28,9 @@ bool AuxFunctions::findAugmentingPaths(Vertex* s, Vertex* t) {
 //            cout << e->getOrig()->getInfo() << " -> " << e->getDest()->getInfo() << " " << e->getFlow() << " " << e->getWeight() - e->getFlow() << endl;
             testAndVisit(q, e, e->getDest(), e->getWeight() - e->getFlow());
         }
+        for(Edge* e: v->getIncoming()) {
+            testAndVisit(q, e, e->getOrig(), e->getFlow());
+        }
     }
 //    cout << endl;
 //    cout << "end find paths" << endl;
@@ -121,6 +124,7 @@ void AuxFunctions::MaxFlow(bool csv) {
     csvInfo::pipesGraph.removeVertex("super_source");
 }
 
+
 void AuxFunctions::simulateReservoirRemoval(const std::string& reservoirCode) {
     Vertex* reservoirVertex = csvInfo::pipesGraph.findVertex(reservoirCode);
 
@@ -135,6 +139,7 @@ void AuxFunctions::simulateReservoirRemoval(const std::string& reservoirCode) {
     }
 }
 
+
 void AuxFunctions::simulatePumpingStationRemoval(string code){
     Vertex* v = csvInfo::pipesGraph.findVertex(code);
     for(auto e : v->getAdj()){
@@ -148,6 +153,7 @@ void AuxFunctions::simulatePumpingStationRemoval(string code){
     }
 }
 
+
 void AuxFunctions::simulatePipelineFailure(Edge* e){
     e->setWeight(0);
 
@@ -156,94 +162,25 @@ void AuxFunctions::simulatePipelineFailure(Edge* e){
     e->setWeight(e->getCapacity());
 }
 
-vector<double> AuxFunctions::compute_metrics() {
-    double num = 0.0;
-    double sum = 0.0;
-    double max = 0.0;
-    double aux;
-    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
-        for (Edge* e : v->getAdj()) {
-            aux = e->getWeight() - e->getFlow();
-            sum += aux;
-            num++;
-            if (aux > max) max = aux;
+bool AuxFunctions::findAugmentingPaths_ReservoirRemovalPart(Vertex* s, Vertex* t) {
+//    cout << endl << "find paths" << endl;
+    for(Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        v->setVisited(false);
+    }
+    s->setVisited(true);
+    std::queue<Vertex*> q;
+    q.push(s);
+    while(!q.empty() && !t->isVisited()) {
+        auto v = q.front();
+        q.pop();
+        for(Edge* e: v->getAdj()) {
+//            cout << e->getOrig()->getInfo() << " -> " << e->getDest()->getInfo() << " " << e->getFlow() << " " << e->getWeight() - e->getFlow() << endl;
+            testAndVisit(q, e, e->getDest(), e->getWeight() - e->getFlow());
         }
     }
-
-    double avg = sum * 1.0 / num;
-    double var_diff = 0;
-    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
-        for (Edge* e : v->getAdj()) {
-            var_diff += pow(e->getWeight() - e->getFlow() - avg, 2);
-        }
-    }
-    var_diff /= num;
-
-    vector<double> metrics;
-    metrics = {avg, var_diff, max};
-    return metrics;
-}
-
-void AuxFunctions::print_metrics(vector<double> i, vector<double> f) {
-    cout << "          initial >> final" << endl;
-    cout << "average:  " << i[0] << " >> " << f[0] << endl;
-    cout << "variance: " << i[1] << " >> " << f[1] << endl;
-    cout << "max diff: " << i[2] << " >> " << f[2] << endl;
-}
-
-void AuxFunctions::balanceNetwork() {
-    maxWaterPerCity.clear();
-
-    // add super sink
-    csvInfo::pipesGraph.addVertex("super_sink", -1, -1);
-    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
-        if (v->getType() == 0) {
-            csvInfo::pipesGraph.addEdge(v->getInfo(), "super_sink", csvInfo::citiesVector[v->getPos()].getDemand() * 1.0);
-        }
-    }
-
-    // add super source
-    csvInfo::pipesGraph.addVertex("super_source", -1, -1);
-    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
-        if (v->getType() == 1) {
-            csvInfo::pipesGraph.addEdge("super_source", v->getInfo(), csvInfo::reservoirsVector[v->getPos()].getMaxDelivery() * 1.0);
-        }
-    }
-
-    MaxWaterCity();
-    vector<double> metrics = AuxFunctions::compute_metrics();
-    double learning_rate = 0.01;
-    double avg = metrics[0];
-
-    for (int i = 0; i < 1000; i++) {
-        for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
-            for (Edge* e : v->getAdj()) {
-                if (e->getWeight() > e->getFlow() + avg * learning_rate) e->setFlow(e->getFlow() + avg * learning_rate);
-            }
-        }
-    }
-
-//    for testing purposes
-//    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
-//        if (v->getType() == 0) {
-//            for (Edge* e : v->getAdj()) {
-//                cout << v->getInfo() << " " << e->getFlow() << endl;
-//            }
-//        }
-//    }
-//    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
-//        if (v->getType() == 1) {
-//            for (Edge* e : v->getIncoming()) {
-//                cout << v->getInfo() << " " << e->getFlow() << endl;
-//            }
-//        }
-//    }
-
-    // remove super sink
-    csvInfo::pipesGraph.removeVertex("super_sink");
-    // remove super source
-    csvInfo::pipesGraph.removeVertex("super_source");
-
+//    cout << endl;
+//    cout << "end find paths" << endl;
+    return t->isVisited();
 }
 
 void AuxFunctions::removeFlow(Vertex* r, Vertex* sink) {
@@ -271,7 +208,7 @@ void AuxFunctions::simulateReservoirRemovalPart(string code) {
     for (City c : csvInfo::citiesVector) {
         Vertex* sink = csvInfo::pipesGraph.findVertex(c.getCode());
         cout << c.getCode() << endl;
-        if(findAugmentingPaths(r, sink)) {
+        if(findAugmentingPaths_ReservoirRemovalPart(r, sink)) {
             removeFlow(r, sink);
         }
     }
@@ -317,6 +254,155 @@ double AuxFunctions::findMinflow(Vertex *r, Vertex *c) {
         Edge* e = current->getPath();
         if (e->getFlow() < m) m = e->getFlow();
         current = e->getOrig();
+    }
+    return m;
+}
+
+
+vector<double> AuxFunctions::compute_metrics() {
+    double num = 0.0;
+    double sum = 0.0;
+    double max = 0.0;
+    double aux;
+    double m = 0.0;
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        if (v->getType() == 0) {
+            for (Edge* e : v->getIncoming()) {
+                m += e->getFlow();
+            }
+        }
+    }
+
+
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        for (Edge* e : v->getAdj()) {
+            aux = e->getWeight() - e->getFlow();
+            sum += aux;
+            num++;
+            if (aux > max) max = aux;
+        }
+    }
+
+    double avg = sum * 1.0 / num;
+    double var_diff = 0;
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        for (Edge* e : v->getAdj()) {
+            var_diff += pow(e->getWeight() - e->getFlow() - avg, 2);
+        }
+    }
+    var_diff /= num;
+
+    vector<double> metrics;
+    metrics = {m, avg, var_diff, max};
+    return metrics;
+}
+
+void AuxFunctions::print_metrics(vector<double> i, vector<double> f) {
+    cout << "          initial >> final" << endl;
+    cout << "max flow: " << i[0] << " >> " << f[0] << endl;
+    cout << "average:  " << i[1] << " >> " << f[1] << endl;
+    cout << "variance: " << i[2] << " >> " << f[2] << endl;
+    cout << "max diff: " << i[3] << " >> " << f[3] << endl;
+}
+
+bool AuxFunctions::findAugmentingPaths_balance(Vertex* s, Vertex* t, int delta) {
+    for(Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        v->setVisited(false);
+    }
+    s->setVisited(true);
+    std::queue<Vertex*> q;
+    q.push(s);
+    while(!q.empty() && !t->isVisited()) {
+        auto v = q.front();
+        q.pop();
+        for(Edge* e: v->getAdj()) {
+            if (e->getWeight() - e->getFlow() >= delta) {
+                testAndVisit(q, e, e->getDest(), e->getWeight() - e->getFlow());
+            }
+        }
+        for (Edge* e: v->getIncoming()) {
+            if (e->getWeight() - e->getFlow() >= delta) {
+                testAndVisit(q, e, e->getOrig(), e->getFlow());
+            }
+        }
+    }
+    return t->isVisited();
+}
+
+void AuxFunctions::balanceNetwork() {
+    maxWaterPerCity.clear();
+
+    // add super sink
+    csvInfo::pipesGraph.addVertex("super_sink", -1, -1);
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        if (v->getType() == 0) {
+            csvInfo::pipesGraph.addEdge(v->getInfo(), "super_sink", csvInfo::citiesVector[v->getPos()].getDemand() * 1.0);
+        }
+    }
+    Vertex* super_sink = csvInfo::pipesGraph.findVertex("super_sink");
+
+    // add super source
+    csvInfo::pipesGraph.addVertex("super_source", -1, -1);
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        if (v->getType() == 1) {
+            csvInfo::pipesGraph.addEdge("super_source", v->getInfo(), csvInfo::reservoirsVector[v->getPos()].getMaxDelivery() * 1.0);
+        }
+    }
+    Vertex* super_source = csvInfo::pipesGraph.findVertex("super_source");
+
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        for (Edge* e : v->getAdj()) {
+            e->setFlow(0);
+        }
+    }
+
+    double maxW = AuxFunctions::maxWeight();
+
+    double delta = AuxFunctions::compute_delta(maxW);
+
+    while (delta >= 1) {
+        while (findAugmentingPaths_balance(super_source, super_sink, delta))
+            augmentFlowAlongPath(super_source, super_sink);
+        delta /= 2;
+    }
+
+//    for testing purposes
+//    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+//        if (v->getType() == 0) {
+//            for (Edge* e : v->getAdj()) {
+//                cout << v->getInfo() << " " << e->getFlow() << endl;
+//            }
+//        }
+//    }
+//    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+//        if (v->getType() == 1) {
+//            for (Edge* e : v->getIncoming()) {
+//                cout << v->getInfo() << " " << e->getFlow() << endl;
+//            }
+//        }
+//    }
+
+    // remove super sink
+    csvInfo::pipesGraph.removeVertex("super_sink");
+    // remove super source
+    csvInfo::pipesGraph.removeVertex("super_source");
+
+}
+
+int AuxFunctions::compute_delta(double maxW) {
+    int delta = 0;
+    for (int i = 0; pow(2, i) < maxW; i++) {
+        delta = pow(2, i);
+    }
+    return delta;
+}
+
+double AuxFunctions::maxWeight() {
+    double m = 0.0;
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        for (Edge* e : v->getAdj()) {
+            m = max(m, e->getWeight());
+        }
     }
     return m;
 }

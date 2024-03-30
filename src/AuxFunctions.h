@@ -156,6 +156,14 @@ public:
     static void removeFlow(Vertex* r, Vertex* sink);
 
     static double findMinflow(Vertex *r, Vertex *c);
+
+    static double maxWeight();
+
+    static int compute_delta(double maxW);
+
+    static bool findAugmentingPaths_balance(Vertex* s, Vertex* t, int delta);
+
+    static bool findAugmentingPaths_ReservoirRemovalPart(Vertex* s, Vertex* t);
 };
 
 #endif //DA2324_PRJ1_G13_4_AUXFUNCTIONS_H
