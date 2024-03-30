@@ -54,6 +54,7 @@ void AuxFunctions::augmentFlowAlongPath(Vertex* s, Vertex* t) {
     for (Vertex* v = t; v != s;) {
         Edge* e = v->getPath();
         double flow = e->getFlow();
+        cout << e->getOrig()->getInfo() << " " << e->getDest()->getInfo() << " " << e->getFlow() << " ";
         if (e->getDest() == v) {
             e->setFlow(std::min(flow + f, e->getWeight()));
             v = e->getOrig();
@@ -62,6 +63,7 @@ void AuxFunctions::augmentFlowAlongPath(Vertex* s, Vertex* t) {
             e->setFlow(std::max(flow - f, 0.0));
             v = e->getDest();
         }
+        cout << e->getFlow() << endl;
     }
 }
 
@@ -120,6 +122,7 @@ void AuxFunctions::MaxFlow(bool csv) {
     csvInfo::pipesGraph.removeVertex("super_source");
 }
 
+
 void AuxFunctions::simulateReservoirRemoval(const std::string& reservoirCode) {
     Vertex* reservoirVertex = csvInfo::pipesGraph.findVertex(reservoirCode);
 
@@ -134,6 +137,7 @@ void AuxFunctions::simulateReservoirRemoval(const std::string& reservoirCode) {
     }
 }
 
+
 void AuxFunctions::simulatePumpingStationRemoval(string code){
     Vertex* v = csvInfo::pipesGraph.findVertex(code);
     for(auto e : v->getAdj()){
@@ -147,6 +151,7 @@ void AuxFunctions::simulatePumpingStationRemoval(string code){
     }
 }
 
+
 void AuxFunctions::simulatePipelineFailure(Edge* e){
     e->setWeight(0);
 
@@ -154,6 +159,7 @@ void AuxFunctions::simulatePipelineFailure(Edge* e){
 
     e->setWeight(e->getCapacity());
 }
+
 
 vector<double> AuxFunctions::compute_metrics() {
     double num = 0.0;
@@ -303,6 +309,24 @@ double AuxFunctions::maxWeight() {
     return m;
 }
 
+
+bool AuxFunctions::findAugmentingPaths_ReservoirRemovalPart(Vertex* s, Vertex* t) {
+    for(Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        v->setVisited(false);
+    }
+    s->setVisited(true);
+    std::queue<Vertex*> q;
+    q.push(s);
+    while(!q.empty() && !t->isVisited()) {
+        auto v = q.front();
+        q.pop();
+        for(Edge* e: v->getAdj()) {
+            testAndVisit(q, e, e->getDest(), e->getWeight() - e->getFlow());
+        }
+    }
+    return t->isVisited();
+}
+
 void AuxFunctions::removeFlow(Vertex* r, Vertex* sink) {
 //    cout << endl << "remove flow" << endl;
     Vertex* current = sink;
@@ -328,7 +352,7 @@ void AuxFunctions::simulateReservoirRemovalPart(string code) {
     for (City c : csvInfo::citiesVector) {
         Vertex* sink = csvInfo::pipesGraph.findVertex(c.getCode());
         cout << c.getCode() << endl;
-        if(findAugmentingPaths(r, sink)) {
+        if(findAugmentingPaths_ReservoirRemovalPart(r, sink)) {
             removeFlow(r, sink);
         }
     }
@@ -372,7 +396,7 @@ double AuxFunctions::findMinflow(Vertex *r, Vertex *c) {
     double m = INF;
     while (current != r) {
         Edge* e = current->getPath();
-        if (e->getFlow() < m) m = e->getFlow();
+        m = min(m, e->getFlow());
         current = e->getOrig();
     }
     return m;

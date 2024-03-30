@@ -162,6 +162,8 @@ public:
     static double maxWeight();
 
     static int compute_delta(double maxW);
+
+    static bool findAugmentingPaths_ReservoirRemovalPart(Vertex* s, Vertex* t);
 };
 
 #endif //DA2324_PRJ1_G13_4_AUXFUNCTIONS_H
