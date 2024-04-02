@@ -116,6 +116,14 @@ void AuxFunctions::MaxFlow(bool csv) {
     AuxFunctions::MaxWaterCity();
     if (csv) csvInfo::writeToMaxWaterPerCity(maxWaterPerCity);
 
+    // for testing purposes
+//    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+//        for (Edge* e : v->getAdj()) {
+//            cout << e->getOrig()->getInfo() << " " << e->getDest()->getInfo() << " " << e->getFlow() << " / " << e->getWeight() << endl;
+//        }
+//    }
+//    cout << endl;
+
     csvInfo::pipesGraph.removeVertex("super_sink");
     csvInfo::pipesGraph.removeVertex("super_source");
 }
@@ -175,6 +183,12 @@ bool AuxFunctions::findAugmentingPaths_ReservoirRemovalPart(Vertex* s, Vertex* t
     for(Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
         v->setVisited(false);
     }
+    if (residual)
+        if ((s->getIncoming()[0]->getWeight() - s->getIncoming()[0]->getFlow() == 0) ||
+            (t->getAdj()[0]->getWeight() - t->getAdj()[0]->getWeight() == 0)) return false;
+    else
+        if ((s->getIncoming()[0]->getFlow() == 0) || (t->getIncoming()[0]->getFlow() == 0)) return false;
+
     s->setVisited(true);
     std::queue<Vertex*> q;
     q.push(s);
@@ -189,6 +203,19 @@ bool AuxFunctions::findAugmentingPaths_ReservoirRemovalPart(Vertex* s, Vertex* t
     return t->isVisited();
 }
 
+double AuxFunctions::findMinflow(Vertex *r, Vertex *c) {
+    Vertex* current = c;
+    double m = INF;
+    while (current != r) {
+        Edge* e = current->getPath();
+        if (e->getFlow() < m) m = e->getFlow();
+        current = e->getOrig();
+    }
+    m = min(r->getIncoming()[0]->getFlow(), m);
+    m = min(c->getAdj()[0]->getFlow(), m);
+    return m;
+}
+
 void AuxFunctions::removeFlow(Vertex* r, Vertex* sink) {
     Vertex* current = sink;
     double f = findMinflow(r, sink);
@@ -197,14 +224,32 @@ void AuxFunctions::removeFlow(Vertex* r, Vertex* sink) {
         e->setFlow(max(e->getFlow() - f, 0.0));
         current = e->getOrig();
     }
+    r->getIncoming()[0]->setFlow(r->getIncoming()[0]->getFlow() - f);
+    sink->getAdj()[0]->setFlow(sink->getAdj()[0]->getFlow() - f);
 }
 
 void AuxFunctions::simulateReservoirRemovalPart(string code) {
     maxWaterPerCity.clear();
 
+    // add super sink
+    csvInfo::pipesGraph.addVertex("super_sink", -1, -1);
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        if (v->getType() == 0) {
+            csvInfo::pipesGraph.addEdge(v->getInfo(), "super_sink", csvInfo::citiesVector[v->getPos()].getDemand() * 1.0);
+        }
+    }
 
-    // initial max flow
-    AuxFunctions::MaxFlow(false);
+    // add super source
+    csvInfo::pipesGraph.addVertex("super_source", -1, -1);
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        if (v->getType() == 1) {
+            csvInfo::pipesGraph.addEdge("super_source", v->getInfo(), csvInfo::reservoirsVector[v->getPos()].getMaxDelivery() * 1.0);
+        }
+    }
+    Vertex* super_source = csvInfo::pipesGraph.findVertex("super_source");
+    Vertex* super_sink = csvInfo::pipesGraph.findVertex("super_sink");
+
+    AuxFunctions::MaxWaterCity();
 
     set<string> affected;
     Vertex* r = csvInfo::pipesGraph.findVertex(code);
@@ -222,7 +267,9 @@ void AuxFunctions::simulateReservoirRemovalPart(string code) {
             for (string c : affected) {
                 Vertex* city = csvInfo::pipesGraph.findVertex(c);
                 while (findAugmentingPaths_ReservoirRemovalPart(reservoir, city, true)) {
-                    augmentFlowAlongPath(reservoir, city);
+                    reservoir->setPath(reservoir->getIncoming()[0]);
+                    super_sink->setPath(city->getAdj()[0]);
+                    augmentFlowAlongPath(super_source, super_sink);
                 }
             }
         }
@@ -260,17 +307,9 @@ void AuxFunctions::simulateReservoirRemovalPart(string code) {
 //            cout << e->getOrig()->getInfo() << " " << e->getDest()->getInfo() << " " << e->getFlow() << " / " << e->getWeight() << endl;
 //        }
 //    }
-}
 
-double AuxFunctions::findMinflow(Vertex *r, Vertex *c) {
-    Vertex* current = c;
-    double m = INF;
-    while (current != r) {
-        Edge* e = current->getPath();
-        if (e->getFlow() < m) m = e->getFlow();
-        current = e->getOrig();
-    }
-    return m;
+    csvInfo::pipesGraph.removeVertex("super_sink");
+    csvInfo::pipesGraph.removeVertex("super_source");
 }
 
 

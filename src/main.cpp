@@ -332,8 +332,12 @@ void simulateReservoirRemoval(){
     }
     cout << endl;
 
+    double m = 0;
+
     AuxFunctions::simulateReservoirRemoval(code);
+
     for (auto a: AuxFunctions::maxWaterPerCity) {
+        m += stoi(a[2]);
         for (auto b: csvInfo::citiesVector) {
             if (a[1] == b.getCode() && stoi(a[2]) < b.getDemand()) {
                 int d = b.getDemand() - stoi(a[2]);
@@ -342,6 +346,7 @@ void simulateReservoirRemoval(){
             }
         }
     }
+    cout << "Max Flow: " << m << endl;
     over = true;
 }
 
@@ -354,7 +359,9 @@ void pumpingStationRemoval(){
     AuxFunctions::MaxFlow(false);
     unsigned int t = csvInfo::stationsVector.size();
     for (int i = 0; i<t; i++){
+
         AuxFunctions::simulatePumpingStationRemoval(csvInfo::stationsVector[i].getCode());
+
         for (auto a : AuxFunctions::maxWaterPerCity) {
             for(auto b : csvInfo::citiesVector) {
                 if (a[1] == b.getCode() && stoi(a[2]) < b.getDemand()) {
@@ -380,7 +387,9 @@ void pipelineFailures() {
     for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
         for (Edge* e : v->getAdj()) {
             bool failure = false;
+
             AuxFunctions::simulatePipelineFailure(e);
+
             cout << e->getOrig()->getInfo() << " -> " << e->getDest()->getInfo() << ": " << endl;
             int i = 0;
             for (auto a : AuxFunctions::maxWaterPerCity){
@@ -450,7 +459,9 @@ void reservoirRemovalPart() {
 
     AuxFunctions::simulateReservoirRemovalPart(code);
 
+    double m = 0;
     for (auto a: AuxFunctions::maxWaterPerCity) {
+        m += stoi(a[2]);
         for (auto b: csvInfo::citiesVector) {
             if (a[1] == b.getCode() && stoi(a[2]) < b.getDemand()) {
                 int d = b.getDemand() - stoi(a[2]);
@@ -459,6 +470,7 @@ void reservoirRemovalPart() {
             }
         }
     }
+    cout << "Max Flow: " << m << endl;
     over = true;
 }
 
