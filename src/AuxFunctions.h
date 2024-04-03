@@ -119,7 +119,62 @@ public:
     static void simulatePipelineFailure(Edge *e);
 
     /**
-     * @brief Compute the metrics to calculate balace network
+     * @brief Testes if the vertex w is not visited and the flow is more that 0 and then visits the vertex and adds the edge e
+     *
+     * Complexity: O(1)
+     *
+     * @param q : Queue of vertex's
+     * @param e : Edge
+     * @param w : Vertex
+     * @param flow : Flow
+     */
+    static void testAndVisit_ReservoirRemovalPart(std::queue<Vertex*> &q, Edge* e, Vertex* w, double flow);
+
+    //DUVIDA
+    /**
+     * @brief Find augmenting paths ???
+     *
+     * Complexity: O(n^2)
+     *
+     * @param s : Source vertex
+     * @param t : Destination vertex
+     * @param residual : ???
+     * @return
+     */
+    static bool findAugmentingPaths_ReservoirRemovalPart(Vertex* s, Vertex* t, bool residual);
+
+    /**
+     * @brief Find the minimum flow starting in vertex r and ending in vertex c
+     *
+     * Complexity; O(n)
+     *
+     * @param r : Origin vertex
+     * @param c : Destination vertex
+     * @return Minimum flow
+     */
+    static double findMinflow(Vertex *r, Vertex *c);
+
+    /**
+     * @brief Remove flow
+     *
+     * Complexity: O(n)
+     *
+     * @param r : Vertex
+     * @param sink : Sink vertex
+     */
+    static void removeFlow(Vertex* r, Vertex* sink);
+
+    /**
+     * @brief Simulate reservoir removal
+     *
+     * Complexity: O(n^3)
+     *
+     * @param code : Reservoir code
+     */
+    static void simulateReservoirRemovalPart(string code);
+
+    /**
+     * @brief Compute the metrics to calculate balance network
      *
      * Complexity: O(VE)
      *
@@ -136,36 +191,44 @@ public:
       * @param f : Final metrics
       */
     static void print_metrics(vector<double> i, vector<double> f);
+    //DUVIDA
+    /**
+     * @brief Find augmenting paths
+     *
+     * Complexity: O(n^2)
+     *
+     * @param s : Source vertex
+     * @param t : Destination vertex
+     * @param delta : ???
+     * @return True or false
+     */
+    static bool findAugmentingPaths_balance(Vertex* s, Vertex* t, int delta);
 
     /**
      * @brief Balance Network
      *
-     * Complexity: O(VE)
+     * Complexity: O(n^3)
      */
     static void balanceNetwork();
-
+    //DUVIDA
     /**
      * @brief ???
      *
-     * Complexity: ???
+     * Complexity: O(n)
      *
-     * @param code
+     * @param maxW : Max weight
+     * @return Delta
      */
-    static void simulateReservoirRemovalPart(string code);
-
-    static void removeFlow(Vertex* r, Vertex* sink);
-
-    static double findMinflow(Vertex *r, Vertex *c);
-
-    static double maxWeight();
-
     static int compute_delta(double maxW);
 
-    static bool findAugmentingPaths_balance(Vertex* s, Vertex* t, int delta);
-
-    static bool findAugmentingPaths_ReservoirRemovalPart(Vertex* s, Vertex* t, bool residual);
-
-    static void testAndVisit_ReservoirRemovalPart(std::queue<Vertex*> &q, Edge* e, Vertex* w, double flow);
+    /**
+     * @brief Find the maximum weight
+     *
+     * Complexity: O(n^2)
+     *
+     * @return Max weight
+     */
+    static double maxWeight();
 
 };
 
