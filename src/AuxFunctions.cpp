@@ -222,7 +222,6 @@ double AuxFunctions::findMinflow(Vertex *r, Vertex *c) {
 
 void AuxFunctions::removeFlow(Vertex* r, Vertex* sink) {
     Vertex* current = sink;
-    cout << endl;
     double f = findMinflow(r, sink);
     while (current != r) {
         Edge* e = current->getPath();
@@ -258,7 +257,6 @@ void AuxFunctions::simulateReservoirRemovalPart(string code) {
 
     set<string> affected;
     Vertex* r = csvInfo::pipesGraph.findVertex(code);
-    cout << endl;
     for (City c : csvInfo::citiesVector) {
         Vertex* sink = csvInfo::pipesGraph.findVertex(c.getCode());
         while (findAugmentingPaths_ReservoirRemovalPart(r, sink, false)) {
@@ -266,7 +264,6 @@ void AuxFunctions::simulateReservoirRemovalPart(string code) {
             removeFlow(r, sink);
         }
     }
-    cout << endl;
 
     for (Reservoir rev : csvInfo::reservoirsVector) {
         Vertex* reservoir = csvInfo::pipesGraph.findVertex(rev.getCode());

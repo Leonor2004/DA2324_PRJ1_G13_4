@@ -42,7 +42,6 @@ void csvInfo::createReservoir() {
         reservoirSet.insert(code);
         reservoirsVector.push_back(res);
         int aux = reservoirsVector.size();
-        Reservoir* r = &reservoirsVector[aux - 1];
         pipesGraph.addVertex(code, 1, aux - 1);
     }
     file.close();
