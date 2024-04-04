@@ -419,7 +419,7 @@ void pipelineFailures() {
 /**
  * @brief Balance Network
  *
- * Complexity: O(VE)
+ * Complexity: O(n^3)
  */
 void balanceNetwork() {
     AuxFunctions::MaxFlow(false);
@@ -433,9 +433,9 @@ void balanceNetwork() {
 }
 
 /**
- * @brief ???
+ * @brief Delivery capacity of the network if one specific water reservoir is out of comission without running Max Flow from scratch
  *
- * Complexity: ???
+ * Complexity: O(n^2)
  */
 void reservoirRemovalPart() {
     string code;

@@ -170,7 +170,7 @@ void AuxFunctions::simulatePipelineFailure(Edge* e){
 
 
 
-void AuxFunctions::testAndVisit_ReservoirRemovalPart(std::queue<Vertex*> &q, Edge* e, Vertex* w, double flow) {
+void AuxFunctions:: testAndVisit_ReservoirRemovalPart(std::queue<Vertex*> &q, Edge* e, Vertex* w, double flow) {
     if (!w->isVisited() && flow > 0) {
         w->setVisited(true);
         w->setPath(e);
@@ -299,7 +299,7 @@ void AuxFunctions::simulateReservoirRemovalPart(string code) {
         maxWaterPerCity.push_back(aux);
     }
 
-////     for testing purposes
+//     for testing purposes
 //    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
 //        for (Edge* e : v->getAdj()) {
 //            cout << e->getOrig()->getInfo() << " " << e->getDest()->getInfo() << " " << e->getFlow() << " / " << e->getWeight() << endl;
