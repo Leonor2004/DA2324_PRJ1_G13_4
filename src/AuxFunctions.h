@@ -131,7 +131,7 @@ public:
     static void testAndVisit_ReservoirRemovalPart(std::queue<Vertex*> &q, Edge* e, Vertex* w, double flow);
 
     /**
-     * @brief Find augmenting paths ???
+     * @brief Find augmenting paths
      *
      * Complexity: O(n^2)
      *
