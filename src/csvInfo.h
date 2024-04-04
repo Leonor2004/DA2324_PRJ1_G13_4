@@ -60,11 +60,6 @@ public:
     static std::set<std::string> cityNameSet;
 
     /**
-     * Vector of vectors with the City's name and water that is getting there
-     */
-    static vector<vector<string>> maxWatterPerCity;
-
-    /**
      * @brief Creates a set with the code of all reservoirs and a vector with the info of all reservoirs
      *
      * Complexity: O(n log(n))
@@ -99,14 +94,7 @@ public:
      *
      * @param v: Vector of information
      */
-    static void writeToMaxWaterPerCity(vector<string> v);
-
-    /**
-     * @brief Read information present in MaxWaterPerCity.csv
-     *
-     * Complexity: O(n)
-     */
-    static void readMaxWaterPerCity();
+    static void writeToMaxWaterPerCity(vector<vector<string>> v);
 };
 
 #endif //DA2324_PRJ1_G13_4_CSVINFO_H
