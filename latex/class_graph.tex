@@ -1,0 +1,85 @@
+\doxysection{Graph Class Reference}
+\hypertarget{class_graph}{}\label{class_graph}\index{Graph@{Graph}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_graph_a20bf23ad693930e6e028323477697c36}\label{class_graph_a20bf23ad693930e6e028323477697c36} 
+\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} {\bfseries find\+Vertex} (const string \&in) const
+\item 
+\Hypertarget{class_graph_a310a8b44beed0cc4129ca47570270d39}\label{class_graph_a310a8b44beed0cc4129ca47570270d39} 
+bool {\bfseries add\+Vertex} (const string \&in, int t, int pos)
+\item 
+\Hypertarget{class_graph_a0d8c86c581492d03c3c0714f7e931ba8}\label{class_graph_a0d8c86c581492d03c3c0714f7e931ba8} 
+bool {\bfseries remove\+Vertex} (const string \&in)
+\item 
+\Hypertarget{class_graph_abf1dc1a72bf118879ab1181eaa15f221}\label{class_graph_abf1dc1a72bf118879ab1181eaa15f221} 
+bool {\bfseries add\+Edge} (const string \&sourc, const string \&dest, double w)
+\item 
+\Hypertarget{class_graph_a680b7db2b868494868aeb2227f24ecbd}\label{class_graph_a680b7db2b868494868aeb2227f24ecbd} 
+bool {\bfseries remove\+Edge} (const string \&source, const string \&dest)
+\item 
+\Hypertarget{class_graph_a0dcdf6042e3a0fe927039764441e9d04}\label{class_graph_a0dcdf6042e3a0fe927039764441e9d04} 
+bool {\bfseries add\+Bidirectional\+Edge} (const string \&sourc, const string \&dest, double w)
+\item 
+\Hypertarget{class_graph_abb5e0517e2979c54eebdafc2a9875e8f}\label{class_graph_abb5e0517e2979c54eebdafc2a9875e8f} 
+int {\bfseries get\+Num\+Vertex} () const
+\item 
+\Hypertarget{class_graph_a619ac583094079134074658e29463c0e}\label{class_graph_a619ac583094079134074658e29463c0e} 
+std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries get\+Vertex\+Set} () const
+\item 
+\Hypertarget{class_graph_ad857db4c07be635987daa83f58fbcc94}\label{class_graph_ad857db4c07be635987daa83f58fbcc94} 
+std\+::vector$<$ string $>$ {\bfseries dfs} () const
+\item 
+\Hypertarget{class_graph_a3807e281449f54457934049b7da334d2}\label{class_graph_a3807e281449f54457934049b7da334d2} 
+std\+::vector$<$ string $>$ {\bfseries dfs} (const string \&source) const
+\item 
+\Hypertarget{class_graph_a742805b3a51e761fd43d5c62e89929e6}\label{class_graph_a742805b3a51e761fd43d5c62e89929e6} 
+void {\bfseries dfs\+Visit} (\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}v, std\+::vector$<$ string $>$ \&res) const
+\item 
+\Hypertarget{class_graph_ac22c2fad40d9538f62431c37bd6c5761}\label{class_graph_ac22c2fad40d9538f62431c37bd6c5761} 
+std\+::vector$<$ string $>$ {\bfseries bfs} (const string \&source) const
+\item 
+\Hypertarget{class_graph_a4c636eb91a3e8e51c4fdc02734bbed79}\label{class_graph_a4c636eb91a3e8e51c4fdc02734bbed79} 
+bool {\bfseries is\+DAG} () const
+\item 
+bool \mbox{\hyperlink{class_graph_a03ef8f6e2f6ecbecc6068a5a5dc1f7c7}{dfs\+Is\+DAG}} (\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}v) const
+\item 
+\Hypertarget{class_graph_a8e41ab68fd82c9b57055a77bfc2dafcf}\label{class_graph_a8e41ab68fd82c9b57055a77bfc2dafcf} 
+std\+::vector$<$ string $>$ {\bfseries topsort} () const
+\item 
+\Hypertarget{class_graph_ac6192a41101102ca8aa6acca607c84f3}\label{class_graph_ac6192a41101102ca8aa6acca607c84f3} 
+void {\bfseries clear} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_graph_a3e233789ef54d26a3f4ca33b6a1c806d}\label{class_graph_a3e233789ef54d26a3f4ca33b6a1c806d} 
+int {\bfseries find\+Vertex\+Idx} (const string \&in) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_graph_aa9b0a6d8ad43c5eabaca5a7140bcc8b6}\label{class_graph_aa9b0a6d8ad43c5eabaca5a7140bcc8b6} 
+std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries vertex\+Set}
+\item 
+\Hypertarget{class_graph_a9e61864da69191c1896a25a708d1a02d}\label{class_graph_a9e61864da69191c1896a25a708d1a02d} 
+double \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} {\bfseries dist\+Matrix} = nullptr
+\item 
+\Hypertarget{class_graph_a3ae09699c3616af3ebfcb1eb045f2b62}\label{class_graph_a3ae09699c3616af3ebfcb1eb045f2b62} 
+int \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} {\bfseries path\+Matrix} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_graph_a03ef8f6e2f6ecbecc6068a5a5dc1f7c7}\label{class_graph_a03ef8f6e2f6ecbecc6068a5a5dc1f7c7} 
+\index{Graph@{Graph}!dfsIsDAG@{dfsIsDAG}}
+\index{dfsIsDAG@{dfsIsDAG}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{dfsIsDAG()}{dfsIsDAG()}}
+{\footnotesize\ttfamily bool Graph\+::dfs\+Is\+DAG (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{v }\end{DoxyParamCaption}) const}
+
+Auxiliary function that visits a vertex (v) and its adjacent, recursively. Returns false (not acyclic) if an edge to a vertex in the stack is found. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Graph.\+h\item 
+Graph.\+cpp\end{DoxyCompactItemize}
