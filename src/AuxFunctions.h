@@ -130,7 +130,6 @@ public:
      */
     static void testAndVisit_ReservoirRemovalPart(std::queue<Vertex*> &q, Edge* e, Vertex* w, double flow);
 
-    //DUVIDA
     /**
      * @brief Find augmenting paths ???
      *
@@ -138,8 +137,8 @@ public:
      *
      * @param s : Source vertex
      * @param t : Destination vertex
-     * @param residual : ???
-     * @return
+     * @param residual : Path that already has flow or not
+     * @return True or false
      */
     static bool findAugmentingPaths_ReservoirRemovalPart(Vertex* s, Vertex* t, bool residual);
 
@@ -191,7 +190,7 @@ public:
       * @param f : Final metrics
       */
     static void print_metrics(vector<double> i, vector<double> f);
-    //DUVIDA
+
     /**
      * @brief Find augmenting paths
      *
@@ -199,7 +198,7 @@ public:
      *
      * @param s : Source vertex
      * @param t : Destination vertex
-     * @param delta : ???
+     * @param delta : Delta
      * @return True or false
      */
     static bool findAugmentingPaths_balance(Vertex* s, Vertex* t, int delta);
@@ -210,9 +209,9 @@ public:
      * Complexity: O(n^3)
      */
     static void balanceNetwork();
-    //DUVIDA
+
     /**
-     * @brief ???
+     * @brief Compute delta
      *
      * Complexity: O(n)
      *
