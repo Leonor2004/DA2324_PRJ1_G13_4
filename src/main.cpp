@@ -63,24 +63,10 @@ void clearMenus() {
  * @return Program exit status.
  */
 int main() {
-    auto start = chrono::high_resolution_clock::now();
     csvInfo::createReservoir();
     csvInfo::createStations();
     csvInfo::createCities();
     csvInfo::createPipes();
-
-    cout << csvInfo::reservoirSet.size() << endl;
-    cout << csvInfo::reservoirsVector.size() << endl;
-    cout << csvInfo::stationSet.size() << endl;
-    cout << csvInfo::stationsVector.size() << endl;
-    cout << csvInfo::cityNameSet.size() << endl;
-    cout << csvInfo::cityMap.size() << endl;
-    cout << csvInfo::citiesVector.size() << endl;
-    cout << csvInfo::pipesGraph.getVertexSet().size() << endl;
-
-    auto end = chrono::high_resolution_clock::now();
-    chrono::duration<double> dif = end - start;
-    cout << dif.count() << " seconds" << endl;
 
     menus.emplace("main");
     while (true) {
