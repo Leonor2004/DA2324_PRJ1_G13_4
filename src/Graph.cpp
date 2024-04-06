@@ -201,6 +201,16 @@ Vertex* Graph::findVertex(const string &in) const {
 }
 
 /*
+ * Finds the index of the vertex with a given content.
+ */
+int Graph::findVertexIdx(const string &in) const {
+    for (unsigned i = 0; i < vertexSet.size(); i++)
+        if (vertexSet[i]->getInfo() == in)
+            return i;
+    return -1;
+}
+
+/*
  *  Adds a vertex with a given content or info (in) to a graph (this).
  *  Returns true if successful, and false if a vertex with that content already exists.
  */
