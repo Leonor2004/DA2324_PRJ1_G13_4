@@ -127,16 +127,6 @@ public:
     int getNumVertex() const;
     std::vector<Vertex *> getVertexSet() const;
 
-    std:: vector<string> dfs() const;
-    std:: vector<string> dfs(const string & source) const;
-    void dfsVisit(Vertex *v,  std::vector<string> & res) const;
-    std::vector<string> bfs(const string & source) const;
-
-    bool isDAG() const;
-    bool dfsIsDAG(Vertex *v) const;
-    std::vector<string> topsort() const;
-
-    void clear();
 protected:
     std::vector<Vertex *> vertexSet;    // vertex set
 
