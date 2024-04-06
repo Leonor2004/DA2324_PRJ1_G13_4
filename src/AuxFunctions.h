@@ -201,7 +201,7 @@ public:
      * @param delta : Delta
      * @return True or false
      */
-    static bool findAugmentingPaths_balance(Vertex* s, Vertex* t, int delta);
+    static bool findAugmentingPaths_balance(Vertex* s, Vertex* t, double delta);
 
     /**
      * @brief Balance Network
@@ -229,6 +229,7 @@ public:
      */
     static double maxWeight();
 
-};
+    static void augmentFlowAlongPath_CS(Vertex* s, Vertex* t);
+    };
 
 #endif //DA2324_PRJ1_G13_4_AUXFUNCTIONS_H

@@ -317,11 +317,12 @@ vector<double> AuxFunctions::compute_metrics() {
     double sum = 0.0;
     double max = 0.0;
     double aux;
-    double m = 0.0;
+    double maxFlow = 0.0;
+
     for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
         if (v->getType() == 0) {
             for (Edge* e : v->getIncoming()) {
-                m += e->getFlow();
+                maxFlow += e->getFlow();
             }
         }
     }
@@ -329,6 +330,7 @@ vector<double> AuxFunctions::compute_metrics() {
 
     for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
         for (Edge* e : v->getAdj()) {
+            if (e->getFlow() == 0 & e->getReverse() != nullptr) continue;
             aux = e->getWeight() - e->getFlow();
             sum += aux;
             num++;
@@ -340,13 +342,14 @@ vector<double> AuxFunctions::compute_metrics() {
     double var_diff = 0;
     for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
         for (Edge* e : v->getAdj()) {
+            if (e->getFlow() == 0 & e->getReverse() != nullptr) continue;
             var_diff += pow(e->getWeight() - e->getFlow() - avg, 2);
         }
     }
     var_diff /= num;
 
     vector<double> metrics;
-    metrics = {m, avg, var_diff, max};
+    metrics = {maxFlow, avg, var_diff, max};
     return metrics;
 }
 
@@ -358,7 +361,7 @@ void AuxFunctions::print_metrics(vector<double> i, vector<double> f) {
     cout << "max diff: " << i[3] << " >> " << f[3] << endl;
 }
 
-bool AuxFunctions::findAugmentingPaths_balance(Vertex* s, Vertex* t, int delta) {
+bool AuxFunctions::findAugmentingPaths_balance(Vertex* s, Vertex* t, double delta) {
     for(Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
         v->setVisited(false);
     }
@@ -380,6 +383,27 @@ bool AuxFunctions::findAugmentingPaths_balance(Vertex* s, Vertex* t, int delta) 
         }
     }
     return t->isVisited();
+}
+
+void AuxFunctions::augmentFlowAlongPath_CS(Vertex* s, Vertex* t) {
+    double f = findMinResidualAlongPath(s, t);
+    for (Vertex* v = t; v != s;) {
+        Edge* e = v->getPath();
+        double flow = e->getFlow();
+        if (e->getDest() == v) {
+            e->setFlow(std::min(flow + f, e->getWeight()));
+            v = e->getOrig();
+        }
+        else {
+            e->setFlow(std::max(flow - f, 0.0));
+            v = e->getDest();
+        }
+        for (Edge* edge : e->getDest()->getAdj()) {
+            if (edge->getDest() == e->getOrig()) {
+                edge->setWeight(0);
+            }
+        }
+    }
 }
 
 void AuxFunctions::balanceNetwork() {
@@ -415,23 +439,20 @@ void AuxFunctions::balanceNetwork() {
 
     while (delta >= 1) {
         while (findAugmentingPaths_balance(super_source, super_sink, delta))
-            augmentFlowAlongPath(super_source, super_sink);
+            augmentFlowAlongPath_CS(super_source, super_sink);
         delta /= 2;
+    }
+
+    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
+        for (Edge *edge: v->getAdj()) {
+            edge->setWeight(edge->getCapacity());
+        }
     }
 
 //    for testing purposes
 //    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
-//        if (v->getType() == 0) {
-//            for (Edge* e : v->getAdj()) {
-//                cout << v->getInfo() << " " << e->getFlow() << endl;
-//            }
-//        }
-//    }
-//    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
-//        if (v->getType() == 1) {
-//            for (Edge* e : v->getIncoming()) {
-//                cout << v->getInfo() << " " << e->getFlow() << endl;
-//            }
+//        for (Edge* e : v->getAdj()) {
+//            cout << e->getOrig()->getInfo() << " " << e->getDest()->getInfo() << " " << e->getWeight() << " " << e->getFlow() << endl;
 //        }
 //    }
 
