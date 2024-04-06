@@ -58,7 +58,7 @@ void clearMenus() {
 /**
  * @brief Main function to initialize data and run the program.
  *
- * Complexity: O(n)
+ * Complexity: O(???)
  *
  * @return Program exit status.
  */
@@ -209,7 +209,7 @@ void mainMenu() {
 /**
  * @brief Function to get the maximum amount of water that can reach a specific city.
  *
- * Complexity: O(n^2)
+ * Complexity: O(n^3)
  */
 void amountWaterOneCity() {
     string city;
@@ -244,7 +244,7 @@ void amountWaterOneCity() {
 /**
  * @brief Function to get the maximum amount of water that can reach each city.
  *
- * Complexity: O(n^2)
+ * Complexity: O(n^3)
  */
 void amountWaterEachCity() {
     AuxFunctions::MaxFlow(true);
@@ -261,7 +261,7 @@ void amountWaterEachCity() {
 /**
  * @brief Checks if the water that is reaching the cities is enough for the demand of the city
  *
- * Complexity: O(n^2)
+ * Complexity: O(n^3)
  */
 void waterNeedCheck(){
     AuxFunctions::MaxFlow(false);
@@ -292,7 +292,7 @@ void waterNeedCheck(){
 /**
  * @brief Simulate specific reservoir removal
  *
- * Complexity: O(n^2)
+ * Complexity: O(n^3)
  */
 void simulateReservoirRemoval(){
     AuxFunctions::MaxFlow(false);
@@ -321,13 +321,13 @@ void simulateReservoirRemoval(){
     }
     cout << endl;
 
-    double m = 0;
+    double maxFlow = 0;
 
     AuxFunctions::simulateReservoirRemoval(code);
 
     cout << "Name, Code, Deficit" << endl;
     for (auto a: AuxFunctions::maxWaterPerCity) {
-        m += stoi(a[2]);
+        maxFlow += stoi(a[2]);
         for (auto b: csvInfo::citiesVector) {
             if (a[1] == b.getCode() && stoi(a[2]) < b.getDemand()) {
                 int d = b.getDemand() - stoi(a[2]);
@@ -336,14 +336,14 @@ void simulateReservoirRemoval(){
             }
         }
     }
-    cout << "Max Flow: " << m << endl;
+    cout << "Max Flow: " << maxFlow << endl;
     over = true;
 }
 
 /**
  * @brief Pumping station removal
  *
- * Complexity: O(n^3)
+ * Complexity: O(n^4)
  */
 void pumpingStationRemoval(){
     AuxFunctions::MaxFlow(false);
@@ -370,7 +370,7 @@ void pumpingStationRemoval(){
 /**
  * @brief Pipeline failures
  *
- * Complexity: O(n^4)
+ * Complexity: O(n^5)
  */
 void pipelineFailures() {
     AuxFunctions::MaxFlow(false);
@@ -405,7 +405,7 @@ void pipelineFailures() {
 /**
  * @brief Balance Network
  *
- * Complexity: O(n^3)
+ * Complexity: O(n^4)
  */
 void balanceNetwork() {
     AuxFunctions::MaxFlow(false);

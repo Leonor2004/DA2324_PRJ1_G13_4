@@ -116,18 +116,9 @@ void AuxFunctions::MaxFlow(bool csv) {
     AuxFunctions::MaxWaterCity();
     if (csv) csvInfo::writeToMaxWaterPerCity(maxWaterPerCity);
 
-    // for testing purposes
-//    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
-//        for (Edge* e : v->getAdj()) {
-//            cout << e->getOrig()->getInfo() << " " << e->getDest()->getInfo() << " " << e->getFlow() << " / " << e->getWeight() << endl;
-//        }
-//    }
-
     csvInfo::pipesGraph.removeVertex("super_sink");
     csvInfo::pipesGraph.removeVertex("super_source");
 }
-
-
 
 void AuxFunctions::simulateReservoirRemoval(const std::string& reservoirCode) {
     Vertex* reservoirVertex = csvInfo::pipesGraph.findVertex(reservoirCode);
@@ -143,8 +134,6 @@ void AuxFunctions::simulateReservoirRemoval(const std::string& reservoirCode) {
     }
 }
 
-
-
 void AuxFunctions::simulatePumpingStationRemoval(const string& code){
     Vertex* v = csvInfo::pipesGraph.findVertex(code);
     for(auto e : v->getAdj()){
@@ -158,8 +147,6 @@ void AuxFunctions::simulatePumpingStationRemoval(const string& code){
     }
 }
 
-
-
 void AuxFunctions::simulatePipelineFailure(Edge* e){
     e->setWeight(0);
 
@@ -167,8 +154,6 @@ void AuxFunctions::simulatePipelineFailure(Edge* e){
 
     e->setWeight(e->getCapacity());
 }
-
-
 
 void AuxFunctions:: testAndVisit_ReservoirRemovalPart(std::queue<Vertex*> &q, Edge* e, Vertex* w, double flow) {
     if (!w->isVisited() && flow > 0) {
@@ -298,13 +283,6 @@ void AuxFunctions::simulateReservoirRemovalPart(const string& code) {
         aux.push_back(std::to_string(static_cast<long long>(std::round(flow))));
         maxWaterPerCity.push_back(aux);
     }
-
-//     for testing purposes
-//    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
-//        for (Edge* e : v->getAdj()) {
-//            cout << e->getOrig()->getInfo() << " " << e->getDest()->getInfo() << " " << e->getFlow() << " / " << e->getWeight() << endl;
-//        }
-//    }
 
     csvInfo::pipesGraph.removeVertex("super_sink");
     csvInfo::pipesGraph.removeVertex("super_source");

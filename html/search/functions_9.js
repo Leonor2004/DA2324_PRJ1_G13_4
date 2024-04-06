@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['removeflow_0',['removeFlow',['../class_aux_functions.html#af1f67ae6999db0d06b813b80f91ba0a5',1,'AuxFunctions']]],
-  ['reservoir_1',['Reservoir',['../class_reservoir.html#a75185ff7442747288666fa7b37237698',1,'Reservoir']]],
-  ['reservoirremovalpart_2',['reservoirRemovalPart',['../main_8cpp.html#a9049d79877f3450c87eb823c87245e22',1,'main.cpp']]]
+  ['pipelinefailures_0',['pipelineFailures',['../main_8cpp.html#ab89aff9d1f5dd5a2270907ccc13ee790',1,'main.cpp']]],
+  ['print_5fmetrics_1',['print_metrics',['../class_aux_functions.html#ab427d691f90466043ec5e3a72bd59dd4',1,'AuxFunctions']]],
+  ['pumpingstationremoval_2',['pumpingStationRemoval',['../main_8cpp.html#ae32ee98bbedb491a59ac695406c81854',1,'main.cpp']]]
 ];

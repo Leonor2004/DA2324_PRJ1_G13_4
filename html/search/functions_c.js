@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['verifycity_0',['verifyCity',['../main_8cpp.html#a78a84c97d34803a129166ab16834cdba',1,'main.cpp']]],
-  ['verifyreservoir_1',['verifyReservoir',['../main_8cpp.html#a97282950cb1e37dd8efa679508824eaf',1,'main.cpp']]]
+  ['testandvisit_0',['testAndVisit',['../class_aux_functions.html#a8c9f4b6757fd920d693251d5d01cf1b4',1,'AuxFunctions']]],
+  ['testandvisit_5freservoirremovalpart_1',['testAndVisit_ReservoirRemovalPart',['../class_aux_functions.html#a77d55f9fff4a4ff25f636cee771a2506',1,'AuxFunctions']]]
 ];

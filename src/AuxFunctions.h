@@ -69,7 +69,7 @@ public:
     /**
      * @brief Edmonds Karp algorithm
      *
-     * Complexity: O(n^2)
+     * Complexity: O(n^3)
      *
      * @param source : Source vertex
      * @param target : Target vertex
@@ -79,21 +79,21 @@ public:
     /**
      * @brief Calculate Max Water per City
      *
-     * Complexity: O(n^2)
+     * Complexity: O(n^3)
      */
     static void MaxWaterCity();
 
     /**
      * @brief Calculate Max Flow
      *
-     * Complexity: O(n^2)
+     * Complexity: O(n^3)
      */
     static void MaxFlow(bool csv);
 
     /**
      * @brief Simulate reservoir removal
      *
-     * Complexity: O(n^2)
+     * Complexity: O(n^3)
      *
      * @param reservoirCode : Reservoir Code
      */
@@ -102,7 +102,7 @@ public:
     /**
      * @brief Simulate pumping station removal
      *
-     * Complexity: O(n^2)
+     * Complexity: O(n^3)
      *
      * @param code : Pumping station code
      */
@@ -111,7 +111,7 @@ public:
     /**
      * @brief Simulate pipeline failure
      *
-     * Complexity: O(n^2)
+     * Complexity: O(n^3)
      *
      * @param e : Pipeline edge
      */
@@ -189,7 +189,6 @@ public:
       * @param f : Final metrics
       */
     static void print_metrics(vector<double> i, vector<double> f);
-
     /**
      * @brief Find augmenting paths
      *
@@ -203,9 +202,20 @@ public:
     static bool findAugmentingPaths_balance(Vertex* s, Vertex* t, double delta);
 
     /**
+     * @brief Augments the flow along a path from source vertex s to target vertex t in a graph by the minimum residual
+     * capacity, setting the pipe weight in the opposite direction, if any, to 0, so that no water passes through that pipe.
+     *
+     * Complexity: O(n)
+     *
+     * @param s : Source vertex
+     * @param t : Target vertex
+     */
+    static void augmentFlowAlongPath_CS(Vertex* s, Vertex* t);
+
+    /**
      * @brief Balance Network
      *
-     * Complexity: O(n^3)
+     * Complexity: O(n^4)
      */
     static void balanceNetwork();
 
@@ -227,8 +237,6 @@ public:
      * @return Max weight
      */
     static double maxWeight();
-
-    static void augmentFlowAlongPath_CS(Vertex* s, Vertex* t);
     };
 
 #endif //DA2324_PRJ1_G13_4_AUXFUNCTIONS_H

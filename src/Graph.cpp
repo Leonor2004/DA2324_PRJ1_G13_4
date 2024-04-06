@@ -3,10 +3,43 @@
 /************************* Vertex  **************************/
 
 Vertex::Vertex(string in, int t, int pos): info(in), type(t), vectorPos(pos) {}
-/*
- * Auxiliary function to add an outgoing edge to a vertex (this),
- * with a given destination vertex (d) and edge weight (w).
- */
+
+string Vertex::getInfo() const {
+    return this->info;
+}
+
+int Vertex::getType() const {
+    return type;
+}
+
+std::vector<Edge*> Vertex::getAdj() const {
+    return this->adj;
+}
+
+bool Vertex::isVisited() const {
+    return this->visited;
+}
+
+Edge *Vertex::getPath() const {
+    return this->path;
+}
+
+std::vector<Edge *> Vertex::getIncoming() const {
+    return this->incoming;
+}
+
+int Vertex::getPos() {
+    return this->vectorPos;
+}
+
+void Vertex::setVisited(bool visited) {
+    this->visited = visited;
+}
+
+void Vertex::setPath(Edge *path) {
+    this->path = path;
+}
+
 Edge * Vertex::addEdge(Vertex *d, double w) {
     auto newEdge = new Edge(this, d, w);
     adj.push_back(newEdge);
@@ -14,11 +47,6 @@ Edge * Vertex::addEdge(Vertex *d, double w) {
     return newEdge;
 }
 
-/*
- * Auxiliary function to remove an outgoing edge (with a given destination (d))
- * from a vertex (this).
- * Returns true if successful, and false if such edge does not exist.
- */
 bool Vertex::removeEdge(string in) {
     bool removedEdge = false;
     auto it = adj.begin();
@@ -37,9 +65,6 @@ bool Vertex::removeEdge(string in) {
     return removedEdge;
 }
 
-/*
- * Auxiliary function to remove an outgoing edge of a vertex.
- */
 void Vertex::removeOutgoingEdges() {
     auto it = adj.begin();
     while (it != adj.end()) {
@@ -47,74 +72,6 @@ void Vertex::removeOutgoingEdges() {
         it = adj.erase(it);
         deleteEdge(edge);
     }
-}
-
-bool Vertex::operator<(Vertex & vertex) const {
-    return this->dist < vertex.dist;
-}
-
-string Vertex::getInfo() const {
-    return this->info;
-}
-
-int Vertex::getType() const {
-    return type;
-}
-
-std::vector<Edge*> Vertex::getAdj() const {
-    return this->adj;
-}
-
-bool Vertex::isVisited() const {
-    return this->visited;
-}
-
-bool Vertex::isProcessing() const {
-    return this->processing;
-}
-
-unsigned int Vertex::getIndegree() const {
-    return this->indegree;
-}
-
-double Vertex::getDist() const {
-    return this->dist;
-}
-
-Edge *Vertex::getPath() const {
-    return this->path;
-}
-
-std::vector<Edge *> Vertex::getIncoming() const {
-    return this->incoming;
-}
-
-void Vertex::setInfo(string in) {
-    this->info = in;
-}
-
-void Vertex::setVisited(bool visited) {
-    this->visited = visited;
-}
-
-void Vertex::setProcesssing(bool processing) {
-    this->processing = processing;
-}
-
-void Vertex::setIndegree(unsigned int indegree) {
-    this->indegree = indegree;
-}
-
-void Vertex::setDist(double dist) {
-    this->dist = dist;
-}
-
-void Vertex::setPath(Edge *path) {
-    this->path = path;
-}
-
-int Vertex::getPos() {
-    return this->vectorPos;
 }
 
 void Vertex::deleteEdge(Edge *edge) {
@@ -160,16 +117,8 @@ Edge* Edge::getReverse() const {
     return this->reverse;
 }
 
-bool Edge::isSelected() const {
-    return this->selected;
-}
-
 double Edge::getFlow() const {
     return flow;
-}
-
-void Edge::setSelected(bool selected) {
-    this->selected = selected;
 }
 
 void Edge::setReverse(Edge* reverse) {
@@ -182,17 +131,11 @@ void Edge::setFlow(double flow) {
 
 /********************** Graph  ****************************/
 
-int Graph::getNumVertex() const {
-    return vertexSet.size();
-}
-
 std::vector<Vertex*> Graph::getVertexSet() const {
     return vertexSet;
 }
 
-/*
- * Auxiliary function to find a vertex with a given content.
- */
+
 Vertex* Graph::findVertex(const string &in) const {
     for (auto v : vertexSet)
         if (v->getInfo() == in)
@@ -200,20 +143,6 @@ Vertex* Graph::findVertex(const string &in) const {
     return nullptr;
 }
 
-/*
- * Finds the index of the vertex with a given content.
- */
-int Graph::findVertexIdx(const string &in) const {
-    for (unsigned i = 0; i < vertexSet.size(); i++)
-        if (vertexSet[i]->getInfo() == in)
-            return i;
-    return -1;
-}
-
-/*
- *  Adds a vertex with a given content or info (in) to a graph (this).
- *  Returns true if successful, and false if a vertex with that content already exists.
- */
 bool Graph::addVertex(const string &in, int t, int pos) {
     if (findVertex(in) != nullptr)
         return false;
@@ -242,11 +171,6 @@ bool Graph::removeVertex(const string &in) {
     return false;
 }
 
-/*
- * Adds an edge to a graph (this), given the contents of the source and
- * destination vertices and the edge weight (w).
- * Returns true if successful, and false if the source or destination vertex does not exist.
- */
 bool Graph::addEdge(const string &sourc, const string &dest, double w) {
     auto v1 = findVertex(sourc);
     auto v2 = findVertex(dest);
@@ -254,19 +178,6 @@ bool Graph::addEdge(const string &sourc, const string &dest, double w) {
         return false;
     v1->addEdge(v2, w);
     return true;
-}
-
-/*
- * Removes an edge from a graph (this).
- * The edge is identified by the source (sourc) and destination (dest) contents.
- * Returns true if successful, and false if such edge does not exist.
- */
-bool Graph::removeEdge(const string &sourc, const string &dest) {
-    Vertex* srcVertex = findVertex(sourc);
-    if (srcVertex == nullptr) {
-        return false;
-    }
-    return srcVertex->removeEdge(dest);
 }
 
 bool Graph::addBidirectionalEdge(const string &sourc, const string &dest, double w) {
