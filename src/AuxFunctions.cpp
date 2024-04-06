@@ -449,13 +449,6 @@ void AuxFunctions::balanceNetwork() {
         }
     }
 
-//    for testing purposes
-//    for (Vertex* v : csvInfo::pipesGraph.getVertexSet()) {
-//        for (Edge* e : v->getAdj()) {
-//            cout << e->getOrig()->getInfo() << " " << e->getDest()->getInfo() << " " << e->getWeight() << " " << e->getFlow() << endl;
-//        }
-//    }
-
     // remove super sink
     csvInfo::pipesGraph.removeVertex("super_sink");
     // remove super source
