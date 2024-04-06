@@ -2,7 +2,7 @@
 
 #include <utility>
 
-City::City(string ct, int i, string c, int d, int p) {
+City::City(string ct, int i, string c, double d, int p) {
     city = std::move(ct);
     Id = i;
     code = std::move(c);
@@ -14,7 +14,7 @@ string City::getCity() {
     return city;
 }
 
-int City::getId() {
+int City::getId() const {
     return Id;
 }
 
@@ -22,10 +22,10 @@ string City::getCode() {
     return code;
 }
 
-int City::getDemand() {
+double City::getDemand() const {
     return demand;
 }
 
-int City::getPopulation() {
+int City::getPopulation() const {
     return population;
 }

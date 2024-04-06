@@ -94,7 +94,7 @@ public:
      *
      * @param v: Vector of information
      */
-    static void writeToMaxWaterPerCity(vector<vector<string>> v);
+    static void writeToMaxWaterPerCity(const vector<vector<string>>& v);
 };
 
 #endif //DA2324_PRJ1_G13_4_CSVINFO_H

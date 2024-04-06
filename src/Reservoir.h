@@ -51,7 +51,7 @@ public:
      *
      * @return Returns the value of the Reservoir's Id
      */
-    int getId();
+    int getId() const;
 
     /**
      * @brief Get the code of the Reservoir
@@ -69,7 +69,7 @@ public:
      *
      * @return Returns the value of the max delivery of the Reservoir
      */
-    int getMaxDelivery();
+    int getMaxDelivery() const;
 };
 
 

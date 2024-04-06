@@ -65,7 +65,7 @@ void AuxFunctions::augmentFlowAlongPath(Vertex* s, Vertex* t) {
     }
 }
 
-void AuxFunctions::edmondsKarp(string source, string target) {
+void AuxFunctions::edmondsKarp(const string& source, const string& target) {
     Vertex* s = csvInfo::pipesGraph.findVertex(source);
     Vertex* t = csvInfo::pipesGraph.findVertex(target);
     while (findAugmentingPaths(s, t)) {
@@ -83,12 +83,12 @@ void AuxFunctions::MaxWaterCity() {
 
     AuxFunctions::edmondsKarp("super_source", "super_sink");
 
-    for (int idx = 0; idx < csvInfo::citiesVector.size(); idx++) {
-        Vertex* s = csvInfo::pipesGraph.findVertex(csvInfo::citiesVector[idx].getCode());
+    for (auto & idx : csvInfo::citiesVector) {
+        Vertex* s = csvInfo::pipesGraph.findVertex(idx.getCode());
         double flow = s->getAdj()[0]->getFlow();
         aux.clear();
-        aux.push_back(csvInfo::citiesVector[idx].getCity());
-        aux.push_back(csvInfo::citiesVector[idx].getCode());
+        aux.push_back(idx.getCity());
+        aux.push_back(idx.getCode());
         aux.push_back(std::to_string(static_cast<long long>(std::round(flow))));
         maxWaterPerCity.push_back(aux);
     }
@@ -145,7 +145,7 @@ void AuxFunctions::simulateReservoirRemoval(const std::string& reservoirCode) {
 
 
 
-void AuxFunctions::simulatePumpingStationRemoval(string code){
+void AuxFunctions::simulatePumpingStationRemoval(const string& code){
     Vertex* v = csvInfo::pipesGraph.findVertex(code);
     for(auto e : v->getAdj()){
             e->setWeight(0);
@@ -232,7 +232,7 @@ void AuxFunctions::removeFlow(Vertex* r, Vertex* sink) {
     sink->getAdj()[0]->setFlow(sink->getAdj()[0]->getFlow() - f);
 }
 
-void AuxFunctions::simulateReservoirRemovalPart(string code) {
+void AuxFunctions::simulateReservoirRemovalPart(const string& code) {
     maxWaterPerCity.clear();
 
     // add super sink
@@ -268,7 +268,7 @@ void AuxFunctions::simulateReservoirRemovalPart(string code) {
     for (Reservoir rev : csvInfo::reservoirsVector) {
         Vertex* reservoir = csvInfo::pipesGraph.findVertex(rev.getCode());
         if (rev.getCode() != code) {
-            for (string c : affected) {
+            for (const string& c : affected) {
                 Vertex* city = csvInfo::pipesGraph.findVertex(c);
                 while (findAugmentingPaths_ReservoirRemovalPart(reservoir, city, true)) {
                     reservoir->setPath(reservoir->getIncoming()[0]);
@@ -288,13 +288,13 @@ void AuxFunctions::simulateReservoirRemovalPart(string code) {
 
     maxWaterPerCity.clear();
     vector<string> aux;
-    for (int idx = 0; idx < csvInfo::citiesVector.size(); idx++) {
-        Vertex* s = csvInfo::pipesGraph.findVertex(csvInfo::citiesVector[idx].getCode());
+    for (auto & idx : csvInfo::citiesVector) {
+        Vertex* s = csvInfo::pipesGraph.findVertex(idx.getCode());
         double flow = 0;
         for (Edge* e : s->getIncoming()) flow += e->getFlow();
         aux.clear();
-        aux.push_back(csvInfo::citiesVector[idx].getCity());
-        aux.push_back(csvInfo::citiesVector[idx].getCode());
+        aux.push_back(idx.getCity());
+        aux.push_back(idx.getCode());
         aux.push_back(std::to_string(static_cast<long long>(std::round(flow))));
         maxWaterPerCity.push_back(aux);
     }
@@ -456,8 +456,8 @@ void AuxFunctions::balanceNetwork() {
 
 }
 
-int AuxFunctions::compute_delta(double maxW) {
-    int delta = 0;
+double AuxFunctions::compute_delta(double maxW) {
+    double delta = 0;
     for (int i = 0; pow(2, i) < maxW; i++) {
         delta = pow(2, i);
     }

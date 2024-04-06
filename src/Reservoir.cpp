@@ -17,7 +17,7 @@ string Reservoir::getMunicipality() {
     return municipality;
 }
 
-int Reservoir::getId() {
+int Reservoir::getId() const {
     return Id;
 }
 
@@ -25,6 +25,6 @@ string Reservoir::getCode() {
     return code;
 }
 
-int Reservoir::getMaxDelivery() {
+int Reservoir::getMaxDelivery() const {
     return maxDelivery;
 }
