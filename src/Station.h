@@ -27,7 +27,7 @@ public:
      *
      * @return Returns the value of the Station's Id
      */
-    int getId();
+    int getId() const;
 
     /**
      * @brief Get the code of the Station

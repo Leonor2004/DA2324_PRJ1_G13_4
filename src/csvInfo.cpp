@@ -145,7 +145,7 @@ void csvInfo::createPipes() {
     file.close();
 }
 
-void csvInfo::writeToMaxWaterPerCity(vector<vector<string>> v) {
+void csvInfo::writeToMaxWaterPerCity(const vector<vector<string>>& v) {
     ofstream fileName;
     fileName.open("../outputFiles/maxWaterPerCity.csv");
     fileName << "CityName,CityCode,MaxWater" << endl;

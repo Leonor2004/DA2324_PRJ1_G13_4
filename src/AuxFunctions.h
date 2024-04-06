@@ -74,7 +74,7 @@ public:
      * @param source : Source vertex
      * @param target : Target vertex
      */
-    static void edmondsKarp(string source, string target);
+    static void edmondsKarp(const string& source, const string& target);
 
     /**
      * @brief Calculate Max Water per City
@@ -106,7 +106,7 @@ public:
      *
      * @param code : Pumping station code
      */
-    static void simulatePumpingStationRemoval(string code);
+    static void simulatePumpingStationRemoval(const string& code);
 
     /**
      * @brief Simulate pipeline failure
@@ -169,7 +169,7 @@ public:
      *
      * @param code : Reservoir code
      */
-    static void simulateReservoirRemovalPart(string code);
+    static void simulateReservoirRemovalPart(const string& code);
 
     /**
      * @brief Compute the metrics to calculate balance network
@@ -200,7 +200,7 @@ public:
      * @param delta : Delta
      * @return True or false
      */
-    static bool findAugmentingPaths_balance(Vertex* s, Vertex* t, int delta);
+    static bool findAugmentingPaths_balance(Vertex* s, Vertex* t, double delta);
 
     /**
      * @brief Balance Network
@@ -217,7 +217,7 @@ public:
      * @param maxW : Max weight
      * @return Delta
      */
-    static int compute_delta(double maxW);
+    static double compute_delta(double maxW);
 
     /**
      * @brief Find the maximum weight
@@ -228,6 +228,7 @@ public:
      */
     static double maxWeight();
 
-};
+    static void augmentFlowAlongPath_CS(Vertex* s, Vertex* t);
+    };
 
 #endif //DA2324_PRJ1_G13_4_AUXFUNCTIONS_H
