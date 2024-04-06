@@ -244,7 +244,7 @@ void amountWaterOneCity() {
 /**
  * @brief Function to get the maximum amount of water that can reach each city.
  *
- * Complexity: O(n)
+ * Complexity: O(n^2)
  */
 void amountWaterEachCity() {
     AuxFunctions::MaxFlow(true);
@@ -421,7 +421,7 @@ void balanceNetwork() {
 /**
  * @brief Delivery capacity of the network if one specific water reservoir is out of comission without running Max Flow from scratch
  *
- * Complexity: O(n^2)
+ * Complexity: O(n^3)
  */
 void reservoirRemovalPart() {
     string code;

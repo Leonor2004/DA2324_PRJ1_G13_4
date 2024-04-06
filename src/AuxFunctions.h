@@ -83,7 +83,6 @@ public:
      */
     static void MaxWaterCity();
 
-
     /**
      * @brief Calculate Max Flow
      *
@@ -175,7 +174,7 @@ public:
     /**
      * @brief Compute the metrics to calculate balance network
      *
-     * Complexity: O(VE)
+     * Complexity: O(n^2)
      *
      * @return Metrics vector
      */

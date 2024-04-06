@@ -12,15 +12,29 @@
 
 using namespace std;
 
+/**
+ * @brief Edge, Vertex and Graph
+ */
 
 class Edge;
 
 #define INF std::numeric_limits<double>::max()
 
-/************************* Vertex  **************************/
-
+/**
+ * @brief Represents a Vertex in the graph.
+ */
 class Vertex {
 public:
+
+    /**
+     * @brief Constructor for Vertex class
+     *
+     * Complexity: O(1)
+     *
+     * @param in : Airport object to be associated with the vertex
+     * @param type : 0,1 or 2 if City, Reservoir or Station
+     * @param pos : Position in the vector of its type (citiesVector, reservoirVector, stationsVector)
+     */
     Vertex(string in, int type, int pos);
     bool operator<(Vertex & vertex) const;
 
@@ -41,15 +55,31 @@ public:
     void setIndegree(unsigned int indegree);
     void setDist(double dist);
     void setPath(Edge *path);
+
+    /**
+     * Auxiliary function to add an outgoing edge to a vertex (this),
+     * with a given destination vertex (d) and edge weight (w)
+     *
+     * @param d : Vertex
+     * @param airline_ : Airline
+     * @return Edge
+     */
     Edge * addEdge(Vertex *dest, double w);
+
+    /**
+     * Auxiliary function to remove an outgoing edge (with a given destination (d))
+     * from a vertex (this)
+     *
+     * @param d : Vertex
+     * @return True if successful, and false if such edge does not exist
+     */
     bool removeEdge(string in);
     void removeOutgoingEdges();
 
 protected:
     string info;                // info node
     int type;                   // 0->City; 1->Reservoir; 2->Station
-    std::vector<Edge *> adj;  // outgoing edges
-
+    std::vector<Edge *> adj;    // outgoing edges
     int vectorPos;              // position in the vector of its type (citiesVector, reservoirVector, stationsVector)
 
     // auxiliary fields
@@ -64,7 +94,7 @@ protected:
     void deleteEdge(Edge *edge);
 };
 
-/********************** Edge  ****************************/
+/* ********************* Edge  ****************************/
 
 class Edge {
 public:
@@ -99,7 +129,7 @@ protected:
     double flow; // for flow-related problems
 };
 
-/********************** Graph  ****************************/
+/* ********************* Graph  ****************************/
 
 class Graph {
 public:
@@ -127,29 +157,11 @@ public:
     int getNumVertex() const;
     std::vector<Vertex *> getVertexSet() const;
 
-    std:: vector<string> dfs() const;
-    std:: vector<string> dfs(const string & source) const;
-    void dfsVisit(Vertex *v,  std::vector<string> & res) const;
-    std::vector<string> bfs(const string & source) const;
 
-    bool isDAG() const;
-    bool dfsIsDAG(Vertex *v) const;
-    std::vector<string> topsort() const;
-
-    void clear();
 protected:
     std::vector<Vertex *> vertexSet;    // vertex set
 
-    double ** distMatrix = nullptr;   // dist matrix for Floyd-Warshall
-    int **pathMatrix = nullptr;   // path matrix for Floyd-Warshall
-
-    /*
-     * Finds the index of the vertex with a given content.
-     */
-    int findVertexIdx(const string &in) const;
 };
 
-void deleteMatrix(int **m, int n);
-void deleteMatrix(double **m, int n);
 
 #endif /* DA_TP_CLASSES_GRAPH */
