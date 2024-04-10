@@ -1,0 +1,497 @@
+\doxysection{Aux\+Functions Class Reference}
+\hypertarget{class_aux_functions}{}\label{class_aux_functions}\index{AuxFunctions@{AuxFunctions}}
+
+
+Auxiliar Functions.  
+
+
+
+
+{\ttfamily \#include $<$Aux\+Functions.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_aux_functions_a1c6dd4bada96da478d6a9e8899cab6d4}{Aux\+Functions}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_aux_functions_a8c9f4b6757fd920d693251d5d01cf1b4}{test\+And\+Visit}} (std\+::queue$<$ \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} $>$ \&q, \mbox{\hyperlink{class_edge}{Edge}} \texorpdfstring{$\ast$}{*}e, \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}w, double residual)
+\begin{DoxyCompactList}\small\item\em Test if vertex is visited and visit if not. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_aux_functions_a95a390217e4176d5d5bde38f81e70632}{find\+Augmenting\+Paths}} (\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}s, \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}t)
+\begin{DoxyCompactList}\small\item\em Find augmenting paths in a graph from a given source vertex to a target vertex. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{class_aux_functions_a4797acd2c70b008d3d92ef5b97d98ceb}{find\+Min\+Residual\+Along\+Path}} (\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}s, \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}t)
+\begin{DoxyCompactList}\small\item\em Calculates the minimum residual capacity along a path from source vertex s to target vertex t in a graph. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_aux_functions_a04fd905b1305cffff94fa530e534fe20}{augment\+Flow\+Along\+Path}} (\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}s, \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}t)
+\begin{DoxyCompactList}\small\item\em Augments the flow along a path from source vertex s to target vertex t in a graph by the minimum residual capacity. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_aux_functions_a17cf451a52c82be96362f7ce818e54dd}{edmonds\+Karp}} (const string \&source, const string \&target)
+\begin{DoxyCompactList}\small\item\em Edmonds Karp algorithm. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_aux_functions_a827661fc72429ccc8448ff0872e93a43}{Max\+Water\+City}} ()
+\begin{DoxyCompactList}\small\item\em Calculate Max Water per \doxylink{class_city}{City}. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_aux_functions_a6ccefd2e27b97d709b1d5633e2e782f1}{Max\+Flow}} (bool csv)
+\begin{DoxyCompactList}\small\item\em Calculate Max Flow. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_aux_functions_a2d0bae7e65e6d99f9b6f0ebe6f2206b2}{simulate\+Reservoir\+Removal}} (const std\+::string \&reservoir\+Code)
+\begin{DoxyCompactList}\small\item\em Simulate reservoir removal. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_aux_functions_a764de5e3c500738a12bbe1a1154b18b6}{simulate\+Pumping\+Station\+Removal}} (const string \&code)
+\begin{DoxyCompactList}\small\item\em Simulate pumping station removal. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_aux_functions_ac2342cd21ccc2300f703fb4d187a7139}{simulate\+Pipeline\+Failure}} (\mbox{\hyperlink{class_edge}{Edge}} \texorpdfstring{$\ast$}{*}e)
+\begin{DoxyCompactList}\small\item\em Simulate pipeline failure. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_aux_functions_a77d55f9fff4a4ff25f636cee771a2506}{test\+And\+Visit\+\_\+\+Reservoir\+Removal\+Part}} (std\+::queue$<$ \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} $>$ \&q, \mbox{\hyperlink{class_edge}{Edge}} \texorpdfstring{$\ast$}{*}e, \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}w, double flow)
+\begin{DoxyCompactList}\small\item\em Testes if the vertex w is not visited and the flow is more that 0 and then visits the vertex and adds the edge e. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_aux_functions_a08d82fca6510fed11bb030bc97393828}{find\+Augmenting\+Paths\+\_\+\+Reservoir\+Removal\+Part}} (\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}s, \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}t, bool residual)
+\begin{DoxyCompactList}\small\item\em Find augmenting paths. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{class_aux_functions_a618d4c9f54ef304028db811d8e376164}{find\+Minflow}} (\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}r, \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}c)
+\begin{DoxyCompactList}\small\item\em Find the minimum flow starting in vertex r and ending in vertex c. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_aux_functions_af1f67ae6999db0d06b813b80f91ba0a5}{remove\+Flow}} (\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}r, \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}sink)
+\begin{DoxyCompactList}\small\item\em Remove flow. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_aux_functions_a6241ee0dabab0c3411782f8532bf488e}{simulate\+Reservoir\+Removal\+Part}} (const string \&code)
+\begin{DoxyCompactList}\small\item\em Simulate reservoir removal. \end{DoxyCompactList}\item 
+static vector$<$ double $>$ \mbox{\hyperlink{class_aux_functions_a407160d4b45694108103a9174ec36ba9}{compute\+\_\+metrics}} ()
+\begin{DoxyCompactList}\small\item\em Compute the metrics to calculate balance network. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_aux_functions_ab427d691f90466043ec5e3a72bd59dd4}{print\+\_\+metrics}} (vector$<$ double $>$ i, vector$<$ double $>$ f)
+\begin{DoxyCompactList}\small\item\em Print the metrics. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_aux_functions_aeb3c78dd75542356ab640fa1154b16f6}{find\+Augmenting\+Paths\+\_\+balance}} (\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}s, \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}t, double delta)
+\begin{DoxyCompactList}\small\item\em Find augmenting paths. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_aux_functions_aa47f0689c02fdb37a883afbb7d030722}{augment\+Flow\+Along\+Path\+\_\+\+CS}} (\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}s, \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}t)
+\begin{DoxyCompactList}\small\item\em Augments the flow along a path from source vertex s to target vertex t in a graph by the minimum residual capacity, setting the pipe weight in the opposite direction, if any, to 0, so that no water passes through that pipe. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_aux_functions_a2b4437d9417d079afc1a52cf2bd65e59}{balance\+Network}} ()
+\begin{DoxyCompactList}\small\item\em Balance Network. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{class_aux_functions_a2b57b97b4b3ff655fc233c06ef8424d6}{compute\+\_\+delta}} (double maxW)
+\begin{DoxyCompactList}\small\item\em Compute delta. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{class_aux_functions_a96edbd210a5be73e2a9074491b5294a8}{max\+Weight}} ()
+\begin{DoxyCompactList}\small\item\em Find the maximum weight. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aux_functions_a4ae0807c52682b510fdcd594ba3343af}\label{class_aux_functions_a4ae0807c52682b510fdcd594ba3343af} 
+static vector$<$ vector$<$ string $>$ $>$ {\bfseries max\+Water\+Per\+City}
+\begin{DoxyCompactList}\small\item\em Vector of vectors of max water per city. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Auxiliar Functions. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_aux_functions_a1c6dd4bada96da478d6a9e8899cab6d4}\label{class_aux_functions_a1c6dd4bada96da478d6a9e8899cab6d4} 
+\index{AuxFunctions@{AuxFunctions}!AuxFunctions@{AuxFunctions}}
+\index{AuxFunctions@{AuxFunctions}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{AuxFunctions()}{AuxFunctions()}}
+{\footnotesize\ttfamily Aux\+Functions\+::\+Aux\+Functions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor. 
+
+Complexity\+: O(1) 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aux_functions_a04fd905b1305cffff94fa530e534fe20}\label{class_aux_functions_a04fd905b1305cffff94fa530e534fe20} 
+\index{AuxFunctions@{AuxFunctions}!augmentFlowAlongPath@{augmentFlowAlongPath}}
+\index{augmentFlowAlongPath@{augmentFlowAlongPath}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{augmentFlowAlongPath()}{augmentFlowAlongPath()}}
+{\footnotesize\ttfamily void Aux\+Functions\+::augment\+Flow\+Along\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{s,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Augments the flow along a path from source vertex s to target vertex t in a graph by the minimum residual capacity. 
+
+Complexity\+: O(n)
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \+: Source vertex \\
+\hline
+{\em t} & \+: Target vertex \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_aux_functions_aa47f0689c02fdb37a883afbb7d030722}\label{class_aux_functions_aa47f0689c02fdb37a883afbb7d030722} 
+\index{AuxFunctions@{AuxFunctions}!augmentFlowAlongPath\_CS@{augmentFlowAlongPath\_CS}}
+\index{augmentFlowAlongPath\_CS@{augmentFlowAlongPath\_CS}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{augmentFlowAlongPath\_CS()}{augmentFlowAlongPath\_CS()}}
+{\footnotesize\ttfamily void Aux\+Functions\+::augment\+Flow\+Along\+Path\+\_\+\+CS (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{s,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Augments the flow along a path from source vertex s to target vertex t in a graph by the minimum residual capacity, setting the pipe weight in the opposite direction, if any, to 0, so that no water passes through that pipe. 
+
+Complexity\+: O(n)
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \+: Source vertex \\
+\hline
+{\em t} & \+: Target vertex \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_aux_functions_a2b4437d9417d079afc1a52cf2bd65e59}\label{class_aux_functions_a2b4437d9417d079afc1a52cf2bd65e59} 
+\index{AuxFunctions@{AuxFunctions}!balanceNetwork@{balanceNetwork}}
+\index{balanceNetwork@{balanceNetwork}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{balanceNetwork()}{balanceNetwork()}}
+{\footnotesize\ttfamily void Aux\+Functions\+::balance\+Network (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Balance Network. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}4) \Hypertarget{class_aux_functions_a2b57b97b4b3ff655fc233c06ef8424d6}\label{class_aux_functions_a2b57b97b4b3ff655fc233c06ef8424d6} 
+\index{AuxFunctions@{AuxFunctions}!compute\_delta@{compute\_delta}}
+\index{compute\_delta@{compute\_delta}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{compute\_delta()}{compute\_delta()}}
+{\footnotesize\ttfamily double Aux\+Functions\+::compute\+\_\+delta (\begin{DoxyParamCaption}\item[{double}]{maxW }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Compute delta. 
+
+Complexity\+: O(n)
+
+
+\begin{DoxyParams}{Parameters}
+{\em maxW} & \+: Max weight \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Delta 
+\end{DoxyReturn}
+\Hypertarget{class_aux_functions_a407160d4b45694108103a9174ec36ba9}\label{class_aux_functions_a407160d4b45694108103a9174ec36ba9} 
+\index{AuxFunctions@{AuxFunctions}!compute\_metrics@{compute\_metrics}}
+\index{compute\_metrics@{compute\_metrics}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{compute\_metrics()}{compute\_metrics()}}
+{\footnotesize\ttfamily vector$<$ double $>$ Aux\+Functions\+::compute\+\_\+metrics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Compute the metrics to calculate balance network. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}2)
+
+\begin{DoxyReturn}{Returns}
+Metrics vector 
+\end{DoxyReturn}
+\Hypertarget{class_aux_functions_a17cf451a52c82be96362f7ce818e54dd}\label{class_aux_functions_a17cf451a52c82be96362f7ce818e54dd} 
+\index{AuxFunctions@{AuxFunctions}!edmondsKarp@{edmondsKarp}}
+\index{edmondsKarp@{edmondsKarp}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{edmondsKarp()}{edmondsKarp()}}
+{\footnotesize\ttfamily void Aux\+Functions\+::edmonds\+Karp (\begin{DoxyParamCaption}\item[{const string \&}]{source,  }\item[{const string \&}]{target }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Edmonds Karp algorithm. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}3)
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & \+: Source vertex \\
+\hline
+{\em target} & \+: Target vertex \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_aux_functions_a95a390217e4176d5d5bde38f81e70632}\label{class_aux_functions_a95a390217e4176d5d5bde38f81e70632} 
+\index{AuxFunctions@{AuxFunctions}!findAugmentingPaths@{findAugmentingPaths}}
+\index{findAugmentingPaths@{findAugmentingPaths}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{findAugmentingPaths()}{findAugmentingPaths()}}
+{\footnotesize\ttfamily bool Aux\+Functions\+::find\+Augmenting\+Paths (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{s,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Find augmenting paths in a graph from a given source vertex to a target vertex. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}2)
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \+: Source vertex \\
+\hline
+{\em t} & \+: Target vertex \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True or false 
+\end{DoxyReturn}
+\Hypertarget{class_aux_functions_aeb3c78dd75542356ab640fa1154b16f6}\label{class_aux_functions_aeb3c78dd75542356ab640fa1154b16f6} 
+\index{AuxFunctions@{AuxFunctions}!findAugmentingPaths\_balance@{findAugmentingPaths\_balance}}
+\index{findAugmentingPaths\_balance@{findAugmentingPaths\_balance}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{findAugmentingPaths\_balance()}{findAugmentingPaths\_balance()}}
+{\footnotesize\ttfamily bool Aux\+Functions\+::find\+Augmenting\+Paths\+\_\+balance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{s,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{t,  }\item[{double}]{delta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Find augmenting paths. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}2)
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \+: Source vertex \\
+\hline
+{\em t} & \+: Destination vertex \\
+\hline
+{\em delta} & \+: Delta \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True or false 
+\end{DoxyReturn}
+\Hypertarget{class_aux_functions_a08d82fca6510fed11bb030bc97393828}\label{class_aux_functions_a08d82fca6510fed11bb030bc97393828} 
+\index{AuxFunctions@{AuxFunctions}!findAugmentingPaths\_ReservoirRemovalPart@{findAugmentingPaths\_ReservoirRemovalPart}}
+\index{findAugmentingPaths\_ReservoirRemovalPart@{findAugmentingPaths\_ReservoirRemovalPart}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{findAugmentingPaths\_ReservoirRemovalPart()}{findAugmentingPaths\_ReservoirRemovalPart()}}
+{\footnotesize\ttfamily bool Aux\+Functions\+::find\+Augmenting\+Paths\+\_\+\+Reservoir\+Removal\+Part (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{s,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{t,  }\item[{bool}]{residual }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Find augmenting paths. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}2)
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \+: Source vertex \\
+\hline
+{\em t} & \+: Destination vertex \\
+\hline
+{\em residual} & \+: Path that already has flow or not \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True or false 
+\end{DoxyReturn}
+\Hypertarget{class_aux_functions_a618d4c9f54ef304028db811d8e376164}\label{class_aux_functions_a618d4c9f54ef304028db811d8e376164} 
+\index{AuxFunctions@{AuxFunctions}!findMinflow@{findMinflow}}
+\index{findMinflow@{findMinflow}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{findMinflow()}{findMinflow()}}
+{\footnotesize\ttfamily double Aux\+Functions\+::find\+Minflow (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{r,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Find the minimum flow starting in vertex r and ending in vertex c. 
+
+Complexity; O(n)
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & \+: Origin vertex \\
+\hline
+{\em c} & \+: Destination vertex \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Minimum flow 
+\end{DoxyReturn}
+\Hypertarget{class_aux_functions_a4797acd2c70b008d3d92ef5b97d98ceb}\label{class_aux_functions_a4797acd2c70b008d3d92ef5b97d98ceb} 
+\index{AuxFunctions@{AuxFunctions}!findMinResidualAlongPath@{findMinResidualAlongPath}}
+\index{findMinResidualAlongPath@{findMinResidualAlongPath}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{findMinResidualAlongPath()}{findMinResidualAlongPath()}}
+{\footnotesize\ttfamily double Aux\+Functions\+::find\+Min\+Residual\+Along\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{s,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the minimum residual capacity along a path from source vertex s to target vertex t in a graph. 
+
+Complexity\+: O(n)
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \+: Source vertex \\
+\hline
+{\em t} & \+: Target vertex \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Double with the minimum residual capacity along the path 
+\end{DoxyReturn}
+\Hypertarget{class_aux_functions_a6ccefd2e27b97d709b1d5633e2e782f1}\label{class_aux_functions_a6ccefd2e27b97d709b1d5633e2e782f1} 
+\index{AuxFunctions@{AuxFunctions}!MaxFlow@{MaxFlow}}
+\index{MaxFlow@{MaxFlow}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{MaxFlow()}{MaxFlow()}}
+{\footnotesize\ttfamily void Aux\+Functions\+::\+Max\+Flow (\begin{DoxyParamCaption}\item[{bool}]{csv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculate Max Flow. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}3) \Hypertarget{class_aux_functions_a827661fc72429ccc8448ff0872e93a43}\label{class_aux_functions_a827661fc72429ccc8448ff0872e93a43} 
+\index{AuxFunctions@{AuxFunctions}!MaxWaterCity@{MaxWaterCity}}
+\index{MaxWaterCity@{MaxWaterCity}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{MaxWaterCity()}{MaxWaterCity()}}
+{\footnotesize\ttfamily void Aux\+Functions\+::\+Max\+Water\+City (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculate Max Water per \doxylink{class_city}{City}. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}3) \Hypertarget{class_aux_functions_a96edbd210a5be73e2a9074491b5294a8}\label{class_aux_functions_a96edbd210a5be73e2a9074491b5294a8} 
+\index{AuxFunctions@{AuxFunctions}!maxWeight@{maxWeight}}
+\index{maxWeight@{maxWeight}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{maxWeight()}{maxWeight()}}
+{\footnotesize\ttfamily double Aux\+Functions\+::max\+Weight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Find the maximum weight. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}2)
+
+\begin{DoxyReturn}{Returns}
+Max weight 
+\end{DoxyReturn}
+\Hypertarget{class_aux_functions_ab427d691f90466043ec5e3a72bd59dd4}\label{class_aux_functions_ab427d691f90466043ec5e3a72bd59dd4} 
+\index{AuxFunctions@{AuxFunctions}!print\_metrics@{print\_metrics}}
+\index{print\_metrics@{print\_metrics}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{print\_metrics()}{print\_metrics()}}
+{\footnotesize\ttfamily void Aux\+Functions\+::print\+\_\+metrics (\begin{DoxyParamCaption}\item[{vector$<$ double $>$}]{i,  }\item[{vector$<$ double $>$}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Print the metrics. 
+
+Complexity\+: O(1)
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & \+: Initial metrics \\
+\hline
+{\em f} & \+: Final metrics \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_aux_functions_af1f67ae6999db0d06b813b80f91ba0a5}\label{class_aux_functions_af1f67ae6999db0d06b813b80f91ba0a5} 
+\index{AuxFunctions@{AuxFunctions}!removeFlow@{removeFlow}}
+\index{removeFlow@{removeFlow}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{removeFlow()}{removeFlow()}}
+{\footnotesize\ttfamily void Aux\+Functions\+::remove\+Flow (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{r,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{sink }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Remove flow. 
+
+Complexity\+: O(n)
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & \+: \doxylink{class_vertex}{Vertex} \\
+\hline
+{\em sink} & \+: Sink vertex \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_aux_functions_ac2342cd21ccc2300f703fb4d187a7139}\label{class_aux_functions_ac2342cd21ccc2300f703fb4d187a7139} 
+\index{AuxFunctions@{AuxFunctions}!simulatePipelineFailure@{simulatePipelineFailure}}
+\index{simulatePipelineFailure@{simulatePipelineFailure}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{simulatePipelineFailure()}{simulatePipelineFailure()}}
+{\footnotesize\ttfamily void Aux\+Functions\+::simulate\+Pipeline\+Failure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{Edge}} \texorpdfstring{$\ast$}{*}}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Simulate pipeline failure. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}3)
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & \+: Pipeline edge \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_aux_functions_a764de5e3c500738a12bbe1a1154b18b6}\label{class_aux_functions_a764de5e3c500738a12bbe1a1154b18b6} 
+\index{AuxFunctions@{AuxFunctions}!simulatePumpingStationRemoval@{simulatePumpingStationRemoval}}
+\index{simulatePumpingStationRemoval@{simulatePumpingStationRemoval}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{simulatePumpingStationRemoval()}{simulatePumpingStationRemoval()}}
+{\footnotesize\ttfamily void Aux\+Functions\+::simulate\+Pumping\+Station\+Removal (\begin{DoxyParamCaption}\item[{const string \&}]{code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Simulate pumping station removal. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}3)
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & \+: Pumping station code \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_aux_functions_a2d0bae7e65e6d99f9b6f0ebe6f2206b2}\label{class_aux_functions_a2d0bae7e65e6d99f9b6f0ebe6f2206b2} 
+\index{AuxFunctions@{AuxFunctions}!simulateReservoirRemoval@{simulateReservoirRemoval}}
+\index{simulateReservoirRemoval@{simulateReservoirRemoval}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{simulateReservoirRemoval()}{simulateReservoirRemoval()}}
+{\footnotesize\ttfamily void Aux\+Functions\+::simulate\+Reservoir\+Removal (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{reservoir\+Code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Simulate reservoir removal. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}3)
+
+
+\begin{DoxyParams}{Parameters}
+{\em reservoir\+Code} & \+: \doxylink{class_reservoir}{Reservoir} Code \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_aux_functions_a6241ee0dabab0c3411782f8532bf488e}\label{class_aux_functions_a6241ee0dabab0c3411782f8532bf488e} 
+\index{AuxFunctions@{AuxFunctions}!simulateReservoirRemovalPart@{simulateReservoirRemovalPart}}
+\index{simulateReservoirRemovalPart@{simulateReservoirRemovalPart}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{simulateReservoirRemovalPart()}{simulateReservoirRemovalPart()}}
+{\footnotesize\ttfamily void Aux\+Functions\+::simulate\+Reservoir\+Removal\+Part (\begin{DoxyParamCaption}\item[{const string \&}]{code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Simulate reservoir removal. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}3)
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & \+: \doxylink{class_reservoir}{Reservoir} code \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_aux_functions_a8c9f4b6757fd920d693251d5d01cf1b4}\label{class_aux_functions_a8c9f4b6757fd920d693251d5d01cf1b4} 
+\index{AuxFunctions@{AuxFunctions}!testAndVisit@{testAndVisit}}
+\index{testAndVisit@{testAndVisit}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{testAndVisit()}{testAndVisit()}}
+{\footnotesize\ttfamily void Aux\+Functions\+::test\+And\+Visit (\begin{DoxyParamCaption}\item[{std\+::queue$<$ \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} $>$ \&}]{q,  }\item[{\mbox{\hyperlink{class_edge}{Edge}} \texorpdfstring{$\ast$}{*}}]{e,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{w,  }\item[{double}]{residual }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Test if vertex is visited and visit if not. 
+
+Complexity\+: O(1)
+
+
+\begin{DoxyParams}{Parameters}
+{\em q} & \+: Queue of vertex \\
+\hline
+{\em e} & \+: \doxylink{class_edge}{Edge} \\
+\hline
+{\em w} & \+: \doxylink{class_vertex}{Vertex} \\
+\hline
+{\em residual} & \+: Flow or the difference between the weigh and the flow of an edge \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_aux_functions_a77d55f9fff4a4ff25f636cee771a2506}\label{class_aux_functions_a77d55f9fff4a4ff25f636cee771a2506} 
+\index{AuxFunctions@{AuxFunctions}!testAndVisit\_ReservoirRemovalPart@{testAndVisit\_ReservoirRemovalPart}}
+\index{testAndVisit\_ReservoirRemovalPart@{testAndVisit\_ReservoirRemovalPart}!AuxFunctions@{AuxFunctions}}
+\doxysubsubsection{\texorpdfstring{testAndVisit\_ReservoirRemovalPart()}{testAndVisit\_ReservoirRemovalPart()}}
+{\footnotesize\ttfamily void Aux\+Functions\+::test\+And\+Visit\+\_\+\+Reservoir\+Removal\+Part (\begin{DoxyParamCaption}\item[{std\+::queue$<$ \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} $>$ \&}]{q,  }\item[{\mbox{\hyperlink{class_edge}{Edge}} \texorpdfstring{$\ast$}{*}}]{e,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{w,  }\item[{double}]{flow }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Testes if the vertex w is not visited and the flow is more that 0 and then visits the vertex and adds the edge e. 
+
+Complexity\+: O(1)
+
+
+\begin{DoxyParams}{Parameters}
+{\em q} & \+: Queue of vertex\textquotesingle{}s \\
+\hline
+{\em e} & \+: \doxylink{class_edge}{Edge} \\
+\hline
+{\em w} & \+: \doxylink{class_vertex}{Vertex} \\
+\hline
+{\em flow} & \+: Flow \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Aux\+Functions.\+h\item 
+Aux\+Functions.\+cpp\end{DoxyCompactItemize}

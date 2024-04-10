@@ -1,0 +1,169 @@
+\doxysection{csv\+Info Class Reference}
+\hypertarget{classcsv_info}{}\label{classcsv_info}\index{csvInfo@{csvInfo}}
+
+
+Gets the info from the csv\textquotesingle{}s.  
+
+
+
+
+{\ttfamily \#include $<$csv\+Info.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classcsv_info_acf6ba247718573453cde38c1a9616081}\label{classcsv_info_acf6ba247718573453cde38c1a9616081} 
+{\bfseries csv\+Info} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classcsv_info_a1f83aeb3aa6be708359453aa82a69008}{create\+Reservoir}} ()
+\begin{DoxyCompactList}\small\item\em Creates a set with the code of all reservoirs and a vector with the info of all reservoirs. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classcsv_info_a3ba13a134a11beb74dd830aae96faf74}{create\+Stations}} ()
+\begin{DoxyCompactList}\small\item\em Creates a set with the code of all stations and a vector with the info of all stations. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classcsv_info_aa4e82b01a10bb86a98f31c9d1ea7456e}{create\+Cities}} ()
+\begin{DoxyCompactList}\small\item\em Creates a set with the name of all cities and a vector with the info of all cities. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classcsv_info_aa4a94a1a266617d7e684f67982384473}{create\+Pipes}} ()
+\begin{DoxyCompactList}\small\item\em Adds the pipes as edges of the graph. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classcsv_info_ab609b5384604d04eeca3f9a2845b27e4}{write\+To\+Max\+Water\+Per\+City}} (const vector$<$ vector$<$ string $>$ $>$ \&v)
+\begin{DoxyCompactList}\small\item\em Write information present in the vector to file Max\+Water\+Per\+City.\+csv. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static vector$<$ \mbox{\hyperlink{class_reservoir}{Reservoir}} $>$ \mbox{\hyperlink{classcsv_info_a74ee05a3f4663cc0c83609c3b80b3292}{reservoirs\+Vector}}
+\item 
+static vector$<$ \mbox{\hyperlink{class_station}{Station}} $>$ \mbox{\hyperlink{classcsv_info_a6a7faa15868b0b53d14230a48884745b}{stations\+Vector}}
+\item 
+static vector$<$ \mbox{\hyperlink{class_city}{City}} $>$ \mbox{\hyperlink{classcsv_info_ac77f479d3ccfefbb7accd1c35989353d}{cities\+Vector}}
+\item 
+static \mbox{\hyperlink{class_graph}{Graph}} \mbox{\hyperlink{classcsv_info_a5ff8e8477b0998d792edfa6ac90828ef}{pipes\+Graph}}
+\item 
+static std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{classcsv_info_ac3752e709c1452065e268674d9f027f6}{reservoir\+Set}}
+\item 
+static std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{classcsv_info_a79a02b94209fae0dad0457e06fa1a355}{station\+Set}}
+\item 
+static map$<$ std\+::string, int $>$ \mbox{\hyperlink{classcsv_info_a34565a8366c1ecd60ff1afe26bd94955}{city\+Map}}
+\item 
+static std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{classcsv_info_a947583ac13b5515ed0c7fc0aeaead04d}{city\+Name\+Set}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gets the info from the csv\textquotesingle{}s. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcsv_info_aa4e82b01a10bb86a98f31c9d1ea7456e}\label{classcsv_info_aa4e82b01a10bb86a98f31c9d1ea7456e} 
+\index{csvInfo@{csvInfo}!createCities@{createCities}}
+\index{createCities@{createCities}!csvInfo@{csvInfo}}
+\doxysubsubsection{\texorpdfstring{createCities()}{createCities()}}
+{\footnotesize\ttfamily void csv\+Info\+::create\+Cities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a set with the name of all cities and a vector with the info of all cities. 
+
+Complexity\+: O(n log(n)) \Hypertarget{classcsv_info_aa4a94a1a266617d7e684f67982384473}\label{classcsv_info_aa4a94a1a266617d7e684f67982384473} 
+\index{csvInfo@{csvInfo}!createPipes@{createPipes}}
+\index{createPipes@{createPipes}!csvInfo@{csvInfo}}
+\doxysubsubsection{\texorpdfstring{createPipes()}{createPipes()}}
+{\footnotesize\ttfamily void csv\+Info\+::create\+Pipes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Adds the pipes as edges of the graph. 
+
+Complexity\+: O(n) \Hypertarget{classcsv_info_a1f83aeb3aa6be708359453aa82a69008}\label{classcsv_info_a1f83aeb3aa6be708359453aa82a69008} 
+\index{csvInfo@{csvInfo}!createReservoir@{createReservoir}}
+\index{createReservoir@{createReservoir}!csvInfo@{csvInfo}}
+\doxysubsubsection{\texorpdfstring{createReservoir()}{createReservoir()}}
+{\footnotesize\ttfamily void csv\+Info\+::create\+Reservoir (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a set with the code of all reservoirs and a vector with the info of all reservoirs. 
+
+Complexity\+: O(n log(n)) \Hypertarget{classcsv_info_a3ba13a134a11beb74dd830aae96faf74}\label{classcsv_info_a3ba13a134a11beb74dd830aae96faf74} 
+\index{csvInfo@{csvInfo}!createStations@{createStations}}
+\index{createStations@{createStations}!csvInfo@{csvInfo}}
+\doxysubsubsection{\texorpdfstring{createStations()}{createStations()}}
+{\footnotesize\ttfamily void csv\+Info\+::create\+Stations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a set with the code of all stations and a vector with the info of all stations. 
+
+Complexity\+: O(n log(n)) \Hypertarget{classcsv_info_ab609b5384604d04eeca3f9a2845b27e4}\label{classcsv_info_ab609b5384604d04eeca3f9a2845b27e4} 
+\index{csvInfo@{csvInfo}!writeToMaxWaterPerCity@{writeToMaxWaterPerCity}}
+\index{writeToMaxWaterPerCity@{writeToMaxWaterPerCity}!csvInfo@{csvInfo}}
+\doxysubsubsection{\texorpdfstring{writeToMaxWaterPerCity()}{writeToMaxWaterPerCity()}}
+{\footnotesize\ttfamily void csv\+Info\+::write\+To\+Max\+Water\+Per\+City (\begin{DoxyParamCaption}\item[{const vector$<$ vector$<$ string $>$ $>$ \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Write information present in the vector to file Max\+Water\+Per\+City.\+csv. 
+
+Complexity\+: O(n)
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & Vector of information \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classcsv_info_ac77f479d3ccfefbb7accd1c35989353d}\label{classcsv_info_ac77f479d3ccfefbb7accd1c35989353d} 
+\index{csvInfo@{csvInfo}!citiesVector@{citiesVector}}
+\index{citiesVector@{citiesVector}!csvInfo@{csvInfo}}
+\doxysubsubsection{\texorpdfstring{citiesVector}{citiesVector}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{class_city}{City}} $>$ csv\+Info\+::cities\+Vector\hspace{0.3cm}{\ttfamily [static]}}
+
+Vector of all the cities \Hypertarget{classcsv_info_a34565a8366c1ecd60ff1afe26bd94955}\label{classcsv_info_a34565a8366c1ecd60ff1afe26bd94955} 
+\index{csvInfo@{csvInfo}!cityMap@{cityMap}}
+\index{cityMap@{cityMap}!csvInfo@{csvInfo}}
+\doxysubsubsection{\texorpdfstring{cityMap}{cityMap}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, int $>$ csv\+Info\+::city\+Map\hspace{0.3cm}{\ttfamily [static]}}
+
+Map with the name of all cities and its corresponding index \Hypertarget{classcsv_info_a947583ac13b5515ed0c7fc0aeaead04d}\label{classcsv_info_a947583ac13b5515ed0c7fc0aeaead04d} 
+\index{csvInfo@{csvInfo}!cityNameSet@{cityNameSet}}
+\index{cityNameSet@{cityNameSet}!csvInfo@{csvInfo}}
+\doxysubsubsection{\texorpdfstring{cityNameSet}{cityNameSet}}
+{\footnotesize\ttfamily std\+::set$<$ std\+::string $>$ csv\+Info\+::city\+Name\+Set\hspace{0.3cm}{\ttfamily [static]}}
+
+Set with the name of all cities \Hypertarget{classcsv_info_a5ff8e8477b0998d792edfa6ac90828ef}\label{classcsv_info_a5ff8e8477b0998d792edfa6ac90828ef} 
+\index{csvInfo@{csvInfo}!pipesGraph@{pipesGraph}}
+\index{pipesGraph@{pipesGraph}!csvInfo@{csvInfo}}
+\doxysubsubsection{\texorpdfstring{pipesGraph}{pipesGraph}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_graph}{Graph}} csv\+Info\+::pipes\+Graph\hspace{0.3cm}{\ttfamily [static]}}
+
+\doxylink{class_graph}{Graph} of all the pipes \Hypertarget{classcsv_info_ac3752e709c1452065e268674d9f027f6}\label{classcsv_info_ac3752e709c1452065e268674d9f027f6} 
+\index{csvInfo@{csvInfo}!reservoirSet@{reservoirSet}}
+\index{reservoirSet@{reservoirSet}!csvInfo@{csvInfo}}
+\doxysubsubsection{\texorpdfstring{reservoirSet}{reservoirSet}}
+{\footnotesize\ttfamily std\+::set$<$ std\+::string $>$ csv\+Info\+::reservoir\+Set\hspace{0.3cm}{\ttfamily [static]}}
+
+Set with the code of all reservoirs \Hypertarget{classcsv_info_a74ee05a3f4663cc0c83609c3b80b3292}\label{classcsv_info_a74ee05a3f4663cc0c83609c3b80b3292} 
+\index{csvInfo@{csvInfo}!reservoirsVector@{reservoirsVector}}
+\index{reservoirsVector@{reservoirsVector}!csvInfo@{csvInfo}}
+\doxysubsubsection{\texorpdfstring{reservoirsVector}{reservoirsVector}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{class_reservoir}{Reservoir}} $>$ csv\+Info\+::reservoirs\+Vector\hspace{0.3cm}{\ttfamily [static]}}
+
+Vector of all the reservoirs \Hypertarget{classcsv_info_a79a02b94209fae0dad0457e06fa1a355}\label{classcsv_info_a79a02b94209fae0dad0457e06fa1a355} 
+\index{csvInfo@{csvInfo}!stationSet@{stationSet}}
+\index{stationSet@{stationSet}!csvInfo@{csvInfo}}
+\doxysubsubsection{\texorpdfstring{stationSet}{stationSet}}
+{\footnotesize\ttfamily std\+::set$<$ std\+::string $>$ csv\+Info\+::station\+Set\hspace{0.3cm}{\ttfamily [static]}}
+
+Set with the code of all stations \Hypertarget{classcsv_info_a6a7faa15868b0b53d14230a48884745b}\label{classcsv_info_a6a7faa15868b0b53d14230a48884745b} 
+\index{csvInfo@{csvInfo}!stationsVector@{stationsVector}}
+\index{stationsVector@{stationsVector}!csvInfo@{csvInfo}}
+\doxysubsubsection{\texorpdfstring{stationsVector}{stationsVector}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{class_station}{Station}} $>$ csv\+Info\+::stations\+Vector\hspace{0.3cm}{\ttfamily [static]}}
+
+Vector of all the stations 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+csv\+Info.\+h\item 
+csv\+Info.\+cpp\end{DoxyCompactItemize}

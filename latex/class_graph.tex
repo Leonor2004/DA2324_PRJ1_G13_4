@@ -1,0 +1,152 @@
+\doxysection{Graph Class Reference}
+\hypertarget{class_graph}{}\label{class_graph}\index{Graph@{Graph}}
+
+
+Represents a \doxylink{class_vertex}{Vertex} in the graph.  
+
+
+
+
+{\ttfamily \#include $<$Graph.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_graph_a902c5b3eacb66d60752525ab23297a95}\label{class_graph_a902c5b3eacb66d60752525ab23297a95} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Graph} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{class_graph}{Graph} destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph_a20bf23ad693930e6e028323477697c36}{find\+Vertex}} (const string \&in) const
+\begin{DoxyCompactList}\small\item\em Auxiliary function to find a vertex with a given the content. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_graph_a310a8b44beed0cc4129ca47570270d39}{add\+Vertex}} (const string \&in, int t, int pos)
+\begin{DoxyCompactList}\small\item\em Adds a vertex with a given content or info (in) to a graph (this). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_graph_a0d8c86c581492d03c3c0714f7e931ba8}{remove\+Vertex}} (const string \&in)
+\begin{DoxyCompactList}\small\item\em Remove vertex. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_graph_abf1dc1a72bf118879ab1181eaa15f221}{add\+Edge}} (const string \&sourc, const string \&dest, double w)
+\begin{DoxyCompactList}\small\item\em Adds an edge to a graph (this), given the contents of the source and destination vertices and the edge weight (w). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_graph_a0dcdf6042e3a0fe927039764441e9d04}{add\+Bidirectional\+Edge}} (const string \&sourc, const string \&dest, double w)
+\begin{DoxyCompactList}\small\item\em Add bidirectional edge. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_graph_a619ac583094079134074658e29463c0e}{get\+Vertex\+Set}} () const
+\begin{DoxyCompactList}\small\item\em Get vertex vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_graph_aa9b0a6d8ad43c5eabaca5a7140bcc8b6}\label{class_graph_aa9b0a6d8ad43c5eabaca5a7140bcc8b6} 
+std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries vertex\+Set}
+\item 
+\Hypertarget{class_graph_a9e61864da69191c1896a25a708d1a02d}\label{class_graph_a9e61864da69191c1896a25a708d1a02d} 
+double \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} {\bfseries dist\+Matrix} = nullptr
+\item 
+\Hypertarget{class_graph_a3ae09699c3616af3ebfcb1eb045f2b62}\label{class_graph_a3ae09699c3616af3ebfcb1eb045f2b62} 
+int \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} {\bfseries path\+Matrix} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a \doxylink{class_vertex}{Vertex} in the graph. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_graph_a0dcdf6042e3a0fe927039764441e9d04}\label{class_graph_a0dcdf6042e3a0fe927039764441e9d04} 
+\index{Graph@{Graph}!addBidirectionalEdge@{addBidirectionalEdge}}
+\index{addBidirectionalEdge@{addBidirectionalEdge}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{addBidirectionalEdge()}{addBidirectionalEdge()}}
+{\footnotesize\ttfamily bool Graph\+::add\+Bidirectional\+Edge (\begin{DoxyParamCaption}\item[{const string \&}]{sourc,  }\item[{const string \&}]{dest,  }\item[{double}]{w }\end{DoxyParamCaption})}
+
+
+
+Add bidirectional edge. 
+
+Complexity\+: O(n)
+
+
+\begin{DoxyParams}{Parameters}
+{\em sourc} & \+: Source vertex \\
+\hline
+{\em dest} & \+: Destination vertex \\
+\hline
+{\em w} & \+: Weight \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True or false 
+\end{DoxyReturn}
+\Hypertarget{class_graph_abf1dc1a72bf118879ab1181eaa15f221}\label{class_graph_abf1dc1a72bf118879ab1181eaa15f221} 
+\index{Graph@{Graph}!addEdge@{addEdge}}
+\index{addEdge@{addEdge}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{addEdge()}{addEdge()}}
+{\footnotesize\ttfamily bool Graph\+::add\+Edge (\begin{DoxyParamCaption}\item[{const string \&}]{sourc,  }\item[{const string \&}]{dest,  }\item[{double}]{w }\end{DoxyParamCaption})}
+
+
+
+Adds an edge to a graph (this), given the contents of the source and destination vertices and the edge weight (w). 
+
+Complexity\+: O(n)
+
+\begin{DoxyReturn}{Returns}
+\+: Returns true if successful, and false if the source or destination vertex does not exist. 
+\end{DoxyReturn}
+\Hypertarget{class_graph_a310a8b44beed0cc4129ca47570270d39}\label{class_graph_a310a8b44beed0cc4129ca47570270d39} 
+\index{Graph@{Graph}!addVertex@{addVertex}}
+\index{addVertex@{addVertex}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{addVertex()}{addVertex()}}
+{\footnotesize\ttfamily bool Graph\+::add\+Vertex (\begin{DoxyParamCaption}\item[{const string \&}]{in,  }\item[{int}]{t,  }\item[{int}]{pos }\end{DoxyParamCaption})}
+
+
+
+Adds a vertex with a given content or info (in) to a graph (this). 
+
+Complexity\+: O(n)
+
+\begin{DoxyReturn}{Returns}
+Returns true if successful, and false if a vertex with that content already exists. 
+\end{DoxyReturn}
+\Hypertarget{class_graph_a20bf23ad693930e6e028323477697c36}\label{class_graph_a20bf23ad693930e6e028323477697c36} 
+\index{Graph@{Graph}!findVertex@{findVertex}}
+\index{findVertex@{findVertex}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{findVertex()}{findVertex()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} Graph\+::find\+Vertex (\begin{DoxyParamCaption}\item[{const string \&}]{in }\end{DoxyParamCaption}) const}
+
+
+
+Auxiliary function to find a vertex with a given the content. 
+
+Complexity\+: O(n) \Hypertarget{class_graph_a619ac583094079134074658e29463c0e}\label{class_graph_a619ac583094079134074658e29463c0e} 
+\index{Graph@{Graph}!getVertexSet@{getVertexSet}}
+\index{getVertexSet@{getVertexSet}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{getVertexSet()}{getVertexSet()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} \texorpdfstring{$\ast$}{*} $>$ Graph\+::get\+Vertex\+Set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get vertex vector. 
+
+Complexity\+: O(1)
+
+\begin{DoxyReturn}{Returns}
+vertex\+Set 
+\end{DoxyReturn}
+\Hypertarget{class_graph_a0d8c86c581492d03c3c0714f7e931ba8}\label{class_graph_a0d8c86c581492d03c3c0714f7e931ba8} 
+\index{Graph@{Graph}!removeVertex@{removeVertex}}
+\index{removeVertex@{removeVertex}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{removeVertex()}{removeVertex()}}
+{\footnotesize\ttfamily bool Graph\+::remove\+Vertex (\begin{DoxyParamCaption}\item[{const string \&}]{in }\end{DoxyParamCaption})}
+
+
+
+Remove vertex. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}4)
+
+
+\begin{DoxyParams}{Parameters}
+{\em in} & \+: Info \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True or false 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Graph.\+h\item 
+Graph.\+cpp\end{DoxyCompactItemize}

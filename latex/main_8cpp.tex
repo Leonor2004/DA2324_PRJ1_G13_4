@@ -1,0 +1,210 @@
+\doxysection{main.\+cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{main.cpp@{main.cpp}}
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$stack$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include "{}src/\+Aux\+Functions.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8cpp_a82aa826432a4be05cdb2dc19cc6fcb62}{clear\+Menus}} ()
+\begin{DoxyCompactList}\small\item\em Clears all the menus. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Main function to initialize data and run the program. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_ab3002fe8e0074c9e2ecb5b835e5e819f}{main\+Menu}} ()
+\begin{DoxyCompactList}\small\item\em Main Menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_aec5dc3062a3481c11ca2ece593131bd6}{amount\+Water\+Each\+City}} ()
+\begin{DoxyCompactList}\small\item\em Function to get the maximum amount of water that can reach each city. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a635ed71c454e96ea9f341a935fa3ebc5}{amount\+Water\+One\+City}} ()
+\begin{DoxyCompactList}\small\item\em Function to get the maximum amount of water that can reach a specific city. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a4aa9e31921cdb9dff0ccf92ba4a823da}{water\+Need\+Check}} ()
+\begin{DoxyCompactList}\small\item\em Checks if the water that is reaching the cities is enough for the demand of the city. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_ab195702bfb0f75b9df8d31e1cd55dc57}{simulate\+Reservoir\+Removal}} ()
+\begin{DoxyCompactList}\small\item\em Simulate specific reservoir removal. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_ae32ee98bbedb491a59ac695406c81854}{pumping\+Station\+Removal}} ()
+\begin{DoxyCompactList}\small\item\em Pumping station removal. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_ab89aff9d1f5dd5a2270907ccc13ee790}{pipeline\+Failures}} ()
+\begin{DoxyCompactList}\small\item\em Pipeline failures. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a03b239454a3049b0617d14c2cd9b8070}{balance\+Network}} ()
+\begin{DoxyCompactList}\small\item\em Balance Network. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a9049d79877f3450c87eb823c87245e22}{reservoir\+Removal\+Part}} ()
+\begin{DoxyCompactList}\small\item\em Delivery capacity of the network if one specific water reservoir is out of comission without running Max Flow from scratch. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8cpp_a78a84c97d34803a129166ab16834cdba}{verify\+City}} (string city)
+\begin{DoxyCompactList}\small\item\em Checks if the city exists. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8cpp_a97282950cb1e37dd8efa679508824eaf}{verify\+Reservoir}} (string code)
+\begin{DoxyCompactList}\small\item\em Checks if the reservoir exists. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_8cpp_a5048bbdc4a007465f07e97c4b28117c9}\label{main_8cpp_a5048bbdc4a007465f07e97c4b28117c9} 
+map$<$ string, int $>$ {\bfseries m} = \{\{"{}main"{}, 0\}, \{"{}water\+Each"{}, 1\}, \{"{}water\+Specific"{}, 2\}, \{"{}water\+Need\+Check"{}, 3\}, \{"{}balance\+Network"{}, 4\}, \{"{}reservoir\+Removal"{}, 5\}, \{"{}reservoir\+Removal\+Part"{}, 6\}, \{"{}station\+Removal"{},7\}, \{"{}pipeline\+Failures"{}, 8\}\}
+\item 
+\Hypertarget{main_8cpp_a1869ac8262fe8e90d8c927fe5ce516d2}\label{main_8cpp_a1869ac8262fe8e90d8c927fe5ce516d2} 
+stack$<$ string $>$ {\bfseries menus}
+\item 
+\Hypertarget{main_8cpp_add491d010713ee793630c031c2e9a7ce}\label{main_8cpp_add491d010713ee793630c031c2e9a7ce} 
+bool {\bfseries over} = false
+\item 
+\Hypertarget{main_8cpp_ac746fa6ad48d19984a159f14bec028a3}\label{main_8cpp_ac746fa6ad48d19984a159f14bec028a3} 
+bool {\bfseries quit} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_aec5dc3062a3481c11ca2ece593131bd6}\label{main_8cpp_aec5dc3062a3481c11ca2ece593131bd6} 
+\index{main.cpp@{main.cpp}!amountWaterEachCity@{amountWaterEachCity}}
+\index{amountWaterEachCity@{amountWaterEachCity}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{amountWaterEachCity()}{amountWaterEachCity()}}
+{\footnotesize\ttfamily void amount\+Water\+Each\+City (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function to get the maximum amount of water that can reach each city. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}3) \Hypertarget{main_8cpp_a635ed71c454e96ea9f341a935fa3ebc5}\label{main_8cpp_a635ed71c454e96ea9f341a935fa3ebc5} 
+\index{main.cpp@{main.cpp}!amountWaterOneCity@{amountWaterOneCity}}
+\index{amountWaterOneCity@{amountWaterOneCity}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{amountWaterOneCity()}{amountWaterOneCity()}}
+{\footnotesize\ttfamily void amount\+Water\+One\+City (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function to get the maximum amount of water that can reach a specific city. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}3) \Hypertarget{main_8cpp_a03b239454a3049b0617d14c2cd9b8070}\label{main_8cpp_a03b239454a3049b0617d14c2cd9b8070} 
+\index{main.cpp@{main.cpp}!balanceNetwork@{balanceNetwork}}
+\index{balanceNetwork@{balanceNetwork}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{balanceNetwork()}{balanceNetwork()}}
+{\footnotesize\ttfamily void balance\+Network (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Balance Network. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}4) \Hypertarget{main_8cpp_a82aa826432a4be05cdb2dc19cc6fcb62}\label{main_8cpp_a82aa826432a4be05cdb2dc19cc6fcb62} 
+\index{main.cpp@{main.cpp}!clearMenus@{clearMenus}}
+\index{clearMenus@{clearMenus}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{clearMenus()}{clearMenus()}}
+{\footnotesize\ttfamily void clear\+Menus (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clears all the menus. 
+
+Complexity\+: O(n) \Hypertarget{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Main function to initialize data and run the program. 
+
+Complexity\+: O(???)
+
+\begin{DoxyReturn}{Returns}
+Program exit status. 
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_ab3002fe8e0074c9e2ecb5b835e5e819f}\label{main_8cpp_ab3002fe8e0074c9e2ecb5b835e5e819f} 
+\index{main.cpp@{main.cpp}!mainMenu@{mainMenu}}
+\index{mainMenu@{mainMenu}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{mainMenu()}{mainMenu()}}
+{\footnotesize\ttfamily void main\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Main Menu. 
+
+Complexity\+: O(n) \Hypertarget{main_8cpp_ab89aff9d1f5dd5a2270907ccc13ee790}\label{main_8cpp_ab89aff9d1f5dd5a2270907ccc13ee790} 
+\index{main.cpp@{main.cpp}!pipelineFailures@{pipelineFailures}}
+\index{pipelineFailures@{pipelineFailures}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{pipelineFailures()}{pipelineFailures()}}
+{\footnotesize\ttfamily void pipeline\+Failures (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Pipeline failures. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}5) \Hypertarget{main_8cpp_ae32ee98bbedb491a59ac695406c81854}\label{main_8cpp_ae32ee98bbedb491a59ac695406c81854} 
+\index{main.cpp@{main.cpp}!pumpingStationRemoval@{pumpingStationRemoval}}
+\index{pumpingStationRemoval@{pumpingStationRemoval}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{pumpingStationRemoval()}{pumpingStationRemoval()}}
+{\footnotesize\ttfamily void pumping\+Station\+Removal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Pumping station removal. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}4) \Hypertarget{main_8cpp_a9049d79877f3450c87eb823c87245e22}\label{main_8cpp_a9049d79877f3450c87eb823c87245e22} 
+\index{main.cpp@{main.cpp}!reservoirRemovalPart@{reservoirRemovalPart}}
+\index{reservoirRemovalPart@{reservoirRemovalPart}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{reservoirRemovalPart()}{reservoirRemovalPart()}}
+{\footnotesize\ttfamily void reservoir\+Removal\+Part (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Delivery capacity of the network if one specific water reservoir is out of comission without running Max Flow from scratch. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}3) \Hypertarget{main_8cpp_ab195702bfb0f75b9df8d31e1cd55dc57}\label{main_8cpp_ab195702bfb0f75b9df8d31e1cd55dc57} 
+\index{main.cpp@{main.cpp}!simulateReservoirRemoval@{simulateReservoirRemoval}}
+\index{simulateReservoirRemoval@{simulateReservoirRemoval}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{simulateReservoirRemoval()}{simulateReservoirRemoval()}}
+{\footnotesize\ttfamily void simulate\+Reservoir\+Removal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Simulate specific reservoir removal. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}3) \Hypertarget{main_8cpp_a78a84c97d34803a129166ab16834cdba}\label{main_8cpp_a78a84c97d34803a129166ab16834cdba} 
+\index{main.cpp@{main.cpp}!verifyCity@{verifyCity}}
+\index{verifyCity@{verifyCity}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{verifyCity()}{verifyCity()}}
+{\footnotesize\ttfamily bool verify\+City (\begin{DoxyParamCaption}\item[{string}]{city }\end{DoxyParamCaption})}
+
+
+
+Checks if the city exists. 
+
+Complexity\+: O(log(n))
+
+
+\begin{DoxyParams}{Parameters}
+{\em city} & \+: \doxylink{class_city}{City}\textquotesingle{}s name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True or false 
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_a97282950cb1e37dd8efa679508824eaf}\label{main_8cpp_a97282950cb1e37dd8efa679508824eaf} 
+\index{main.cpp@{main.cpp}!verifyReservoir@{verifyReservoir}}
+\index{verifyReservoir@{verifyReservoir}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{verifyReservoir()}{verifyReservoir()}}
+{\footnotesize\ttfamily bool verify\+Reservoir (\begin{DoxyParamCaption}\item[{string}]{code }\end{DoxyParamCaption})}
+
+
+
+Checks if the reservoir exists. 
+
+Complexity\+: O(log(n))
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & \+: \doxylink{class_reservoir}{Reservoir} code \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True or false 
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_a4aa9e31921cdb9dff0ccf92ba4a823da}\label{main_8cpp_a4aa9e31921cdb9dff0ccf92ba4a823da} 
+\index{main.cpp@{main.cpp}!waterNeedCheck@{waterNeedCheck}}
+\index{waterNeedCheck@{waterNeedCheck}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{waterNeedCheck()}{waterNeedCheck()}}
+{\footnotesize\ttfamily void water\+Need\+Check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Checks if the water that is reaching the cities is enough for the demand of the city. 
+
+Complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}3) 

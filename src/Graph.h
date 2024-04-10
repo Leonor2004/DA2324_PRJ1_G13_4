@@ -17,70 +17,249 @@ class Edge;
 
 #define INF std::numeric_limits<double>::max()
 
-/************************* Vertex  **************************/
-
+/**
+ * @brief Represents a Vertex in the graph.
+ */
 class Vertex {
 public:
-    Vertex(string in, int type, int pos);
-    bool operator<(Vertex & vertex) const;
 
+    /**
+     * @brief Constructor for Vertex class
+     *
+     * Complexity: O(1)
+     *
+     * @param in : Information associated with the vertex
+     * @param type : 0,1 or 2 if City, Reservoir or Station
+     * @param pos : Position in the vector of its type (citiesVector, reservoirVector, stationsVector)
+     */
+    Vertex(string in, int type, int pos);
+
+    /**
+     * @brief Get info
+     *
+     * Complexity: O(1)
+     *
+     * @return Info
+     */
     string getInfo() const;
+
+    /**
+     * @brief Get type
+     *
+     * Complexity: O(1)
+     *
+     * @return Type
+     */
     int getType() const;
+
+    /**
+     * @brief Get vector with adjacent edges
+     *
+     * Complexity: O(1)
+     *
+     * @return Adjacent edges
+     */
     std::vector<Edge *> getAdj() const;
+
+    /**
+     * @brief Check if is visited
+     *
+     * Complexity: O(1)
+     *
+     * @return True or false
+     */
     bool isVisited() const;
-    bool isProcessing() const;
-    unsigned int getIndegree() const;
-    double getDist() const;
+
+    /**
+     * @brief Get path
+     *
+     * Complexity: O(1)
+     *
+     * @return Path
+     */
     Edge *getPath() const;
+
+    /**
+     * @brief Get vector with incoming edges
+     *
+     * Complexity: O(1)
+     *
+     * @return Incoming edges
+     */
     std::vector<Edge *> getIncoming() const;
+
+    /**
+     * @brief Get the value of the position in the vector of its type
+     *
+     * Complexity:  O(1)
+     *
+     * @return Position
+     */
     int getPos();
 
-    void setInfo(string info);
+    /**
+     * @brief Set visited
+     *
+     * Complexity: O(1)
+     *
+     * @param visited : True or false
+     */
     void setVisited(bool visited);
-    void setProcesssing(bool processing);
-    void setIndegree(unsigned int indegree);
-    void setDist(double dist);
+
+    /**
+     * @brief Set path
+     *
+     * Complexity: O(1)
+     *
+     * @param path : Edge
+     */
     void setPath(Edge *path);
+
+    /**
+     * Auxiliary function to add an outgoing edge to a vertex (this), with a given destination vertex (d) and edge weight (w)
+     *
+     * Complexity: O(1)
+     *
+     * @param d : Vertex
+     * @param airline_ : Airline
+     * @return Edge
+     */
     Edge * addEdge(Vertex *dest, double w);
+
+    /**
+     * Auxiliary function to remove an outgoing edge (with a given destination (d)) from a vertex (this)
+     *
+     * Complexity: O(n^2)
+     *
+     * @param d : Vertex
+     * @return True if successful, and false if such edge does not exist
+     */
     bool removeEdge(string in);
+
+    /**
+     * @brief Auxiliary function to remove outgoing edges of a vertex.
+     *
+     * Complexity: O(n^2)
+     */
     void removeOutgoingEdges();
 
 protected:
-    string info;                // info node
-    int type;                   // 0->City; 1->Reservoir; 2->Station
-    std::vector<Edge *> adj;  // outgoing edges
-
-    int vectorPos;              // position in the vector of its type (citiesVector, reservoirVector, stationsVector)
+    string info;                    // info node
+    int type;                       // 0->City; 1->Reservoir; 2->Station
+    std::vector<Edge *> adj;        // outgoing edges
+    std::vector<Edge *> incoming;   // incoming edges
+    int vectorPos;                  // position in the vector of its type (citiesVector, reservoirVector, stationsVector)
 
     // auxiliary fields
-    bool visited = false; // used by DFS, BFS, Prim ...
-    bool processing = false; // used by isDAG (in addition to the visited attribute)
-    unsigned int indegree; // used by topsort
-    double dist = 0;
+    bool visited = false;
     Edge *path = nullptr;
 
-    std::vector<Edge *> incoming; // incoming edges
-
+    /**
+     * @brief Constructor for Vertex class
+     *
+     * Complexity: O(n)
+     *
+     * @param edge : Edge
+     */
     void deleteEdge(Edge *edge);
 };
 
-/********************** Edge  ****************************/
-
+/* ********************* Edge  ****************************/
+/**
+ * @brief Represents a Vertex in the graph.
+ */
 class Edge {
 public:
+    /**
+     * @brief Constructor for Edge class
+     *
+     * Complexity: O(1)
+     *
+     * @param orig : Origin vertex
+     * @param dest : Destination vertex
+     * @param w : Edge weight
+     */
     Edge(Vertex *orig, Vertex *dest, double w);
 
+    /**
+     * @brief : Get destination vertex
+     *
+     * Complexity: O(1)
+     *
+     * @return Destination vertex
+     */
     Vertex * getDest() const;
+
+    /**
+     * @brief : Get weight
+     *
+     * Complexity: O(1)
+     *
+     * @return Weight
+     */
     double getWeight() const;
+
+    /**
+     * @brief : Set weight
+     *
+     * Complexity: O(1)
+     *
+     * @param w : Weight
+     */
     void setWeight(double w);
+
+    /**
+     * @brief : Get capacity
+     *
+     * Complexity: O(1)
+     *
+     * @return Capacity
+     */
     double getCapacity() const;
-    bool isSelected() const;
+
+    /**
+     * @brief : Get origin vertex
+     *
+     * Complexity: O(1)
+     *
+     * @return Origin vertex
+     */
     Vertex * getOrig() const;
+
+    /**
+     * @brief : Get reverse edge
+     *
+     * Complexity: O(1)
+     *
+     * @return Reverse edge
+     */
     Edge *getReverse() const;
+
+    /**
+     * @brief : Get flow
+     *
+     * Complexity: O(1)
+     *
+     * @return Flow
+     */
     double getFlow() const;
 
-    void setSelected(bool selected);
+    /**
+     * @brief : Set reverse
+     *
+     * Complexity: O(1)
+     *
+     * @param reverse : Reverse edge
+     */
     void setReverse(Edge *reverse);
+
+    /**
+     * @brief : Get flow
+     *
+     * Complexity: O(1)
+     *
+     * @param flow : Flow
+     */
     void setFlow(double flow);
 
 
@@ -89,9 +268,6 @@ protected:
     double weight; // edge weight
     double capacity; // edge capacity, don't change
 
-    // auxiliary fields
-    bool selected = false;
-
     // used for bidirectional edges
     Vertex *orig;
     Edge *reverse = nullptr;
@@ -99,57 +275,82 @@ protected:
     double flow; // for flow-related problems
 };
 
-/********************** Graph  ****************************/
-
+/* ********************* Graph  ****************************/
+/**
+ * @brief Represents a Vertex in the graph.
+ */
 class Graph {
 public:
+    /**
+     * @brief Graph destructor
+     */
     ~Graph();
-    /*
-    * Auxiliary function to find a vertex with a given the content.
-    */
+
+    /**
+     * @brief Auxiliary function to find a vertex with a given the content.
+     *
+     * Complexity: O(n)
+     */
     Vertex *findVertex(const string &in) const;
-    /*
-     *  Adds a vertex with a given content or info (in) to a graph (this).
-     *  Returns true if successful, and false if a vertex with that content already exists.
+
+    /**
+     *  @brief Adds a vertex with a given content or info (in) to a graph (this).
+     *
+     *  Complexity: O(n)
+     *
+     *  @return Returns true if successful, and false if a vertex with that content already exists.
      */
     bool addVertex(const string &in, int t, int pos);
+
+    /**
+     * @brief Remove vertex
+     *
+     * Complexity: O(n^4)
+     *
+     * @param in : Info
+     * @return True or false
+     */
     bool removeVertex(const string &in);
 
-    /*
-     * Adds an edge to a graph (this), given the contents of the source and
+    /**
+     * @brief Adds an edge to a graph (this), given the contents of the source and
      * destination vertices and the edge weight (w).
-     * Returns true if successful, and false if the source or destination vertex does not exist.
+     *
+     * Complexity: O(n)
+     *
+     * @return: Returns true if successful, and false if the source or destination vertex does not exist.
      */
     bool addEdge(const string &sourc, const string &dest, double w);
-    bool removeEdge(const string &source, const string &dest);
+
+    /**
+     * @brief Add bidirectional edge
+     *
+     * Complexity: O(n)
+     *
+     * @param sourc : Source vertex
+     * @param dest : Destination vertex
+     * @param w : Weight
+     * @return True or false
+     */
     bool addBidirectionalEdge(const string &sourc, const string &dest, double w);
 
-    int getNumVertex() const;
+    /**
+     * @brief Get vertex vector
+     *
+     * Complexity: O(1)
+     *
+     * @return vertexSet
+     */
     std::vector<Vertex *> getVertexSet() const;
 
-    std:: vector<string> dfs() const;
-    std:: vector<string> dfs(const string & source) const;
-    void dfsVisit(Vertex *v,  std::vector<string> & res) const;
-    std::vector<string> bfs(const string & source) const;
-
-    bool isDAG() const;
-    bool dfsIsDAG(Vertex *v) const;
-    std::vector<string> topsort() const;
-
-    void clear();
 protected:
-    std::vector<Vertex *> vertexSet;    // vertex set
-
-    double ** distMatrix = nullptr;   // dist matrix for Floyd-Warshall
-    int **pathMatrix = nullptr;   // path matrix for Floyd-Warshall
-
-    /*
-     * Finds the index of the vertex with a given content.
-     */
-    int findVertexIdx(const string &in) const;
+    std::vector<Vertex *> vertexSet;
+    double ** distMatrix = nullptr;
+    int **pathMatrix = nullptr;
 };
 
 void deleteMatrix(int **m, int n);
 void deleteMatrix(double **m, int n);
+
 
 #endif /* DA_TP_CLASSES_GRAPH */

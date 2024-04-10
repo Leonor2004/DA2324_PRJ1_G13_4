@@ -69,32 +69,31 @@ public:
     /**
      * @brief Edmonds Karp algorithm
      *
-     * Complexity: O(n^2)
+     * Complexity: O(n^3)
      *
      * @param source : Source vertex
      * @param target : Target vertex
      */
-    static void edmondsKarp(string source, string target);
+    static void edmondsKarp(const string& source, const string& target);
 
     /**
      * @brief Calculate Max Water per City
      *
-     * Complexity: O(n^2)
+     * Complexity: O(n^3)
      */
     static void MaxWaterCity();
-
 
     /**
      * @brief Calculate Max Flow
      *
-     * Complexity: O(n^2)
+     * Complexity: O(n^3)
      */
     static void MaxFlow(bool csv);
 
     /**
      * @brief Simulate reservoir removal
      *
-     * Complexity: O(n^2)
+     * Complexity: O(n^3)
      *
      * @param reservoirCode : Reservoir Code
      */
@@ -103,16 +102,16 @@ public:
     /**
      * @brief Simulate pumping station removal
      *
-     * Complexity: O(n^2)
+     * Complexity: O(n^3)
      *
      * @param code : Pumping station code
      */
-    static void simulatePumpingStationRemoval(string code);
+    static void simulatePumpingStationRemoval(const string& code);
 
     /**
      * @brief Simulate pipeline failure
      *
-     * Complexity: O(n^2)
+     * Complexity: O(n^3)
      *
      * @param e : Pipeline edge
      */
@@ -131,7 +130,7 @@ public:
     static void testAndVisit_ReservoirRemovalPart(std::queue<Vertex*> &q, Edge* e, Vertex* w, double flow);
 
     /**
-     * @brief Find augmenting paths ???
+     * @brief Find augmenting paths
      *
      * Complexity: O(n^2)
      *
@@ -170,12 +169,12 @@ public:
      *
      * @param code : Reservoir code
      */
-    static void simulateReservoirRemovalPart(string code);
+    static void simulateReservoirRemovalPart(const string& code);
 
     /**
      * @brief Compute the metrics to calculate balance network
      *
-     * Complexity: O(VE)
+     * Complexity: O(n^2)
      *
      * @return Metrics vector
      */
@@ -190,7 +189,6 @@ public:
       * @param f : Final metrics
       */
     static void print_metrics(vector<double> i, vector<double> f);
-
     /**
      * @brief Find augmenting paths
      *
@@ -201,12 +199,23 @@ public:
      * @param delta : Delta
      * @return True or false
      */
-    static bool findAugmentingPaths_balance(Vertex* s, Vertex* t, int delta);
+    static bool findAugmentingPaths_balance(Vertex* s, Vertex* t, double delta);
+
+    /**
+     * @brief Augments the flow along a path from source vertex s to target vertex t in a graph by the minimum residual
+     * capacity, setting the pipe weight in the opposite direction, if any, to 0, so that no water passes through that pipe.
+     *
+     * Complexity: O(n)
+     *
+     * @param s : Source vertex
+     * @param t : Target vertex
+     */
+    static void augmentFlowAlongPath_CS(Vertex* s, Vertex* t);
 
     /**
      * @brief Balance Network
      *
-     * Complexity: O(n^3)
+     * Complexity: O(n^4)
      */
     static void balanceNetwork();
 
@@ -218,7 +227,7 @@ public:
      * @param maxW : Max weight
      * @return Delta
      */
-    static int compute_delta(double maxW);
+    static double compute_delta(double maxW);
 
     /**
      * @brief Find the maximum weight
@@ -228,7 +237,6 @@ public:
      * @return Max weight
      */
     static double maxWeight();
-
-};
+    };
 
 #endif //DA2324_PRJ1_G13_4_AUXFUNCTIONS_H

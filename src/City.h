@@ -12,7 +12,7 @@ private:
     string city;
     int Id;
     string code;
-    int demand;
+    double demand;
     int population;
 public:
 
@@ -25,7 +25,7 @@ public:
      * @param d : Demand
      * @param p : Population
      */
-    City(string ct, int i, string c, int d, int p);
+    City(string ct, int i, string c, double d, int p);
 
     /**
      * @brief Get the name of the City
@@ -43,7 +43,7 @@ public:
      *
      * @return Returns the value of the City's Id
      */
-    int getId();
+    int getId() const;
 
     /**
      * @brief Get the code of the City
@@ -61,7 +61,7 @@ public:
      *
      * @return Returns the value of the City's demand
      */
-    int getDemand();
+    double getDemand() const;
 
     /**
      * @brief Get the population of the City
@@ -70,7 +70,7 @@ public:
      *
      * @return Returns the value of the City's population
      */
-    int getPopulation();
+    int getPopulation() const;
 };
 
 

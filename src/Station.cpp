@@ -6,7 +6,7 @@ Station::Station(int i, string c) {
     code = std::move(c);
 }
 
-int Station::getId() {
+int Station::getId() const {
     return Id;
 }
 
