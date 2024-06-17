@@ -17,4 +17,4 @@ to failures to anticipate service disruption or at least to mitigate its nefario
 - **Group members:**
   - Frederica Pereira (up202108167@up.pt),
   - Filipa Fidalgo (up202208039@up.pt),
-  - Leonor Couto (up202205796@up.pt)
+  - Leonor Couto (up202205796@up.pt).
